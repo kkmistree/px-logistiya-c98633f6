@@ -8,7 +8,8 @@ import {
   Filter, 
   X, 
   ChevronDown, 
-  ImportExport 
+  FileDown,
+  FileUp
 } from "lucide-react";
 import {
   Popover,
@@ -236,8 +237,11 @@ const ClientsHeader = ({ onAddClient, onSearch, onFilterChange, onImportExport }
           </Popover>
           
           <Button variant="outline" onClick={onImportExport}>
-            <ImportExport size={18} className="mr-2" />
-            <span className="hidden sm:inline">Import/Export</span>
+            <div className="flex items-center">
+              <FileDown size={16} className="mr-1" />
+              <FileUp size={16} />
+            </div>
+            <span className="hidden sm:inline ml-2">Import/Export</span>
           </Button>
           
           <Button onClick={onAddClient}>
