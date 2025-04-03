@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Search as SearchIcon, Loader2, ArrowLeft } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -26,8 +27,8 @@ const QuickSearch = ({ onSearch, fullScreen = false, onClose }: QuickSearchProps
     }
   }, [fullScreen]);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSearch = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     if (!query.trim()) return;
     
     setIsSearching(true);
@@ -44,6 +45,14 @@ const QuickSearch = ({ onSearch, fullScreen = false, onClose }: QuickSearchProps
         setQuery("");
       }
     }, 1000);
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setQuery(suggestion);
+    // Trigger search immediately after setting the query
+    setTimeout(() => {
+      handleSearch();
+    }, 10);
   };
 
   const searchSuggestions = [
@@ -109,7 +118,7 @@ const QuickSearch = ({ onSearch, fullScreen = false, onClose }: QuickSearchProps
             {searchSuggestions.map((suggestion, index) => (
               <span 
                 key={index} 
-                onClick={() => setQuery(suggestion)}
+                onClick={() => handleSuggestionClick(suggestion)}
                 className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-full text-sm cursor-pointer transition-colors"
               >
                 {suggestion}
