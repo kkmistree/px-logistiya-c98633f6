@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from "react";
-import { Search as SearchIcon, Loader2 } from "lucide-react";
+import { Search as SearchIcon, Loader2, ArrowLeft } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -57,17 +56,28 @@ const QuickSearch = ({ onSearch, fullScreen = false, onClose }: QuickSearchProps
 
   if (fullScreen) {
     return (
-      <div className="fixed inset-0 bg-black text-white z-50 flex flex-col">
-        <div className="container mx-auto px-4 pt-20 max-w-4xl flex flex-col items-center">
+      <div className="relative w-full h-full bg-estate-background pt-4">
+        {onClose && (
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="absolute top-0 left-0 m-4"
+            onClick={onClose}
+          >
+            <ArrowLeft size={20} />
+          </Button>
+        )}
+        
+        <div className="container mx-auto px-4 pt-12 max-w-4xl flex flex-col items-center">
           <div className="mb-2">
             <span className="bg-purple-700/60 text-white text-sm py-1 px-4 rounded-full">
               Find your ideal investment property
             </span>
           </div>
           
-          <h1 className="text-4xl font-semibold text-white text-center mb-4">Intuitive Property Search</h1>
+          <h1 className="text-4xl font-semibold text-center mb-4">Intuitive Property Search</h1>
           
-          <p className="text-white/80 text-center mb-8">
+          <p className="text-gray-600 text-center mb-8">
             Simply describe your ideal property, and let us find the perfect match for you!
           </p>
           
@@ -100,7 +110,7 @@ const QuickSearch = ({ onSearch, fullScreen = false, onClose }: QuickSearchProps
               <span 
                 key={index} 
                 onClick={() => setQuery(suggestion)}
-                className="px-4 py-2 bg-white/10 rounded-full text-sm hover:bg-white/20 cursor-pointer transition-colors"
+                className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-full text-sm cursor-pointer transition-colors"
               >
                 {suggestion}
               </span>
@@ -108,7 +118,7 @@ const QuickSearch = ({ onSearch, fullScreen = false, onClose }: QuickSearchProps
           </div>
 
           {/* Search results would go here */}
-          <div className="text-white text-center mt-8">
+          <div className="text-center mt-8">
             {isSearching ? (
               <div className="flex flex-col items-center">
                 <Loader2 className="w-8 h-8 animate-spin mb-4" />
@@ -116,7 +126,7 @@ const QuickSearch = ({ onSearch, fullScreen = false, onClose }: QuickSearchProps
               </div>
             ) : (
               query.length === 0 && (
-                <p className="text-white/50">Enter your query to search</p>
+                <p className="text-gray-400">Enter your query to search</p>
               )
             )}
           </div>

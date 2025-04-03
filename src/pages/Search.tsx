@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import QuickSearch from "@/components/search/QuickSearch";
+import AppShell from "@/components/layout/AppShell";
 
 const SearchPage = () => {
   const navigate = useNavigate();
@@ -15,7 +16,11 @@ const SearchPage = () => {
     navigate(-1);
   };
 
-  return <QuickSearch fullScreen onSearch={handleSearch} onClose={handleClose} />;
+  return (
+    <AppShell>
+      <QuickSearch fullScreen onSearch={handleSearch} onClose={handleClose} />
+    </AppShell>
+  );
 };
 
 export default SearchPage;
