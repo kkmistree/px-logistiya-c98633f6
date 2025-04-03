@@ -9,7 +9,7 @@ interface ComparisonDifferenceProps {
 
 const ComparisonDifference = ({ value, isPositive }: ComparisonDifferenceProps) => {
   return (
-    <Badge className={`absolute z-10 transform -translate-y-1/2 px-3 py-1 text-white ${
+    <Badge className={`px-2 py-1 text-xs text-white ${
       isPositive ? 'bg-green-500' : 'bg-red-500'
     } rounded-full`}>
       {Math.abs(parseFloat(value))}%

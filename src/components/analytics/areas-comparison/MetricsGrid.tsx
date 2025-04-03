@@ -10,7 +10,7 @@ interface MetricsGridProps {
 
 const MetricsGrid = ({ locationData, position }: MetricsGridProps) => {
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       <ComparisonItem 
         title="Transactions volume"
         value={locationData.totalVolume}
@@ -38,13 +38,13 @@ const MetricsGrid = ({ locationData, position }: MetricsGridProps) => {
       <ComparisonItem 
         title="Existing Units"
         value={locationData.existingUnits}
-        changeValue={position === 'left' ? "+5.2% YoY Change" : "+3.7% YoY Change"}
+        changeValue={locationData.valueYoY}
       />
       
       <ComparisonItem 
         title="Upcoming Units"
         value={locationData.upcomingUnits}
-        changeValue={position === 'left' ? "+12.3% YoY Change" : "+8.5% YoY Change"}
+        changeValue={locationData.valueYoY}
       />
     </div>
   );

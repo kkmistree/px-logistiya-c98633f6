@@ -25,9 +25,9 @@ const PercentageDifferences = ({
   upcomingUnitsDiff
 }: PercentageDifferencesProps) => {
   return (
-    <div className="hidden md:block absolute left-1/2 top-0 bottom-0 transform -translate-x-1/2 w-0.5 bg-slate-700" style={{ zIndex: 1 }}>
+    <div className="hidden md:flex flex-col justify-between items-center w-16 py-6 bg-slate-800 rounded-lg mx-1">
       {/* Volume difference */}
-      <div className="absolute top-[10%] transform -translate-x-1/2">
+      <div className="mb-3">
         <ComparisonDifference 
           value={volumeDiff} 
           isPositive={isHigherValue(location1Data.totalVolume, location2Data.totalVolume, 'volume')}
@@ -35,7 +35,7 @@ const PercentageDifferences = ({
       </div>
       
       {/* Value difference */}
-      <div className="absolute top-[26.5%] transform -translate-x-1/2">
+      <div className="mb-3">
         <ComparisonDifference 
           value={valueDiff} 
           isPositive={isHigherValue(location1Data.totalValue, location2Data.totalValue, 'value')}
@@ -43,7 +43,7 @@ const PercentageDifferences = ({
       </div>
       
       {/* Price per sqft difference */}
-      <div className="absolute top-[43%] transform -translate-x-1/2">
+      <div className="mb-3">
         <ComparisonDifference 
           value={priceSqftDiff} 
           isPositive={isHigherValue(location1Data.medianPricePerSqft, location2Data.medianPricePerSqft, 'price-sqft')}
@@ -51,7 +51,7 @@ const PercentageDifferences = ({
       </div>
       
       {/* Median price difference */}
-      <div className="absolute top-[59.5%] transform -translate-x-1/2">
+      <div className="mb-3">
         <ComparisonDifference 
           value={priceDiff} 
           isPositive={isHigherValue(location1Data.medianPrice, location2Data.medianPrice, 'price')}
@@ -59,7 +59,7 @@ const PercentageDifferences = ({
       </div>
       
       {/* Existing units difference */}
-      <div className="absolute top-[76%] transform -translate-x-1/2">
+      <div className="mb-3">
         <ComparisonDifference 
           value={existingUnitsDiff} 
           isPositive={isHigherValue(location1Data.existingUnits, location2Data.existingUnits, 'units')}
@@ -67,7 +67,7 @@ const PercentageDifferences = ({
       </div>
       
       {/* Upcoming units difference */}
-      <div className="absolute top-[92.5%] transform -translate-x-1/2">
+      <div>
         <ComparisonDifference 
           value={upcomingUnitsDiff} 
           isPositive={isHigherValue(location1Data.upcomingUnits, location2Data.upcomingUnits, 'units')}

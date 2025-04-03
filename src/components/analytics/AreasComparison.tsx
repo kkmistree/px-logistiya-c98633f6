@@ -61,9 +61,14 @@ const AreasComparison = () => {
         <Badge className="px-4 py-1 bg-pink-500 text-white rounded-full">{year}</Badge>
       </div>
       
-      {/* Metrics comparison grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
-        {/* Center divider with percentage differences */}
+      {/* Metrics comparison grid with middle column for differences */}
+      <div className="flex items-stretch gap-0 relative">
+        {/* Left column - Location 1 */}
+        <div className="flex-1">
+          <MetricsGrid locationData={location1Data} position="left" />
+        </div>
+        
+        {/* Center column - Percentage differences */}
         <PercentageDifferences 
           location1Data={location1Data}
           location2Data={location2Data}
@@ -75,11 +80,10 @@ const AreasComparison = () => {
           upcomingUnitsDiff={upcomingUnitsDiff}
         />
         
-        {/* Left column - Location 1 */}
-        <MetricsGrid locationData={location1Data} position="left" />
-        
         {/* Right column - Location 2 */}
-        <MetricsGrid locationData={location2Data} position="right" />
+        <div className="flex-1">
+          <MetricsGrid locationData={location2Data} position="right" />
+        </div>
       </div>
     </div>
   );
