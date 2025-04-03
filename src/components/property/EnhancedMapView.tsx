@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import { Property } from "@/types/property";
 import { Button } from "@/components/ui/button";
@@ -18,9 +17,10 @@ import ProjectDetail from "./ProjectDetail";
 
 interface EnhancedMapViewProps {
   properties: Property[];
+  highlightedProperty?: Property | null;
 }
 
-const EnhancedMapView = ({ properties }: EnhancedMapViewProps) => {
+const EnhancedMapView = ({ properties, highlightedProperty }: EnhancedMapViewProps) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [mapStyle, setMapStyle] = useState("standard");
@@ -38,6 +38,13 @@ const EnhancedMapView = ({ properties }: EnhancedMapViewProps) => {
 
     return () => clearTimeout(timer);
   }, [properties]);
+
+  useEffect(() => {
+    if (highlightedProperty) {
+      // Logic to highlight property on the map (in a real implementation)
+      console.log("Highlighting property:", highlightedProperty.id);
+    }
+  }, [highlightedProperty]);
 
   const handlePropertySelect = (property: Property) => {
     setSelectedProperty(property);

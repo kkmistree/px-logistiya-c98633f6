@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -368,7 +367,9 @@ const MarketPerformance = () => {
                         from3Mto7M: "AED 3.7M - AED 7M",
                         above7M: "Above AED 7M"
                       };
-                      return [`${(value).toFixed(1)}%`, labels[name as keyof typeof labels]];
+                      
+                      const formattedValue = typeof value === 'number' ? `${value.toFixed(1)}%` : `${value}%`;
+                      return [formattedValue, labels[name as keyof typeof labels]];
                     }}
                   />
                   <Bar dataKey="below1M" stackId="a" fill="#22d3ee" />
