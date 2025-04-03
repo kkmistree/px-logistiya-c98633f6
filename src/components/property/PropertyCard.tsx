@@ -5,6 +5,7 @@ import { Building, Calendar, MapPin, Maximize2, Bed, Bath, Heart } from "lucide-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/utils/format";
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 interface PropertyCardProps {
   property: Property;
@@ -12,6 +13,8 @@ interface PropertyCardProps {
 }
 
 const PropertyCard = ({ property, className }: PropertyCardProps) => {
+  const { currency } = useCurrency();
+  
   const getStatusColor = (status: Property["status"]) => {
     switch (status) {
       case "ready":
@@ -105,7 +108,7 @@ const PropertyCard = ({ property, className }: PropertyCardProps) => {
         
         <div className="mt-auto flex items-end justify-between">
           <div>
-            <span className="text-xl font-semibold text-estate-primary">{formatCurrency(property.price)}</span>
+            <span className="text-xl font-semibold text-estate-primary">{formatCurrency(property.price, currency.code)}</span>
             {property.roi && (
               <div className="text-xs text-estate-success font-medium">ROI: {property.roi}%</div>
             )}

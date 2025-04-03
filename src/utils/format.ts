@@ -1,8 +1,8 @@
 
-export const formatCurrency = (value: number): string => {
-  return new Intl.NumberFormat('en-AE', {
+export const formatCurrency = (value: number, currencyCode: string = 'AED'): string => {
+  return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'AED',
+    currency: currencyCode,
     maximumFractionDigits: 0,
   }).format(value);
 };

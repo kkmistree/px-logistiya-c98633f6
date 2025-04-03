@@ -4,8 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { formatCurrency } from "@/utils/format";
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 const ActiveDeals = () => {
+  const { currency } = useCurrency();
+  
   const deals = [
     {
       property: "Dubai Marina Apartment",
@@ -51,7 +54,7 @@ const ActiveDeals = () => {
                 <p className="text-sm text-slate-500 mt-1">Client: {deal.client}</p>
               </div>
               <div className="text-right">
-                <span className="font-semibold text-estate-primary">{formatCurrency(deal.price)}</span>
+                <span className="font-semibold text-estate-primary">{formatCurrency(deal.price, currency.code)}</span>
                 <p className="text-xs font-medium bg-slate-100 rounded-full px-2 py-1 mt-1">
                   {deal.status}
                 </p>
