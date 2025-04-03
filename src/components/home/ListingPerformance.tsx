@@ -4,12 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { Property } from "@/types/property";
 
 interface ListingPerformanceProps {
   onAddListing?: () => void;
+  onViewProperty?: (property: Property) => void;
 }
 
-const ListingPerformance = ({ onAddListing }: ListingPerformanceProps) => {
+const ListingPerformance = ({ onAddListing, onViewProperty }: ListingPerformanceProps) => {
   const navigate = useNavigate();
   const { toast } = useToast();
   
@@ -43,7 +45,34 @@ const ListingPerformance = ({ onAddListing }: ListingPerformanceProps) => {
   };
   
   const handleViewListing = (listingId: string) => {
-    navigate(`/listings/${listingId}`);
+    // Convert listing to a Property object and pass it to onViewProperty if available
+    if (onViewProperty) {
+      const mockProperty: Property = {
+        id: listingId,
+        title: listings.topViewed.find(l => l.id === listingId)?.title || 
+               listings.lowEngagement.find(l => l.id === listingId)?.title || 
+               "Property Listing",
+        description: "Luxury property in prime location",
+        type: "apartment",
+        status: "ready",
+        price: 1500000,
+        area: 1200,
+        bedrooms: 2,
+        bathrooms: 2,
+        location: {
+          area: "Dubai Marina",
+          community: "Marina Promenade"
+        },
+        features: ["Balcony", "Pool", "Gym"],
+        images: ["/placeholder.svg"],
+        tags: ["Premium", "Sea View"],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      onViewProperty(mockProperty);
+    } else {
+      navigate(`/listings/${listingId}`);
+    }
   };
   
   const handleAddNewListing = () => {

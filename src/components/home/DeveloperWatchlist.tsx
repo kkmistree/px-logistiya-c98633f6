@@ -5,8 +5,13 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { Property } from "@/types/property";
 
-const DeveloperWatchlist = () => {
+interface DeveloperWatchlistProps {
+  onViewProperty?: (property: Property) => void;
+}
+
+const DeveloperWatchlist = ({ onViewProperty }: DeveloperWatchlistProps) => {
   const navigate = useNavigate();
   const { toast } = useToast();
   
@@ -60,7 +65,39 @@ const DeveloperWatchlist = () => {
   };
   
   const handleOpenDevelopment = (developmentId: string) => {
-    navigate(`/developments/${developmentId}`);
+    // If onViewProperty is provided, create a mock property and pass it
+    if (onViewProperty) {
+      const development = developments.find(d => d.id === developmentId);
+      if (development) {
+        const mockProperty: Property = {
+          id: developmentId,
+          title: development.name,
+          description: `${development.developer} development - ${development.phase}`,
+          type: "apartment",
+          status: "off-plan",
+          price: 2500000,
+          area: 1500,
+          bedrooms: 3,
+          bathrooms: 3,
+          location: {
+            area: "Dubai Marina",
+            community: "Marina Promenade"
+          },
+          features: ["Smart Home", "Beach Access", "Panoramic Views"],
+          images: ["/placeholder.svg"],
+          developer: development.developer,
+          completionDate: "2025-12-31",
+          roi: 6.5,
+          tags: ["Off-Plan", "Premium", development.phase],
+          directFromDeveloper: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+        onViewProperty(mockProperty);
+      }
+    } else {
+      navigate(`/developments/${developmentId}`);
+    }
   };
 
   return (
