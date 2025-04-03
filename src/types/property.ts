@@ -34,6 +34,10 @@ export interface Property {
   updatedAt: string; // ISO date string
   matchScore?: number; // AI-generated match score (0-100)
   tags: string[]; // e.g., "sea view", "high floor", "furnished"
+  furnishing?: 'Furnished' | 'Semi-Furnished' | 'Unfurnished';
+  exclusive?: boolean;
+  directFromDeveloper?: boolean;
+  developerRating?: number; // 1-5 stars
 }
 
 export interface PropertyFilter {
@@ -49,6 +53,13 @@ export interface PropertyFilter {
   minROI?: number;
   developer?: string[];
   completionYear?: number;
+  handoverYear?: string[];
+  paymentPlan?: string[];
+  furnishing?: string[];
+  exclusive?: boolean;
+  directFromDeveloper?: boolean;
+  developerRating?: number;
+  listingAge?: string;
 }
 
 export interface PropertySearchResult {

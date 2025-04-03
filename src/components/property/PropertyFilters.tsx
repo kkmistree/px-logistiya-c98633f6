@@ -1,9 +1,9 @@
-
 import { useState } from "react";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import {
   Select,
   SelectContent,
@@ -38,6 +38,11 @@ const PropertyFilters = ({ filters, setFilters }: PropertyFiltersProps) => {
     10000,
   ]);
   
+  const [roiRange, setRoiRange] = useState<[number, number]>([
+    filters.minROI || 4,
+    12,
+  ]);
+  
   const handlePriceChange = (value: number[]) => {
     setPriceRange([value[0], value[1]]);
   };
@@ -46,18 +51,24 @@ const PropertyFilters = ({ filters, setFilters }: PropertyFiltersProps) => {
     setAreaRange([value[0], value[1]]);
   };
   
+  const handleRoiChange = (value: number[]) => {
+    setRoiRange([value[0], value[1]]);
+  };
+  
   const applyFilters = () => {
     setFilters({
       ...filters,
       minPrice: priceRange[0],
       maxPrice: priceRange[1],
       minArea: areaRange[0],
+      minROI: roiRange[0],
     });
   };
   
   const resetFilters = () => {
     setPriceRange([500000, 10000000]);
     setAreaRange([500, 10000]);
+    setRoiRange([4, 12]);
     setFilters({});
   };
 
@@ -102,8 +113,13 @@ const PropertyFilters = ({ filters, setFilters }: PropertyFiltersProps) => {
     "Maid's Room",
   ];
 
+  const handoverYears = ["2024", "2025", "2026", "2027", "2028+"];
+  const paymentPlans = ["20/80", "40/60", "50/50", "1% Monthly", "Other"];
+  const furnishingOptions = ["Furnished", "Semi-Furnished", "Unfurnished"];
+  const listingAgeOptions = ["New Today", "This Week", "This Month", "Any"];
+
   return (
-    <div className="bg-white rounded-lg shadow-sm p-4 h-full">
+    <div className="bg-white rounded-lg shadow-sm p-4 h-full overflow-y-auto max-h-[calc(100vh-220px)]">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold text-estate-primary">Filters</h2>
         <Button variant="outline" size="sm" onClick={resetFilters}>
@@ -111,7 +127,7 @@ const PropertyFilters = ({ filters, setFilters }: PropertyFiltersProps) => {
         </Button>
       </div>
       
-      <Accordion type="multiple" defaultValue={["price", "type", "bedrooms", "location"]}>
+      <Accordion type="multiple" defaultValue={["price", "type", "bedrooms", "location", "roi"]}>
         <AccordionItem value="price">
           <AccordionTrigger>Price Range</AccordionTrigger>
           <AccordionContent>
@@ -366,30 +382,226 @@ const PropertyFilters = ({ filters, setFilters }: PropertyFiltersProps) => {
         </AccordionItem>
         
         <AccordionItem value="roi">
-          <AccordionTrigger>Minimum ROI</AccordionTrigger>
+          <AccordionTrigger>ROI / Yield %</AccordionTrigger>
+          <AccordionContent>
+            <div className="space-y-4">
+              <Slider
+                min={0}
+                max={15}
+                step={0.5}
+                value={roiRange}
+                onValueChange={handleRoiChange}
+                className="my-4"
+              />
+              <div className="flex justify-between">
+                <div>
+                  <Label>Min</Label>
+                  <Input
+                    value={`${roiRange[0]}%`}
+                    readOnly
+                    className="text-sm w-32"
+                  />
+                </div>
+                <div>
+                  <Label>Max</Label>
+                  <Input
+                    value={`${roiRange[1]}%`}
+                    readOnly
+                    className="text-sm w-32"
+                  />
+                </div>
+              </div>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        
+        <AccordionItem value="handover">
+          <AccordionTrigger>Handover Date</AccordionTrigger>
+          <AccordionContent>
+            <div className="space-y-2 max-h-40 overflow-y-auto">
+              {handoverYears.map(year => (
+                <div key={year} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={`handover-${year}`}
+                    checked={(filters.handoverYear || []).includes(year)}
+                    onCheckedChange={(checked) => {
+                      const currentYears = filters.handoverYear || [];
+                      setFilters({
+                        ...filters,
+                        handoverYear: checked
+                          ? [...currentYears, year]
+                          : currentYears.filter(y => y !== year),
+                      });
+                    }}
+                  />
+                  <label
+                    htmlFor={`handover-${year}`}
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    {year}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        
+        <AccordionItem value="payment">
+          <AccordionTrigger>Payment Plan</AccordionTrigger>
+          <AccordionContent>
+            <div className="space-y-2 max-h-40 overflow-y-auto">
+              {paymentPlans.map(plan => (
+                <div key={plan} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={`plan-${plan}`}
+                    checked={(filters.paymentPlan || []).includes(plan)}
+                    onCheckedChange={(checked) => {
+                      const currentPlans = filters.paymentPlan || [];
+                      setFilters({
+                        ...filters,
+                        paymentPlan: checked
+                          ? [...currentPlans, plan]
+                          : currentPlans.filter(p => p !== plan),
+                      });
+                    }}
+                  />
+                  <label
+                    htmlFor={`plan-${plan}`}
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    {plan}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        
+        <AccordionItem value="reputation">
+          <AccordionTrigger>Developer Reputation</AccordionTrigger>
           <AccordionContent>
             <div className="space-y-2">
               <Select
-                value={String(filters.minROI || "0")}
+                value={String(filters.developerRating || "0")}
                 onValueChange={(value) => {
                   setFilters({
                     ...filters,
-                    minROI: Number(value),
+                    developerRating: Number(value),
                   });
                 }}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Select minimum ROI" />
+                  <SelectValue placeholder="Select minimum rating" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="0">Any</SelectItem>
-                  <SelectItem value="4">4% and above</SelectItem>
-                  <SelectItem value="5">5% and above</SelectItem>
-                  <SelectItem value="6">6% and above</SelectItem>
-                  <SelectItem value="7">7% and above</SelectItem>
-                  <SelectItem value="8">8% and above</SelectItem>
+                  <SelectItem value="3">3+ Stars</SelectItem>
+                  <SelectItem value="4">4+ Stars</SelectItem>
+                  <SelectItem value="5">5 Stars</SelectItem>
                 </SelectContent>
               </Select>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        
+        <AccordionItem value="listingAge">
+          <AccordionTrigger>Listing Age</AccordionTrigger>
+          <AccordionContent>
+            <div className="flex flex-wrap gap-2">
+              {listingAgeOptions.map(option => (
+                <Badge
+                  key={option}
+                  variant="outline"
+                  className={`cursor-pointer ${
+                    filters.listingAge === option
+                      ? "bg-estate-primary text-white"
+                      : ""
+                  }`}
+                  onClick={() => {
+                    setFilters({
+                      ...filters,
+                      listingAge: filters.listingAge === option ? undefined : option,
+                    });
+                  }}
+                >
+                  {option}
+                </Badge>
+              ))}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        
+        <AccordionItem value="furnishing">
+          <AccordionTrigger>Furnishing</AccordionTrigger>
+          <AccordionContent>
+            <div className="flex flex-wrap gap-2">
+              {furnishingOptions.map(option => (
+                <Badge
+                  key={option}
+                  variant="outline"
+                  className={`cursor-pointer ${
+                    (filters.furnishing || []).includes(option)
+                      ? "bg-estate-primary text-white"
+                      : ""
+                  }`}
+                  onClick={() => {
+                    const current = filters.furnishing || [];
+                    setFilters({
+                      ...filters,
+                      furnishing: current.includes(option)
+                        ? current.filter(f => f !== option)
+                        : [...current, option],
+                    });
+                  }}
+                >
+                  {option}
+                </Badge>
+              ))}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+        
+        <AccordionItem value="exclusive">
+          <AccordionTrigger>Listing Type</AccordionTrigger>
+          <AccordionContent>
+            <div className="space-y-4">
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="exclusive"
+                  checked={!!filters.exclusive}
+                  onCheckedChange={(checked) => {
+                    setFilters({
+                      ...filters,
+                      exclusive: !!checked,
+                    });
+                  }}
+                />
+                <label
+                  htmlFor="exclusive"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Exclusive Listings Only
+                </label>
+              </div>
+              
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="direct"
+                  checked={!!filters.directFromDeveloper}
+                  onCheckedChange={(checked) => {
+                    setFilters({
+                      ...filters,
+                      directFromDeveloper: !!checked,
+                    });
+                  }}
+                />
+                <label
+                  htmlFor="direct"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Direct From Developer
+                </label>
+              </div>
             </div>
           </AccordionContent>
         </AccordionItem>
