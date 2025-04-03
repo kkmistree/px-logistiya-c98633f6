@@ -13,8 +13,17 @@ import {
   HelpCircle,
   ChevronRight,
   BookOpen,
+  LogOut,
+  User,
+  CreditCard
 } from "lucide-react";
 import CurrencySwitcher from "@/components/currency/CurrencySwitcher";
+import { useState } from "react";
+import { 
+  Popover, 
+  PopoverContent, 
+  PopoverTrigger 
+} from "@/components/ui/popover";
 
 interface SidebarProps {
   open: boolean;
@@ -22,6 +31,8 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ open, setOpen }: SidebarProps) => {
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  
   const navItems = [
     { icon: Search, label: "Quick Search", path: "/search" },
     { icon: Home, label: "Command Center", path: "/" },
@@ -107,26 +118,75 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
         </div>
 
         <div className="p-4 border-t border-white/10">
-          <div className={cn(
-            "flex items-center",
-            open ? "justify-between" : "justify-center"
-          )}>
-            {open ? (
-              <>
-                <div className="flex flex-col">
-                  <span className="text-sm font-medium">Kaiyan Mistree</span>
-                  <span className="text-xs text-white/70">PropSimplify Real Estate LLC</span>
+          <Popover open={userMenuOpen} onOpenChange={setUserMenuOpen}>
+            <PopoverTrigger asChild>
+              <button 
+                className={cn(
+                  "w-full flex items-center",
+                  open ? "justify-between" : "justify-center",
+                  "hover:bg-white/10 rounded-lg p-2 transition-colors"
+                )}
+              >
+                {open ? (
+                  <>
+                    <div className="flex flex-col items-start">
+                      <span className="text-sm font-medium">Kaiyan Mistree</span>
+                      <span className="text-xs text-white/70">PropSimplify Real Estate LLC</span>
+                    </div>
+                    <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center">
+                      <span className="text-xs font-medium">KM</span>
+                    </div>
+                  </>
+                ) : (
+                  <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center">
+                    <span className="text-xs font-medium">KM</span>
+                  </div>
+                )}
+              </button>
+            </PopoverTrigger>
+            <PopoverContent 
+              className="w-56 bg-black border border-white/10 text-white p-0" 
+              align="end" 
+              side="top"
+              sideOffset={10}
+            >
+              <div className="p-2">
+                <div className="border-b border-white/10 pb-2 mb-2">
+                  <div className="flex items-center space-x-2 p-2">
+                    <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center">
+                      <span className="text-xs font-medium">KM</span>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium">Kaiyan Mistree</p>
+                      <p className="text-xs text-white/70">kaiyan@propsimplify.com</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center">
-                  <span className="text-xs font-medium">KM</span>
+                
+                <div className="space-y-1">
+                  <button className="flex items-center space-x-2 hover:bg-white/10 w-full rounded-md p-2 text-left text-sm">
+                    <User size={16} />
+                    <span>My Profile</span>
+                  </button>
+                  <button className="flex items-center space-x-2 hover:bg-white/10 w-full rounded-md p-2 text-left text-sm">
+                    <CreditCard size={16} />
+                    <span>Billing</span>
+                  </button>
+                  <button className="flex items-center space-x-2 hover:bg-white/10 w-full rounded-md p-2 text-left text-sm">
+                    <Settings size={16} />
+                    <span>Settings</span>
+                  </button>
                 </div>
-              </>
-            ) : (
-              <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center">
-                <span className="text-xs font-medium">KM</span>
+                
+                <div className="border-t border-white/10 pt-2 mt-2">
+                  <button className="flex items-center space-x-2 hover:bg-white/10 w-full rounded-md p-2 text-left text-sm text-red-400">
+                    <LogOut size={16} />
+                    <span>Sign out</span>
+                  </button>
+                </div>
               </div>
-            )}
-          </div>
+            </PopoverContent>
+          </Popover>
         </div>
       </div>
     </aside>
