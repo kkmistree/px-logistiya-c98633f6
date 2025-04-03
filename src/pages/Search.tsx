@@ -5,10 +5,12 @@ import SearchResults from "@/components/search/SearchResults";
 import AppShell from "@/components/layout/AppShell";
 import { Property } from "@/types/property";
 import { searchProperties } from "@/services/propertyService";
+import { useNavigate } from "react-router-dom";
 
 const SearchPage = () => {
   const [searchResults, setSearchResults] = useState<Property[]>([]);
   const [isSearching, setIsSearching] = useState(false);
+  const navigate = useNavigate();
   
   const handleSearch = (query: string) => {
     console.log("Search query from page:", query);
@@ -28,6 +30,13 @@ const SearchPage = () => {
     setSearchResults([]);
   };
 
+  const handlePropertyClick = (propertyId: string) => {
+    // For now we'll just log it, but in a real app we would navigate to a property details page
+    console.log(`Navigating to property: ${propertyId}`);
+    // Example of how navigation would work when you have a property page:
+    // navigate(`/property/${propertyId}`);
+  };
+
   return (
     <AppShell>
       <div className="h-full flex flex-col">
@@ -38,6 +47,7 @@ const SearchPage = () => {
           <SearchResults 
             searchResults={searchResults}
             onNewSearch={handleNewSearch}
+            onPropertyClick={handlePropertyClick}
           />
         )}
       </div>

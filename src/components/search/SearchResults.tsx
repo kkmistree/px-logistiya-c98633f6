@@ -6,13 +6,16 @@ import { ArrowLeft } from "lucide-react";
 interface SearchResultsProps {
   searchResults: Property[];
   onNewSearch: () => void;
+  onPropertyClick?: (propertyId: string) => void;
 }
 
-const SearchResults = ({ searchResults, onNewSearch }: SearchResultsProps) => {
+const SearchResults = ({ searchResults, onNewSearch, onPropertyClick }: SearchResultsProps) => {
   return (
     <div className="mt-8 px-4">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-medium">Search Results</h2>
+        <h2 className="text-2xl font-medium">
+          Search Results <span className="text-purple-600 font-bold">({searchResults.length})</span>
+        </h2>
         <Button variant="outline" size="sm" onClick={onNewSearch}>
           <ArrowLeft className="mr-2 h-4 w-4" />
           New Search
@@ -21,7 +24,11 @@ const SearchResults = ({ searchResults, onNewSearch }: SearchResultsProps) => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {searchResults.map(property => (
-          <div key={property.id} className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+          <div 
+            key={property.id} 
+            className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+            onClick={() => onPropertyClick && onPropertyClick(property.id)}
+          >
             <div className="h-40 bg-gray-200 relative">
               <img 
                 src={property.images[0] || "/placeholder.svg"} 
