@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { areaData } from "./areas-comparison/areaData";
@@ -59,27 +58,69 @@ const AreasComparison = () => {
       
       {/* Comparison badge */}
       <div className="flex justify-center">
-        <Badge className="px-4 py-1 bg-pink-500 text-white">{year}</Badge>
+        <Badge className="px-4 py-1 bg-pink-500 text-white rounded-full">{year}</Badge>
       </div>
       
       {/* Metrics comparison grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+        {/* Center divider with percentage differences */}
+        <div className="hidden md:block absolute left-1/2 top-0 bottom-0 transform -translate-x-1/2 w-0.5 bg-slate-700" style={{ zIndex: 1 }}>
+          {/* Volume difference */}
+          <div className="absolute top-[10%] transform -translate-x-1/2">
+            <ComparisonDifference 
+              value={volumeDiff} 
+              isPositive={isHigherValue(location1Data.totalVolume, location2Data.totalVolume, 'volume')}
+            />
+          </div>
+          
+          {/* Value difference */}
+          <div className="absolute top-[26.5%] transform -translate-x-1/2">
+            <ComparisonDifference 
+              value={valueDiff} 
+              isPositive={isHigherValue(location1Data.totalValue, location2Data.totalValue, 'value')}
+            />
+          </div>
+          
+          {/* Price per sqft difference */}
+          <div className="absolute top-[43%] transform -translate-x-1/2">
+            <ComparisonDifference 
+              value={priceSqftDiff} 
+              isPositive={isHigherValue(location1Data.medianPricePerSqft, location2Data.medianPricePerSqft, 'price-sqft')}
+            />
+          </div>
+          
+          {/* Median price difference */}
+          <div className="absolute top-[59.5%] transform -translate-x-1/2">
+            <ComparisonDifference 
+              value={priceDiff} 
+              isPositive={isHigherValue(location1Data.medianPrice, location2Data.medianPrice, 'price')}
+            />
+          </div>
+          
+          {/* Existing units difference */}
+          <div className="absolute top-[76%] transform -translate-x-1/2">
+            <ComparisonDifference 
+              value={existingUnitsDiff} 
+              isPositive={isHigherValue(location1Data.existingUnits, location2Data.existingUnits, 'units')}
+            />
+          </div>
+          
+          {/* Upcoming units difference */}
+          <div className="absolute top-[92.5%] transform -translate-x-1/2">
+            <ComparisonDifference 
+              value={upcomingUnitsDiff} 
+              isPositive={isHigherValue(location1Data.upcomingUnits, location2Data.upcomingUnits, 'units')}
+            />
+          </div>
+        </div>
+        
         {/* Left column - Location 1 */}
-        <div className="space-y-8">
+        <div className="space-y-6">
           <ComparisonItem 
             title="Transactions volume"
             value={location1Data.totalVolume}
             changeValue={location1Data.volumeYoY}
           />
-          
-          <div className="relative">
-            <div className="absolute left-full top-1/2 transform -translate-y-1/2 z-10 translate-x-[-50%]">
-              <ComparisonDifference 
-                value={Math.abs(volumeDiff).toFixed(1)} 
-                isPositive={isHigherValue(location1Data.totalVolume, location2Data.totalVolume, 'volume')}
-              />
-            </div>
-          </div>
           
           <ComparisonItem 
             title="Total transaction value"
@@ -87,29 +128,11 @@ const AreasComparison = () => {
             changeValue={location1Data.valueYoY}
           />
           
-          <div className="relative">
-            <div className="absolute left-full top-1/2 transform -translate-y-1/2 z-10 translate-x-[-50%]">
-              <ComparisonDifference 
-                value={Math.abs(valueDiff).toFixed(1)} 
-                isPositive={isHigherValue(location1Data.totalValue, location2Data.totalValue, 'value')}
-              />
-            </div>
-          </div>
-          
           <ComparisonItem 
             title="Median price per sqft"
             value={location1Data.medianPricePerSqft}
             changeValue={location1Data.valueYoY}
           />
-          
-          <div className="relative">
-            <div className="absolute left-full top-1/2 transform -translate-y-1/2 z-10 translate-x-[-50%]">
-              <ComparisonDifference 
-                value={Math.abs(priceSqftDiff).toFixed(1)} 
-                isPositive={isHigherValue(location1Data.medianPricePerSqft, location2Data.medianPricePerSqft, 'price-sqft')}
-              />
-            </div>
-          </div>
           
           <ComparisonItem 
             title="Property median price"
@@ -117,48 +140,21 @@ const AreasComparison = () => {
             changeValue={location1Data.valueYoY}
           />
           
-          <div className="relative">
-            <div className="absolute left-full top-1/2 transform -translate-y-1/2 z-10 translate-x-[-50%]">
-              <ComparisonDifference 
-                value={Math.abs(priceDiff).toFixed(1)} 
-                isPositive={isHigherValue(location1Data.medianPrice, location2Data.medianPrice, 'price')}
-              />
-            </div>
-          </div>
-          
           <ComparisonItem 
             title="Existing Units"
             value={location1Data.existingUnits}
-            changeValue="+5.2%"
+            changeValue="+5.2% YoY Change"
           />
-          
-          <div className="relative">
-            <div className="absolute left-full top-1/2 transform -translate-y-1/2 z-10 translate-x-[-50%]">
-              <ComparisonDifference 
-                value={Math.abs(existingUnitsDiff).toFixed(1)} 
-                isPositive={isHigherValue(location1Data.existingUnits, location2Data.existingUnits, 'units')}
-              />
-            </div>
-          </div>
           
           <ComparisonItem 
             title="Upcoming Units"
             value={location1Data.upcomingUnits}
-            changeValue="+12.3%"
+            changeValue="+12.3% YoY Change"
           />
-          
-          <div className="relative">
-            <div className="absolute left-full top-1/2 transform -translate-y-1/2 z-10 translate-x-[-50%]">
-              <ComparisonDifference 
-                value={Math.abs(upcomingUnitsDiff).toFixed(1)} 
-                isPositive={isHigherValue(location1Data.upcomingUnits, location2Data.upcomingUnits, 'units')}
-              />
-            </div>
-          </div>
         </div>
         
         {/* Right column - Location 2 */}
-        <div className="space-y-8">
+        <div className="space-y-6">
           <ComparisonItem 
             title="Transactions volume"
             value={location2Data.totalVolume}
@@ -186,13 +182,13 @@ const AreasComparison = () => {
           <ComparisonItem 
             title="Existing Units"
             value={location2Data.existingUnits}
-            changeValue="+3.7%"
+            changeValue="+3.7% YoY Change"
           />
           
           <ComparisonItem 
             title="Upcoming Units"
             value={location2Data.upcomingUnits}
-            changeValue="+8.5%"
+            changeValue="+8.5% YoY Change"
           />
         </div>
       </div>
