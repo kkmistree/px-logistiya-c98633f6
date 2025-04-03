@@ -14,6 +14,7 @@ import UserSettings from "./pages/UserSettings";
 import Clients from "./pages/Clients";
 import Developers from "./pages/Developers";
 import Deals from "./pages/Deals";
+import DealDetail from "./pages/DealDetail";
 import Analytics from "./pages/Analytics";
 import Messages from "./pages/Messages";
 import Knowledge from "./pages/Knowledge";
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/clients" element={<Clients />} />
           <Route path="/developers" element={<Developers />} />
           <Route path="/deals" element={<Deals />} />
+          <Route path="/deals/:dealId" element={<DealDetail />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/messages" element={<Messages />} />
           <Route path="/knowledge" element={<Knowledge />} />

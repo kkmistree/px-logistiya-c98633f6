@@ -8,10 +8,14 @@ import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import DashboardWidgets from "@/components/dashboard/DashboardWidgets";
 import ListingDialog from "@/components/dashboard/ListingDialog";
 import ClientDialog from "@/components/dashboard/ClientDialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import ProjectDetail from "@/components/property/ProjectDetail";
+import { Property } from "@/types/property";
 
 const Index = () => {
   const [showAddListing, setShowAddListing] = useState<boolean>(false);
   const [showAddClient, setShowAddClient] = useState<boolean>(false);
+  const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   
   const getCurrentDate = () => {
     const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -24,6 +28,10 @@ const Index = () => {
 
   const handleAddClient = () => {
     setShowAddClient(true);
+  };
+  
+  const handleViewProperty = (property: Property) => {
+    setSelectedProperty(property);
   };
 
   return (
@@ -42,12 +50,24 @@ const Index = () => {
         <DashboardWidgets 
           onAddListing={handleAddListing}
           onAddClient={handleAddClient}
+          onViewProperty={handleViewProperty}
         />
       </div>
       
       {/* Dialogs */}
       <ListingDialog open={showAddListing} onOpenChange={setShowAddListing} />
       <ClientDialog open={showAddClient} onOpenChange={setShowAddClient} />
+      
+      <Dialog open={!!selectedProperty} onOpenChange={(open) => !open && setSelectedProperty(null)}>
+        <DialogContent className="sm:max-w-[1000px] p-0">
+          {selectedProperty && (
+            <ProjectDetail 
+              property={selectedProperty} 
+              onClose={() => setSelectedProperty(null)} 
+            />
+          )}
+        </DialogContent>
+      </Dialog>
       
       <AIAssistant />
     </AppShell>

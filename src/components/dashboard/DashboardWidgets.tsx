@@ -11,13 +11,15 @@ import MarketInsights from "@/components/home/MarketInsights";
 import BrokerLeaderboard from "@/components/home/BrokerLeaderboard";
 import AIAssistantFeed from "@/components/home/AIAssistantFeed";
 import NewsRegulationUpdates from "@/components/home/NewsRegulationUpdates";
+import { Property } from "@/types/property";
 
 interface DashboardWidgetsProps {
   onAddListing?: () => void;
   onAddClient?: () => void;
+  onViewProperty?: (property: Property) => void;
 }
 
-const DashboardWidgets = ({ onAddListing, onAddClient }: DashboardWidgetsProps) => {
+const DashboardWidgets = ({ onAddListing, onAddClient, onViewProperty }: DashboardWidgetsProps) => {
   return (
     <>
       {/* Level 2: Main Widgets Grid - First Row */}
@@ -26,7 +28,7 @@ const DashboardWidgets = ({ onAddListing, onAddClient }: DashboardWidgetsProps) 
           <MandatesSummary />
         </div>
         <div className="md:col-span-1">
-          <ListingPerformance onAddListing={onAddListing} />
+          <ListingPerformance onAddListing={onAddListing} onViewProperty={onViewProperty} />
         </div>
         <div className="md:col-span-1">
           <TasksReminders />
@@ -49,7 +51,7 @@ const DashboardWidgets = ({ onAddListing, onAddClient }: DashboardWidgetsProps) 
       {/* Level 2: Main Widgets Grid - Third Row */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="md:col-span-1">
-          <DeveloperWatchlist />
+          <DeveloperWatchlist onViewProperty={onViewProperty} />
         </div>
         <div className="md:col-span-1">
           <MarketInsights />

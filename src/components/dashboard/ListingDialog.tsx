@@ -1,7 +1,8 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Dialog,
   DialogContent,
@@ -10,7 +11,46 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { useToast } from "@/hooks/use-toast";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { format } from "date-fns";
+import { CalendarIcon, Upload } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+
+const propertySchema = z.object({
+  title: z.string().min(3, { message: "Title must be at least 3 characters" }),
+  price: z.string().min(1, { message: "Price is required" }),
+  location: z.object({
+    area: z.string().min(1, { message: "Area is required" }),
+    community: z.string().min(1, { message: "Community is required" }),
+  }),
+  type: z.string().min(1, { message: "Property type is required" }),
+  bedrooms: z.string().min(1, { message: "Number of bedrooms is required" }),
+  bathrooms: z.string().min(1, { message: "Number of bathrooms is required" }),
+  area: z.string().min(1, { message: "Area in sqft is required" }),
+  description: z.string().min(10, { message: "Description must be at least 10 characters" }),
+  features: z.array(z.string()).optional(),
+  status: z.string().min(1, { message: "Property status is required" }),
+  developer: z.string().optional(),
+  completionDate: z.date().optional(),
+  isExclusive: z.boolean().default(false),
+  isDirectFromDeveloper: z.boolean().default(false),
+});
+
+type PropertyFormValues = z.infer<typeof propertySchema>;
 
 interface ListingDialogProps {
   open: boolean;
@@ -19,63 +59,425 @@ interface ListingDialogProps {
 
 const ListingDialog = ({ open, onOpenChange }: ListingDialogProps) => {
   const { toast } = useToast();
+  const [images, setImages] = useState<File[]>([]);
+  
+  const form = useForm<PropertyFormValues>({
+    resolver: zodResolver(propertySchema),
+    defaultValues: {
+      title: "",
+      price: "",
+      location: {
+        area: "",
+        community: "",
+      },
+      type: "",
+      bedrooms: "",
+      bathrooms: "",
+      area: "",
+      description: "",
+      features: [],
+      status: "ready",
+      developer: "",
+      isExclusive: false,
+      isDirectFromDeveloper: false,
+    },
+  });
 
-  const handleAddListing = () => {
+  const handleAddListing = (values: PropertyFormValues) => {
+    // In a real app, this would call an API to save the listing
+    console.log("Form values:", values);
+    console.log("Images:", images);
+    
     onOpenChange(false);
     toast({
       title: "Listing created",
-      description: "New property has been added successfully",
+      description: `${values.title} has been added successfully`,
     });
+    form.reset();
+    setImages([]);
+  };
+  
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const newFiles = Array.from(e.target.files);
+      setImages((prev) => [...prev, ...newFiles]);
+    }
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Add New Property Listing</DialogTitle>
           <DialogDescription>
             Enter the details of the new property listing below.
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <label htmlFor="property-title" className="text-right text-sm">
-              Title
-            </label>
-            <Input
-              id="property-title"
-              placeholder="Enter property title"
-              className="col-span-3"
+        
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(handleAddListing)} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Property Title</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter property title" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="price"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Price (AED)</FormLabel>
+                      <FormControl>
+                        <Input type="number" placeholder="Enter price" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="location.area"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Area</FormLabel>
+                      <Select 
+                        onValueChange={field.onChange} 
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select area" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="Dubai Marina">Dubai Marina</SelectItem>
+                          <SelectItem value="Downtown Dubai">Downtown Dubai</SelectItem>
+                          <SelectItem value="Palm Jumeirah">Palm Jumeirah</SelectItem>
+                          <SelectItem value="Jumeirah Village Circle">Jumeirah Village Circle</SelectItem>
+                          <SelectItem value="Business Bay">Business Bay</SelectItem>
+                          <SelectItem value="Dubai Hills">Dubai Hills</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="location.community"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Community</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter community" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="type"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Property Type</FormLabel>
+                      <Select 
+                        onValueChange={field.onChange} 
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select property type" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="apartment">Apartment</SelectItem>
+                          <SelectItem value="villa">Villa</SelectItem>
+                          <SelectItem value="townhouse">Townhouse</SelectItem>
+                          <SelectItem value="penthouse">Penthouse</SelectItem>
+                          <SelectItem value="office">Office</SelectItem>
+                          <SelectItem value="retail">Retail</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              
+              <div className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="bedrooms"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Bedrooms</FormLabel>
+                      <Select 
+                        onValueChange={field.onChange} 
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select number of bedrooms" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="studio">Studio</SelectItem>
+                          <SelectItem value="1">1</SelectItem>
+                          <SelectItem value="2">2</SelectItem>
+                          <SelectItem value="3">3</SelectItem>
+                          <SelectItem value="4">4</SelectItem>
+                          <SelectItem value="5">5</SelectItem>
+                          <SelectItem value="6+">6+</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="bathrooms"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Bathrooms</FormLabel>
+                      <Select 
+                        onValueChange={field.onChange} 
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select number of bathrooms" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="1">1</SelectItem>
+                          <SelectItem value="2">2</SelectItem>
+                          <SelectItem value="3">3</SelectItem>
+                          <SelectItem value="4">4</SelectItem>
+                          <SelectItem value="5">5</SelectItem>
+                          <SelectItem value="6+">6+</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="area"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Area (sqft)</FormLabel>
+                      <FormControl>
+                        <Input type="number" placeholder="Enter area in sqft" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="status"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Property Status</FormLabel>
+                      <Select 
+                        onValueChange={field.onChange} 
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select property status" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="ready">Ready</SelectItem>
+                          <SelectItem value="off-plan">Off-Plan</SelectItem>
+                          <SelectItem value="resale">Resale</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="developer"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Developer</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter developer name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+            
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Textarea 
+                      placeholder="Enter property description" 
+                      rows={4}
+                      {...field} 
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <label htmlFor="property-price" className="text-right text-sm">
-              Price
-            </label>
-            <Input
-              id="property-price"
-              type="number"
-              placeholder="Enter price"
-              className="col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <label htmlFor="property-location" className="text-right text-sm">
-              Location
-            </label>
-            <Input
-              id="property-location"
-              placeholder="Area, Community"
-              className="col-span-3"
-            />
-          </div>
-        </div>
-        <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancel
-          </Button>
-          <Button onClick={handleAddListing}>Save Listing</Button>
-        </DialogFooter>
+            
+            <div className="space-y-2">
+              <FormLabel>Images</FormLabel>
+              <div className="flex items-center gap-2">
+                <Input 
+                  type="file" 
+                  accept="image/*" 
+                  multiple 
+                  onChange={handleImageChange}
+                  id="property-images"
+                  className="hidden"
+                />
+                <label 
+                  htmlFor="property-images"
+                  className="flex items-center justify-center w-full border-2 border-dashed border-slate-200 rounded-md h-20 cursor-pointer hover:bg-slate-50 transition-colors"
+                >
+                  <div className="flex flex-col items-center gap-1">
+                    <Upload size={20} className="text-slate-400" />
+                    <span className="text-sm text-slate-500">Click to upload images</span>
+                  </div>
+                </label>
+              </div>
+              {images.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {images.map((file, index) => (
+                    <div key={index} className="relative">
+                      <div className="w-20 h-20 rounded-md bg-slate-100 flex items-center justify-center overflow-hidden">
+                        <img 
+                          src={URL.createObjectURL(file)} 
+                          alt={`Property image ${index}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FormField
+                control={form.control}
+                name="completionDate"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel>Completion Date</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant="outline"
+                            className="w-full text-left font-normal justify-start h-10"
+                          >
+                            <CalendarIcon className="mr-2 h-4 w-4" />
+                            {field.value ? (
+                              format(field.value, "PPP")
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0">
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          disabled={(date) =>
+                            date < new Date()
+                          }
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <div className="flex flex-col space-y-3 justify-end">
+                <FormField
+                  control={form.control}
+                  name="isExclusive"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormLabel className="font-normal">
+                        Exclusive Listing
+                      </FormLabel>
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="isDirectFromDeveloper"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormLabel className="font-normal">
+                        Direct from Developer
+                      </FormLabel>
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+            
+            <DialogFooter>
+              <Button variant="outline" type="button" onClick={() => onOpenChange(false)}>
+                Cancel
+              </Button>
+              <Button type="submit">Save Listing</Button>
+            </DialogFooter>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   );
