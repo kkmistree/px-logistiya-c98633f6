@@ -43,12 +43,21 @@ const SearchPage = () => {
         <QuickSearch fullScreen onSearch={handleSearch} />
         
         {/* Search Results Section */}
-        {searchResults.length > 0 && !isSearching && (
+        {!isSearching && searchResults.length > 0 && (
           <SearchResults 
             searchResults={searchResults}
             onNewSearch={handleNewSearch}
             onPropertyClick={handlePropertyClick}
           />
+        )}
+        
+        {isSearching && (
+          <div className="flex justify-center mt-8">
+            <div className="flex flex-col items-center">
+              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[#1A1F2C]"></div>
+              <p className="mt-4 text-gray-500">Searching for properties...</p>
+            </div>
+          </div>
         )}
       </div>
     </AppShell>
