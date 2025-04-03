@@ -1,6 +1,5 @@
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import QuickSearch from "@/components/search/QuickSearch";
 import SearchResults from "@/components/search/SearchResults";
 import AppShell from "@/components/layout/AppShell";
@@ -8,7 +7,6 @@ import { Property } from "@/types/property";
 import { searchProperties } from "@/services/propertyService";
 
 const SearchPage = () => {
-  const navigate = useNavigate();
   const [searchResults, setSearchResults] = useState<Property[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   
@@ -24,10 +22,6 @@ const SearchPage = () => {
       setIsSearching(false);
     }, 1500);
   };
-  
-  const handleClose = () => {
-    navigate(-1);
-  };
 
   const handleNewSearch = () => {
     setSearchResults([]);
@@ -36,7 +30,7 @@ const SearchPage = () => {
   return (
     <AppShell>
       <div className="h-full flex flex-col">
-        <QuickSearch fullScreen onSearch={handleSearch} onClose={handleClose} />
+        <QuickSearch fullScreen onSearch={handleSearch} />
         
         {/* Search Results Section */}
         {searchResults.length > 0 && !isSearching && (

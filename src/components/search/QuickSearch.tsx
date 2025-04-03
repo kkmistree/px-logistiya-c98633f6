@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from "react";
-import { Search as SearchIcon, Loader2, ArrowLeft } from "lucide-react";
+import { Search as SearchIcon, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -66,17 +65,6 @@ const QuickSearch = ({ onSearch, fullScreen = false, onClose }: QuickSearchProps
   if (fullScreen) {
     return (
       <div className="relative w-full pt-4">
-        {onClose && (
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="absolute top-0 left-0 m-4"
-            onClick={onClose}
-          >
-            <ArrowLeft size={20} />
-          </Button>
-        )}
-        
         <div className="container mx-auto px-4 pt-6 max-w-4xl flex flex-col items-center">
           <div className="mb-2">
             <span className="bg-purple-700/60 text-white text-sm py-1 px-4 rounded-full">
