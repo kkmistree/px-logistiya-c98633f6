@@ -18,16 +18,31 @@ const Index = () => {
     return new Date().toLocaleDateString('en-US', options);
   };
 
+  const handleAddListing = () => {
+    setShowAddListing(true);
+  };
+
+  const handleAddClient = () => {
+    setShowAddClient(true);
+  };
+
   return (
     <AppShell>
       <div className="space-y-6">
-        <DashboardHeader getCurrentDate={getCurrentDate} />
+        <DashboardHeader 
+          getCurrentDate={getCurrentDate} 
+          onAddListing={handleAddListing}
+          onAddClient={handleAddClient}
+        />
         
         <StatCards />
         
         <SearchSection />
         
-        <DashboardWidgets />
+        <DashboardWidgets 
+          onAddListing={handleAddListing}
+          onAddClient={handleAddClient}
+        />
       </div>
       
       {/* Dialogs */}

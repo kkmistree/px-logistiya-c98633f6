@@ -10,7 +10,12 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
-const QuickActions = () => {
+interface QuickActionsProps {
+  onAddListing?: () => void;
+  onAddClient?: () => void;
+}
+
+const QuickActions = ({ onAddListing, onAddClient }: QuickActionsProps) => {
   const navigate = useNavigate();
   const { toast } = useToast();
   
@@ -39,19 +44,27 @@ const QuickActions = () => {
   };
   
   const handleAddListing = () => {
-    toast({
-      title: "Add New Listing",
-      description: "Create a new property listing"
-    });
-    navigate("/listings/new");
+    if (onAddListing) {
+      onAddListing();
+    } else {
+      toast({
+        title: "Add New Listing",
+        description: "Create a new property listing"
+      });
+      navigate("/listings/new");
+    }
   };
   
   const handleAddClient = () => {
-    toast({
-      title: "Add New Client",
-      description: "Add a client to your CRM"
-    });
-    navigate("/clients/new");
+    if (onAddClient) {
+      onAddClient();
+    } else {
+      toast({
+        title: "Add New Client",
+        description: "Add a client to your CRM"
+      });
+      navigate("/clients/new");
+    }
   };
 
   return (

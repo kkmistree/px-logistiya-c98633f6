@@ -12,7 +12,12 @@ import BrokerLeaderboard from "@/components/home/BrokerLeaderboard";
 import AIAssistantFeed from "@/components/home/AIAssistantFeed";
 import NewsRegulationUpdates from "@/components/home/NewsRegulationUpdates";
 
-const DashboardWidgets = () => {
+interface DashboardWidgetsProps {
+  onAddListing?: () => void;
+  onAddClient?: () => void;
+}
+
+const DashboardWidgets = ({ onAddListing, onAddClient }: DashboardWidgetsProps) => {
   return (
     <>
       {/* Level 2: Main Widgets Grid - First Row */}
@@ -21,7 +26,7 @@ const DashboardWidgets = () => {
           <MandatesSummary />
         </div>
         <div className="md:col-span-1">
-          <ListingPerformance />
+          <ListingPerformance onAddListing={onAddListing} />
         </div>
         <div className="md:col-span-1">
           <TasksReminders />

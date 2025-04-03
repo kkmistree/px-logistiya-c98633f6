@@ -5,7 +5,11 @@ import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
-const ListingPerformance = () => {
+interface ListingPerformanceProps {
+  onAddListing?: () => void;
+}
+
+const ListingPerformance = ({ onAddListing }: ListingPerformanceProps) => {
   const navigate = useNavigate();
   const { toast } = useToast();
   
@@ -41,33 +45,54 @@ const ListingPerformance = () => {
   const handleViewListing = (listingId: string) => {
     navigate(`/listings/${listingId}`);
   };
+  
+  const handleAddNewListing = () => {
+    if (onAddListing) {
+      onAddListing();
+    } else {
+      toast({
+        title: "Add New Listing",
+        description: "Create a new property listing"
+      });
+      navigate("/listings/new");
+    }
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-sm p-4">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold text-estate-primary">Listing Performance</h2>
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          className="text-estate-secondary"
-          onClick={handleViewAll}
-        >
-          View All <ArrowUpRight size={16} className="ml-1" />
-        </Button>
+        <div className="flex gap-2">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="text-estate-secondary"
+            onClick={handleViewAll}
+          >
+            View All <ArrowUpRight size={16} className="ml-1" />
+          </Button>
+          <Button
+            size="sm"
+            className="bg-estate-primary hover:bg-estate-primary/90 text-white"
+            onClick={handleAddNewListing}
+          >
+            Add Listing
+          </Button>
+        </div>
       </div>
       
       <div className="grid grid-cols-3 gap-3 mb-4">
-        <Card className="p-3 border border-slate-200 flex flex-col items-center justify-center">
+        <Card className="p-3 border border-slate-200 flex flex-col items-center justify-center cursor-pointer hover:bg-slate-50" onClick={handleViewAll}>
           <span className="text-xs font-medium text-slate-500">Active</span>
           <p className="text-xl font-semibold">{listings.total.active}</p>
         </Card>
         
-        <Card className="p-3 border border-slate-200 flex flex-col items-center justify-center">
+        <Card className="p-3 border border-slate-200 flex flex-col items-center justify-center cursor-pointer hover:bg-slate-50" onClick={handleViewAll}>
           <span className="text-xs font-medium text-slate-500">Under Offer</span>
           <p className="text-xl font-semibold">{listings.total.underOffer}</p>
         </Card>
         
-        <Card className="p-3 border border-slate-200 flex flex-col items-center justify-center">
+        <Card className="p-3 border border-slate-200 flex flex-col items-center justify-center cursor-pointer hover:bg-slate-50" onClick={handleViewAll}>
           <span className="text-xs font-medium text-slate-500">Sold</span>
           <p className="text-xl font-semibold">{listings.total.sold}</p>
         </Card>
@@ -117,7 +142,10 @@ const ListingPerformance = () => {
                     size="sm" 
                     variant="outline"
                     className="border-amber-500 text-amber-600 hover:bg-amber-50"
-                    onClick={() => handleRefreshListing(listing.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleRefreshListing(listing.id);
+                    }}
                   >
                     <Brush size={14} className="mr-1" /> Refresh
                   </Button>
