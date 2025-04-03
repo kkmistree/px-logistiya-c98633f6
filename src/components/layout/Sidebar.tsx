@@ -1,6 +1,6 @@
 
 import { cn } from "@/lib/utils";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import {
   Home,
   Search,
@@ -164,18 +164,30 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
                 </div>
                 
                 <div className="space-y-1">
-                  <button className="flex items-center space-x-2 hover:bg-white/10 w-full rounded-md p-2 text-left text-sm">
+                  <Link 
+                    to="/profile" 
+                    className="flex items-center space-x-2 hover:bg-white/10 w-full rounded-md p-2 text-left text-sm"
+                    onClick={() => setUserMenuOpen(false)}
+                  >
                     <User size={16} />
                     <span>My Profile</span>
-                  </button>
-                  <button className="flex items-center space-x-2 hover:bg-white/10 w-full rounded-md p-2 text-left text-sm">
+                  </Link>
+                  <Link 
+                    to="/billing" 
+                    className="flex items-center space-x-2 hover:bg-white/10 w-full rounded-md p-2 text-left text-sm"
+                    onClick={() => setUserMenuOpen(false)}
+                  >
                     <CreditCard size={16} />
                     <span>Billing</span>
-                  </button>
-                  <button className="flex items-center space-x-2 hover:bg-white/10 w-full rounded-md p-2 text-left text-sm">
+                  </Link>
+                  <Link 
+                    to="/user-settings" 
+                    className="flex items-center space-x-2 hover:bg-white/10 w-full rounded-md p-2 text-left text-sm"
+                    onClick={() => setUserMenuOpen(false)}
+                  >
                     <Settings size={16} />
                     <span>Settings</span>
-                  </button>
+                  </Link>
                 </div>
                 
                 <div className="border-t border-white/10 pt-2 mt-2">
