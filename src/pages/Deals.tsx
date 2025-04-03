@@ -1,23 +1,53 @@
 
-import React from "react";
+import { useState } from "react";
 import AppShell from "@/components/layout/AppShell";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import DealHeader from "@/components/deals/DealHeader";
+import DealsList from "@/components/deals/DealsList";
+import DealsDashboard from "@/components/deals/DealsDashboard";
 
 const Deals = () => {
+  const [activeTab, setActiveTab] = useState("all");
+  
   return (
     <AppShell>
       <div className="space-y-6">
-        <div>
-          <h1 className="text-2xl font-bold text-estate-primary">Deal Rooms</h1>
-          <p className="text-slate-500">Manage your active deals and transactions</p>
-        </div>
+        <DealHeader />
         
-        <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-8 text-center">
-          <h2 className="text-xl font-semibold mb-2">Deal Rooms Coming Soon</h2>
-          <p className="text-slate-500 mb-4">
-            This section is under development. It will soon provide tools to manage your deals from 
-            initial offer through to closing, with document management and milestone tracking.
-          </p>
-        </div>
+        <Tabs defaultValue="all" onValueChange={setActiveTab}>
+          <TabsList className="mb-6">
+            <TabsTrigger value="all">All Deals</TabsTrigger>
+            <TabsTrigger value="initiated">Initiated</TabsTrigger>
+            <TabsTrigger value="docs">Docs in Progress</TabsTrigger>
+            <TabsTrigger value="legal">Legal Review</TabsTrigger>
+            <TabsTrigger value="closed">Closed</TabsTrigger>
+            <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="all">
+            <DealsList status="all" />
+          </TabsContent>
+          
+          <TabsContent value="initiated">
+            <DealsList status="initiated" />
+          </TabsContent>
+          
+          <TabsContent value="docs">
+            <DealsList status="docs" />
+          </TabsContent>
+          
+          <TabsContent value="legal">
+            <DealsList status="legal" />
+          </TabsContent>
+          
+          <TabsContent value="closed">
+            <DealsList status="closed" />
+          </TabsContent>
+          
+          <TabsContent value="dashboard">
+            <DealsDashboard />
+          </TabsContent>
+        </Tabs>
       </div>
     </AppShell>
   );

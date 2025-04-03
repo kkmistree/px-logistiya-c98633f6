@@ -1,23 +1,43 @@
 
-import React from "react";
+import { useState } from "react";
 import AppShell from "@/components/layout/AppShell";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import AnalyticsHeader from "@/components/analytics/AnalyticsHeader";
+import BrokerPerformance from "@/components/analytics/BrokerPerformance";
+import MarketInsights from "@/components/analytics/MarketInsights";
+import ProjectAnalytics from "@/components/analytics/ProjectAnalytics";
+import AnalyticsReports from "@/components/analytics/AnalyticsReports";
 
 const Analytics = () => {
   return (
     <AppShell>
       <div className="space-y-6">
-        <div>
-          <h1 className="text-2xl font-bold text-estate-primary">Analytics</h1>
-          <p className="text-slate-500">Insights and performance metrics for your business</p>
-        </div>
+        <AnalyticsHeader />
         
-        <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-8 text-center">
-          <h2 className="text-xl font-semibold mb-2">Analytics Coming Soon</h2>
-          <p className="text-slate-500 mb-4">
-            This section is under development. It will soon provide detailed analytics and insights 
-            about your listings, clients, deals, and overall business performance.
-          </p>
-        </div>
+        <Tabs defaultValue="performance">
+          <TabsList className="mb-6">
+            <TabsTrigger value="performance">Broker Performance</TabsTrigger>
+            <TabsTrigger value="market">Market Insights</TabsTrigger>
+            <TabsTrigger value="projects">Project Analytics</TabsTrigger>
+            <TabsTrigger value="reports">Reports</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="performance">
+            <BrokerPerformance />
+          </TabsContent>
+          
+          <TabsContent value="market">
+            <MarketInsights />
+          </TabsContent>
+          
+          <TabsContent value="projects">
+            <ProjectAnalytics />
+          </TabsContent>
+          
+          <TabsContent value="reports">
+            <AnalyticsReports />
+          </TabsContent>
+        </Tabs>
       </div>
     </AppShell>
   );

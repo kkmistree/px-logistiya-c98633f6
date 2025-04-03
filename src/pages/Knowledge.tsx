@@ -1,23 +1,43 @@
 
-import React from "react";
+import { useState } from "react";
 import AppShell from "@/components/layout/AppShell";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import KnowledgeHeader from "@/components/knowledge/KnowledgeHeader";
+import KnowledgeHome from "@/components/knowledge/KnowledgeHome";
+import AreaGuides from "@/components/knowledge/AreaGuides";
+import Regulations from "@/components/knowledge/Regulations";
+import DeveloperHandbook from "@/components/knowledge/DeveloperHandbook";
 
 const Knowledge = () => {
   return (
     <AppShell>
       <div className="space-y-6">
-        <div>
-          <h1 className="text-2xl font-bold text-estate-primary">Knowledge Base</h1>
-          <p className="text-slate-500">Resources and educational materials</p>
-        </div>
+        <KnowledgeHeader />
         
-        <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-8 text-center">
-          <h2 className="text-xl font-semibold mb-2">Knowledge Base Coming Soon</h2>
-          <p className="text-slate-500 mb-4">
-            This section is under development. It will soon provide educational resources, 
-            market insights, and best practices for real estate professionals.
-          </p>
-        </div>
+        <Tabs defaultValue="home">
+          <TabsList className="mb-6">
+            <TabsTrigger value="home">Featured Content</TabsTrigger>
+            <TabsTrigger value="areas">Area Guides</TabsTrigger>
+            <TabsTrigger value="regulations">Regulations</TabsTrigger>
+            <TabsTrigger value="developers">Developer Handbook</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="home">
+            <KnowledgeHome />
+          </TabsContent>
+          
+          <TabsContent value="areas">
+            <AreaGuides />
+          </TabsContent>
+          
+          <TabsContent value="regulations">
+            <Regulations />
+          </TabsContent>
+          
+          <TabsContent value="developers">
+            <DeveloperHandbook />
+          </TabsContent>
+        </Tabs>
       </div>
     </AppShell>
   );
