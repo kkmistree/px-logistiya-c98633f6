@@ -37,7 +37,7 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
   return (
     <aside
       className={cn(
-        "fixed left-0 top-0 z-40 h-screen bg-estate-primary text-white transition-all duration-300 ease-in-out",
+        "fixed left-0 top-0 z-40 h-screen bg-black text-white transition-all duration-300 ease-in-out",
         open ? "w-64" : "w-20",
         "md:block",
         !open && "md:hover:w-64"
@@ -51,18 +51,18 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
           {open ? (
             <>
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-estate-accent rounded-md flex items-center justify-center">
-                  <span className="font-bold text-estate-primary">RE</span>
+                <div className="w-8 h-8 bg-white rounded-md flex items-center justify-center">
+                  <span className="font-bold text-black">pX</span>
                 </div>
-                <span className="font-semibold text-xl">PropAI</span>
+                <span className="font-semibold text-xl">pX</span>
               </div>
               <button onClick={() => setOpen(false)} className="p-1 hover:bg-white/10 rounded-full">
                 <ChevronRight size={20} />
               </button>
             </>
           ) : (
-            <div className="w-8 h-8 bg-estate-accent rounded-md flex items-center justify-center">
-              <span className="font-bold text-estate-primary">RE</span>
+            <div className="w-8 h-8 bg-white rounded-md flex items-center justify-center">
+              <span className="font-bold text-black">pX</span>
             </div>
           )}
         </div>
@@ -105,16 +105,16 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
             {open ? (
               <>
                 <div className="flex flex-col">
-                  <span className="text-sm font-medium">Ahmed Khan</span>
-                  <span className="text-xs text-white/70">Real Estate Broker</span>
+                  <span className="text-sm font-medium">Kaiyan Mistree</span>
+                  <span className="text-xs text-white/70">PropSimplify Real Estate LLC</span>
                 </div>
                 <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center">
-                  <span className="text-xs font-medium">AK</span>
+                  <span className="text-xs font-medium">KM</span>
                 </div>
               </>
             ) : (
               <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center">
-                <span className="text-xs font-medium">AK</span>
+                <span className="text-xs font-medium">KM</span>
               </div>
             )}
           </div>

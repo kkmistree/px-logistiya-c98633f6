@@ -65,7 +65,7 @@ export default {
         },
         // Real Estate Platform specific colors
         estate: {
-          primary: "#1A365D", // Deep navy blue
+          primary: "#000000", // Changed to black from Deep navy blue
           secondary: "#4299E1", // Light blue
           accent: "#ECC94B", // Gold accent
           muted: "#E2E8F0", // Light gray
