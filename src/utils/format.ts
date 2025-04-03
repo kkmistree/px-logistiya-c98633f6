@@ -30,6 +30,37 @@ export const formatPercentage = (value: number | string, digits: number = 1) => 
   return `${numericValue.toFixed(digits)}%`;
 };
 
+// Define exchange rates for currency conversion (simplified approach)
+const exchangeRates: Record<string, number> = {
+  'AED': 1,
+  'USD': 3.6725, // 1 USD = 3.6725 AED
+  'EUR': 3.9732, // 1 EUR = 3.9732 AED
+  'GBP': 4.6799, // 1 GBP = 4.6799 AED
+  'JPY': 0.0235, // 1 JPY = 0.0235 AED
+};
+
+// Convert amount from one currency to another 
+export const convertCurrency = (
+  amount: number, 
+  fromCurrency: string, 
+  toCurrency: string
+): number => {
+  // If currencies are the same, no conversion needed
+  if (fromCurrency === toCurrency) {
+    return amount;
+  }
+  
+  // First convert to AED (base currency)
+  const amountInAED = fromCurrency === 'AED' 
+    ? amount 
+    : amount * (exchangeRates[fromCurrency] || 1);
+  
+  // Then convert from AED to target currency
+  return toCurrency === 'AED' 
+    ? amountInAED 
+    : amountInAED / (exchangeRates[toCurrency] || 1);
+};
+
 export const extractCurrencyInfo = (query: string) => {
   // Extract currency and amount from queries like "apartments under $500,000"
   const currencySymbols = {
