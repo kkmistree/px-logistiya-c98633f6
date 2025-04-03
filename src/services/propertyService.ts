@@ -60,13 +60,22 @@ export const searchProperties = (query: string, platformCurrency: CurrencyCode =
   else if (lowerQuery.includes("1 bed") && lowerQuery.includes("high roi") && lowerQuery.includes("high yield")) {
     filtered = filterBedroomsWithHighROIAndYield(filtered, 1);
   } 
-  // Generic search (fallback)
+  // Generic search (fallback) - ALWAYS return 3-5 properties for any query
   else {
-    filtered = filterByKeyword(filtered, lowerQuery);
+    // For any search, find properties with relevant keywords if possible
+    const keywordFiltered = filterByKeyword(filtered, lowerQuery);
+    
+    // If we found matches with keywords, use those, otherwise just return random properties
+    if (keywordFiltered.length > 0) {
+      filtered = keywordFiltered;
+    } else {
+      // Shuffle the array to get random properties
+      filtered = [...mockProperties].sort(() => Math.random() - 0.5);
+    }
   }
   
-  // Limit results and add match scores
-  filtered = limitResults(filtered);
+  // Always limit results to 3-5 properties and add match scores
+  filtered = limitResults(filtered, Math.floor(Math.random() * 3) + 3); // Random number between 3 and 5
   filtered = addMatchScore(filtered);
   
   return filtered;

@@ -1,4 +1,3 @@
-
 import { Property } from "@/types/property";
 import { convertCurrency } from "@/utils/format";
 
@@ -55,6 +54,9 @@ export const filterBedroomsWithHighROIAndYield = (properties: Property[], bedroo
 
 // Generic keyword search across multiple property fields
 export const filterByKeyword = (properties: Property[], keyword: string): Property[] => {
+  // If keyword is empty, return an empty array to trigger the fallback
+  if (!keyword.trim()) return [];
+  
   const lowerKeyword = keyword.toLowerCase();
   return properties.filter(p => 
     p.title.toLowerCase().includes(lowerKeyword) || 
@@ -74,5 +76,16 @@ export const addMatchScore = (properties: Property[]): Property[] => {
 
 // Limit results to a specific count
 export const limitResults = (properties: Property[], limit: number = 5): Property[] => {
-  return properties.slice(0, Math.min(limit, properties.length));
+  // Ensure we have at least 3 properties
+  const actualLimit = Math.max(3, Math.min(limit, properties.length));
+  
+  // If we have fewer properties than the limit, return all of them
+  if (properties.length <= actualLimit) {
+    return properties;
+  }
+  
+  // Otherwise, return a random selection of properties
+  return properties
+    .sort(() => Math.random() - 0.5) // Shuffle the array
+    .slice(0, actualLimit);
 };
