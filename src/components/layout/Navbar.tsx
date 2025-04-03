@@ -1,6 +1,7 @@
 
 import { useState } from "react";
-import { Search, Bell, MessageSquare, User, Menu, X } from "lucide-react";
+import { useLocation } from "react-router-dom";
+import { Search, Bell, MessageSquare, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -20,6 +21,10 @@ interface NavbarProps {
 
 const Navbar = ({ sidebarOpen, setSidebarOpen }: NavbarProps) => {
   const [searchOpen, setSearchOpen] = useState(false);
+  const location = useLocation();
+  
+  // Check if we're on the search page
+  const isSearchPage = location.pathname === "/search";
 
   return (
     <div className="sticky top-0 z-30 bg-white border-b border-estate-muted flex items-center justify-between h-16 px-4 md:px-6 shadow-sm">
@@ -33,37 +38,41 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }: NavbarProps) => {
           {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
         </Button>
         
-        <div className="hidden md:flex items-center">
+        {!isSearchPage && (
+          <div className="hidden md:flex items-center">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="mr-2"
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+            >
+              {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
+            </Button>
+            
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={18} />
+              <Input
+                type="search"
+                placeholder="Search properties, clients, deals..."
+                className="pl-10 w-[300px] bg-slate-50"
+              />
+            </div>
+          </div>
+        )}
+        
+        {!isSearchPage && (
           <Button
             variant="ghost"
             size="icon"
-            className="mr-2"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="md:hidden"
+            onClick={() => setSearchOpen(!searchOpen)}
           >
-            {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
+            <Search size={20} />
           </Button>
-          
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={18} />
-            <Input
-              type="search"
-              placeholder="Search properties, clients, deals..."
-              className="pl-10 w-[300px] bg-slate-50"
-            />
-          </div>
-        </div>
-        
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden"
-          onClick={() => setSearchOpen(!searchOpen)}
-        >
-          <Search size={20} />
-        </Button>
+        )}
       </div>
 
-      {searchOpen && (
+      {searchOpen && !isSearchPage && (
         <div className="absolute top-16 left-0 right-0 bg-white p-4 shadow-md md:hidden">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={18} />
