@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -82,8 +83,7 @@ const AreasComparison = () => {
   const [bedroom, setBedroom] = useState("all");
   const [location1, setLocation1] = useState("downtown-dubai");
   const [location2, setLocation2] = useState("dubai-marina");
-  const [sortBy, setSortBy] = useState("value-high-to-low");
-
+  
   const location1Data = areaData.find(area => area.id === location1);
   const location2Data = areaData.find(area => area.id === location2);
 
@@ -339,57 +339,6 @@ const AreasComparison = () => {
               </div>
             </CardContent>
           </Card>
-        </div>
-      </div>
-      
-      {/* Areas performance table */}
-      <div className="mt-12">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">Performance of Dubai's main areas</h2>
-          <Select value={sortBy} onValueChange={setSortBy}>
-            <SelectTrigger className="w-[200px]">
-              <SelectValue placeholder="Sort by" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="value-high-to-low">Value (High to Low)</SelectItem>
-              <SelectItem value="value-low-to-high">Value (Low to High)</SelectItem>
-              <SelectItem value="volume-high-to-low">Volume (High to Low)</SelectItem>
-              <SelectItem value="volume-low-to-high">Volume (Low to High)</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {areaData.map((area) => (
-            <Card key={area.id} className="bg-slate-900 text-white border-slate-700">
-              <CardContent className="p-4">
-                <h3 className="font-semibold text-sm mb-2">{area.name}</h3>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
-                  <div className="text-slate-300">Total Value (2024)</div>
-                  <div className="text-right">{area.totalValue}</div>
-                  
-                  <div className="text-slate-300">Total Volume (2024)</div>
-                  <div className="text-right">{area.totalVolume}</div>
-                  
-                  <div className="text-slate-300">Median Price (2024)</div>
-                  <div className="text-right">{area.medianPrice}</div>
-                  
-                  <div className="text-slate-300">Median Price/sqft (2024)</div>
-                  <div className="text-right">{area.medianPricePerSqft}</div>
-                  
-                  <div className="text-slate-300">Value YoY</div>
-                  <div className={`text-right ${getPercentageClass(area.valueYoY)}`}>
-                    {area.valueYoY}
-                  </div>
-                  
-                  <div className="text-slate-300">Volume YoY</div>
-                  <div className={`text-right ${getPercentageClass(area.volumeYoY)}`}>
-                    {area.volumeYoY}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
         </div>
       </div>
     </div>

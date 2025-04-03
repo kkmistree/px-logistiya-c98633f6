@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
@@ -5,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { PieChart, Pie, BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Cell } from "recharts";
+import { ChartBarIcon, TableIcon, MapIcon, FilterIcon } from "lucide-react";
 
 // Area data (same as used in AreasComparison)
 const areaData = [
@@ -105,8 +107,10 @@ const volumeData = areaData.map(area => ({
 const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#0088fe', '#00C49F'];
 
 const AreaAnalysis = () => {
-  const [view, setView] = useState<'table' | 'charts'>('table');
+  const [view, setView] = useState<'table' | 'charts' | 'performance'>('table');
   const [sortField, setSortField] = useState("volume-high-to-low");
+  const [selectedAreas, setSelectedAreas] = useState<string[]>(areaData.map(area => area.id));
+  const [showFilters, setShowFilters] = useState(false);
 
   const getBadgeVariant = (trend: string) => {
     switch(trend) {
@@ -141,6 +145,27 @@ const AreaAnalysis = () => {
     }
   });
 
+  const filteredAreaData = sortedAreaData.filter(area => selectedAreas.includes(area.id));
+  
+  // Filter chart data based on selected areas
+  const filteredPricePerSqftData = pricePerSqftData.filter(item => 
+    selectedAreas.some(id => areaData.find(area => area.id === id)?.name.startsWith(item.name))
+  );
+  
+  const filteredVolumeData = volumeData.filter(item => 
+    selectedAreas.some(id => areaData.find(area => area.id === id)?.name.startsWith(item.name))
+  );
+
+  const toggleAreaSelection = (areaId: string) => {
+    if (selectedAreas.includes(areaId)) {
+      if (selectedAreas.length > 1) { // Prevent deselecting all areas
+        setSelectedAreas(selectedAreas.filter(id => id !== areaId));
+      }
+    } else {
+      setSelectedAreas([...selectedAreas, areaId]);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="bg-slate-900 text-white p-4 rounded-lg">
@@ -155,6 +180,7 @@ const AreaAnalysis = () => {
             onClick={() => setView('table')}
             className={view === 'table' ? "bg-pink-500 text-white" : ""}
           >
+            <TableIcon className="mr-2 h-4 w-4" />
             Table View
           </Button>
           <Button 
@@ -162,11 +188,30 @@ const AreaAnalysis = () => {
             onClick={() => setView('charts')}
             className={view === 'charts' ? "bg-pink-500 text-white" : ""}
           >
+            <ChartBarIcon className="mr-2 h-4 w-4" />
             Charts View
+          </Button>
+          <Button 
+            variant={view === 'performance' ? "default" : "outline"} 
+            onClick={() => setView('performance')}
+            className={view === 'performance' ? "bg-pink-500 text-white" : ""}
+          >
+            <MapIcon className="mr-2 h-4 w-4" />
+            Area Performance
           </Button>
         </div>
 
-        <div>
+        <div className="flex gap-2">
+          {view === 'charts' && (
+            <Button 
+              variant="outline"
+              onClick={() => setShowFilters(!showFilters)}
+              className="flex items-center"
+            >
+              <FilterIcon className="mr-2 h-4 w-4" />
+              {showFilters ? 'Hide Filters' : 'Filter Areas'}
+            </Button>
+          )}
           <Select value={sortField} onValueChange={setSortField}>
             <SelectTrigger className="w-[220px]">
               <SelectValue placeholder="Sort by" />
@@ -182,6 +227,26 @@ const AreaAnalysis = () => {
           </Select>
         </div>
       </div>
+
+      {view === 'charts' && showFilters && (
+        <Card className="p-4">
+          <CardContent className="p-0">
+            <h3 className="text-lg font-semibold mb-3">Filter Areas for Charts</h3>
+            <div className="flex flex-wrap gap-2">
+              {areaData.map(area => (
+                <Badge 
+                  key={area.id} 
+                  variant={selectedAreas.includes(area.id) ? "area" : "outline"}
+                  className="px-3 py-1 cursor-pointer text-sm"
+                  onClick={() => toggleAreaSelection(area.id)}
+                >
+                  {area.name.split(' ')[0]}
+                </Badge>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {view === 'table' && (
         <Card>
@@ -237,7 +302,7 @@ const AreaAnalysis = () => {
               <div className="h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart
-                    data={pricePerSqftData}
+                    data={filteredPricePerSqftData}
                     layout="vertical"
                     margin={{ top: 5, right: 30, left: 100, bottom: 5 }}
                   >
@@ -250,7 +315,7 @@ const AreaAnalysis = () => {
                     />
                     <Tooltip formatter={(value) => [`${value} AED/sqft`, 'Median Price']} />
                     <Bar dataKey="price" fill="#8884d8">
-                      {pricePerSqftData.map((entry, index) => (
+                      {filteredPricePerSqftData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                     </Bar>
@@ -267,7 +332,7 @@ const AreaAnalysis = () => {
               <div className="h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart
-                    data={volumeData}
+                    data={filteredVolumeData}
                     layout="vertical"
                     margin={{ top: 5, right: 30, left: 100, bottom: 5 }}
                   >
@@ -280,7 +345,7 @@ const AreaAnalysis = () => {
                     />
                     <Tooltip formatter={(value) => [`${value}K`, 'Transactions']} />
                     <Bar dataKey="volume" fill="#82ca9d">
-                      {volumeData.map((entry, index) => (
+                      {filteredVolumeData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                     </Bar>
@@ -297,7 +362,7 @@ const AreaAnalysis = () => {
               <div className="h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart
-                    data={areaData.map(area => ({
+                    data={filteredAreaData.map(area => ({
                       name: area.name.split(' ')[0],
                       change: parseFloat(area.valueYoY.replace("+", "").replace("%", "")),
                       positive: area.valueYoY.startsWith("+")
@@ -314,7 +379,7 @@ const AreaAnalysis = () => {
                     />
                     <Tooltip formatter={(value) => [`${value}%`, 'YoY Change']} />
                     <Bar dataKey="change" fill="#82ca9d">
-                      {areaData.map((entry, index) => (
+                      {filteredAreaData.map((entry, index) => (
                         <Cell 
                           key={`cell-${index}`} 
                           fill={entry.valueYoY.startsWith("+") ? "#4ade80" : "#ef4444"} 
@@ -334,7 +399,7 @@ const AreaAnalysis = () => {
               <div className="h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart
-                    data={areaData.map(area => ({
+                    data={filteredAreaData.map(area => ({
                       name: area.name.split(' ')[0],
                       existing: parseInt(area.existingUnits.replace(",", "")),
                       upcoming: parseInt(area.upcomingUnits.replace(",", ""))
@@ -353,6 +418,47 @@ const AreaAnalysis = () => {
               </div>
             </CardContent>
           </Card>
+        </div>
+      )}
+
+      {view === 'performance' && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {sortedAreaData.map((area) => (
+            <Card key={area.id} className="bg-slate-900 text-white border-slate-700">
+              <CardContent className="p-4">
+                <h3 className="font-semibold text-sm mb-2">{area.name}</h3>
+                <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
+                  <div className="text-slate-300">Total Value (2024)</div>
+                  <div className="text-right">{area.totalValue}</div>
+                  
+                  <div className="text-slate-300">Total Volume (2024)</div>
+                  <div className="text-right">{area.totalVolume}</div>
+                  
+                  <div className="text-slate-300">Median Price (2024)</div>
+                  <div className="text-right">{area.medianPrice}</div>
+                  
+                  <div className="text-slate-300">Median Price/sqft (2024)</div>
+                  <div className="text-right">{area.medianPricePerSqft}</div>
+                  
+                  <div className="text-slate-300">Value YoY</div>
+                  <div className={`text-right ${getPercentageClass(area.valueYoY)}`}>
+                    {area.valueYoY}
+                  </div>
+                  
+                  <div className="text-slate-300">Volume YoY</div>
+                  <div className={`text-right ${getPercentageClass(area.volumeYoY)}`}>
+                    {area.volumeYoY}
+                  </div>
+
+                  <div className="text-slate-300">Existing Units</div>
+                  <div className="text-right">{area.existingUnits}</div>
+                  
+                  <div className="text-slate-300">Upcoming Units</div>
+                  <div className="text-right">{area.upcomingUnits}</div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       )}
     </div>
