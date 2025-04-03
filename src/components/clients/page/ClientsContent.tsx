@@ -7,6 +7,7 @@ import ClientDetails from "@/components/clients/ClientDetails";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import ClientsPipeline from "@/components/clients/page/ClientsPipeline";
+import RecommendedListings from "@/components/clients/page/RecommendedListings";
 
 interface ClientsContentProps {
   clients: Client[];
@@ -30,6 +31,7 @@ const ClientsContent = ({
         <TabsTrigger value="buyers">Buyers</TabsTrigger>
         <TabsTrigger value="sellers">Sellers</TabsTrigger>
         <TabsTrigger value="investors">Investors</TabsTrigger>
+        <TabsTrigger value="recommendations">Recommendations</TabsTrigger>
         <TabsTrigger value="funnel">Pipeline</TabsTrigger>
       </TabsList>
       
@@ -92,6 +94,13 @@ const ClientsContent = ({
           clients={clients.filter(c => c.type === 'investor')} 
           onClientSelect={onClientSelect}
           selectedClientId={selectedClient?.id}
+        />
+      </TabsContent>
+      
+      <TabsContent value="recommendations">
+        <RecommendedListings 
+          clients={clients.filter(c => c.type === 'buyer' || c.type === 'investor')} 
+          onClientSelect={onClientSelect}
         />
       </TabsContent>
       
