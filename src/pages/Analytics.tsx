@@ -7,18 +7,37 @@ import BrokerPerformance from "@/components/analytics/BrokerPerformance";
 import MarketInsights from "@/components/analytics/MarketInsights";
 import ProjectAnalytics from "@/components/analytics/ProjectAnalytics";
 import AnalyticsReports from "@/components/analytics/AnalyticsReports";
-import MarketPerformance from "@/components/analytics/MarketPerformance";
+import MarketPerformance from "@/components/analytics/market-performance/MarketPerformance";
 import MarketShare from "@/components/analytics/MarketShare";
 import AreasComparison from "@/components/analytics/AreasComparison";
 import TransactionAnalysis from "@/components/analytics/TransactionAnalysis";
+import ReportGenerator from "@/components/analytics/ReportGenerator";
+import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
 
 const Analytics = () => {
   const [activeTab, setActiveTab] = useState("performance");
+  const [showReportGenerator, setShowReportGenerator] = useState(false);
 
   return (
     <AppShell>
       <div className="space-y-6">
-        <AnalyticsHeader />
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <AnalyticsHeader />
+          <Button 
+            onClick={() => setShowReportGenerator(!showReportGenerator)}
+            className="bg-blue-600 hover:bg-blue-700"
+          >
+            <Download className="mr-2 h-4 w-4" />
+            {showReportGenerator ? "Hide Report Generator" : "Generate Custom Report"}
+          </Button>
+        </div>
+        
+        {showReportGenerator && (
+          <div className="mb-6">
+            <ReportGenerator />
+          </div>
+        )}
         
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="mb-6 flex flex-wrap">

@@ -1,48 +1,73 @@
 
 import { useState } from "react";
-import MarketPerformanceFilters from "./MarketPerformanceFilters";
+import AnalyticsFilters from "../AnalyticsFilters";
 import KeyMetricsCards from "./KeyMetricsCards";
 import TransactionVolumeChart from "./TransactionVolumeChart";
 import PropertyPriceChart from "./PropertyPriceChart";
 import PriceRangeDistributionChart from "./PriceRangeDistributionChart";
 import MonthlyTransactionsChart from "./MonthlyTransactionsChart";
 import PriceAnalysisTable from "./PriceAnalysisTable";
+import ReportMetrics from "../ReportMetrics";
 import { 
   marketData, 
   priceRangeData, 
   monthlyData, 
   marketSummary, 
-  propertyTypeData 
+  propertyTypeData,
+  dailyTransactionData,
+  weeklyTransactionData
 } from "./marketData";
 
 const MarketPerformance = () => {
   const [propertyType, setPropertyType] = useState("all");
   const [status, setStatus] = useState("all");
-  const [year, setYear] = useState("2025");
+  const [timeframe, setTimeframe] = useState("monthly");
   const [bedroom, setBedroom] = useState("all");
   const [area, setArea] = useState("all");
   const [transactionType, setTransactionType] = useState("sales");
+  const [fromDate, setFromDate] = useState<Date | undefined>(undefined);
+  const [toDate, setToDate] = useState<Date | undefined>(undefined);
+  
+  // Function to handle filters application
+  const handleApplyFilters = () => {
+    console.log("Applying filters:", {
+      propertyType,
+      status,
+      timeframe,
+      area,
+      fromDate,
+      toDate
+    });
+    // In a real application, this would fetch data based on the filters
+  };
 
   return (
     <div className="space-y-6">
-      {/* Filters */}
-      <MarketPerformanceFilters 
+      {/* Analytics Filters */}
+      <AnalyticsFilters
         propertyType={propertyType}
         setPropertyType={setPropertyType}
         status={status}
         setStatus={setStatus}
-        year={year}
-        setYear={setYear}
-        bedroom={bedroom}
-        setBedroom={setBedroom}
+        timeframe={timeframe}
+        setTimeframe={setTimeframe}
         area={area}
         setArea={setArea}
-        transactionType={transactionType}
-        setTransactionType={setTransactionType}
+        fromDate={fromDate}
+        setFromDate={setFromDate}
+        toDate={toDate}
+        setToDate={setToDate}
+        showDateRange={true}
+        showApplyButton={true}
+        onApplyFilters={handleApplyFilters}
       />
 
-      {/* Key metrics */}
-      <KeyMetricsCards metrics={marketSummary} />
+      {/* Report Metrics based on the selected timeframe */}
+      <ReportMetrics 
+        timeframe={timeframe as "daily" | "weekly" | "monthly" | "yearly"} 
+        propertyType={propertyType}
+        area={area}
+      />
 
       {/* Transaction volume chart */}
       <TransactionVolumeChart data={marketData} />

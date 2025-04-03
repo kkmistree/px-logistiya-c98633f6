@@ -1,3 +1,12 @@
+
+// Add or update the MetricItem interface to explicitly define trend type
+export interface MetricItem {
+  title: string;
+  value: string;
+  change: string;
+  trend: "up" | "down";
+}
+
 // Market performance data (mock)
 export const marketData = [
   { year: '2009', value: 800000, volume: 32000 },
@@ -16,7 +25,7 @@ export const marketData = [
   { year: '2022', value: 1500000, volume: 90000 },
   { year: '2023', value: 1650000, volume: 140000 },
   { year: '2024', value: 1750000, volume: 196000 },
-  { year: '2025', value: 1800000, volume: 75000 },
+  { year: '2025', value: 1800000, volume: 75000 }
 ];
 
 // Price range distribution data
@@ -37,7 +46,7 @@ export const priceRangeData = [
   { year: '2022', below1M: 38.0, from1Mto2M: 33.6, from2Mto3M: 15.9, from3Mto7M: 11.4, above7M: 1.1 },
   { year: '2023', below1M: 40.2, from1Mto2M: 33.4, from2Mto3M: 13.7, from3Mto7M: 11.2, above7M: 1.5 },
   { year: '2024', below1M: 39.4, from1Mto2M: 31.3, from2Mto3M: 15.8, from3Mto7M: 11.5, above7M: 2.0 },
-  { year: '2025', below1M: 35.1, from1Mto2M: 32.0, from2Mto3M: 20.3, from3Mto7M: 11.2, above7M: 1.4 },
+  { year: '2025', below1M: 35.1, from1Mto2M: 32.0, from2Mto3M: 20.3, from3Mto7M: 11.2, above7M: 1.4 }
 ];
 
 // Monthly volume data
@@ -53,16 +62,8 @@ export const monthlyData = [
   { month: 'September', volume: 4023 },
   { month: 'October', volume: 4356 },
   { month: 'November', volume: 4150 },
-  { month: 'December', volume: 4483 },
+  { month: 'December', volume: 4483 }
 ];
-
-// Add or update the MetricItem interface to explicitly define trend type
-export interface MetricItem {
-  title: string;
-  value: string;
-  change: string;
-  trend: "up" | "down";
-}
 
 // Market summary stats with proper typing
 export const marketSummary: MetricItem[] = [
@@ -70,36 +71,51 @@ export const marketSummary: MetricItem[] = [
     title: "Total transaction volume (2024)",
     value: "196K",
     change: "+40.7%",
-    trend: "up" as const,
+    trend: "up",
   },
   {
     title: "Total transaction value (2024)",
     value: "AED 426B",
     change: "+36.1%",
-    trend: "up" as const,
+    trend: "up",
   },
   {
     title: "Median price (2024)",
     value: "AED 1,395,000",
     change: "-1.6%",
-    trend: "down" as const,
+    trend: "down",
   },
   {
     title: "Median price per sqft (2024)",
     value: "AED 1,445",
     change: "+3.1%",
-    trend: "up" as const,
+    trend: "up",
   },
   {
     title: "Yield (2024)",
     value: "4.3%",
     change: "+0.2%",
-    trend: "up" as const,
+    trend: "up",
   }
 ];
 
 // Property type data
 export const propertyTypeData = [
   { type: "Apartment", medianPrice: "AED 1,218,230", pricePerSqft: "AED 979" },
-  { type: "Villa", medianPrice: "AED 2,973,793", pricePerSqft: "AED 1,502" },
+  { type: "Villa", medianPrice: "AED 2,973,793", pricePerSqft: "AED 1,502" }
+];
+
+// Daily transaction data
+export const dailyTransactionData = [
+  { date: '2025-04-01', transactions: 230, value: 715000000 },
+  { date: '2025-04-02', transactions: 245, value: 735000000 },
+  { date: '2025-04-03', transactions: 238, value: 725000000 }
+];
+
+// Weekly transaction data
+export const weeklyTransactionData = [
+  { week: 'Week 1', transactions: 1652, value: 5100000000 },
+  { week: 'Week 2', transactions: 1785, value: 5200000000 },
+  { week: 'Week 3', transactions: 1705, value: 5000000000 },
+  { week: 'Week 4', transactions: 1894, value: 5400000000 }
 ];
