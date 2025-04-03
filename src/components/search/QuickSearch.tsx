@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Search as SearchIcon, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -50,7 +51,15 @@ const QuickSearch = ({ onSearch, fullScreen = false, onClose }: QuickSearchProps
     setQuery(suggestion);
     // Trigger search immediately after setting the query
     setTimeout(() => {
-      handleSearch();
+      if (onSearch) {
+        onSearch(suggestion);
+      }
+      setIsSearching(true);
+      
+      // Simulate AI processing
+      setTimeout(() => {
+        setIsSearching(false);
+      }, 1000);
     }, 10);
   };
 

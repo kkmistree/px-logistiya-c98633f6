@@ -14,13 +14,14 @@ const SearchPage = () => {
     console.log("Search query from page:", query);
     setIsSearching(true);
     
-    // Simulate API call to search properties
+    // Process the query to filter properties
+    const results = searchProperties(query);
+    
+    // Simulate API call delay
     setTimeout(() => {
-      // Process the query to filter properties
-      const results = searchProperties(query);
       setSearchResults(results);
       setIsSearching(false);
-    }, 1500);
+    }, 1000);
   };
 
   const handleNewSearch = () => {

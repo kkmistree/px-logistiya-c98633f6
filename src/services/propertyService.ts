@@ -122,6 +122,116 @@ export const searchProperties = (query: string): Property[] => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       tags: ["off-plan", "payment plan", "investment"]
+    },
+    {
+      id: "prop6",
+      title: "Budget-Friendly Studio in JVC",
+      description: "Affordable studio apartment with great rental potential",
+      type: "apartment",
+      status: "ready",
+      price: 380000,
+      area: 400,
+      bedrooms: 0,
+      bathrooms: 1,
+      location: {
+        area: "Jumeirah Village Circle",
+        community: "JVC"
+      },
+      features: ["Balcony", "Pool", "Gym"],
+      images: ["/placeholder.svg"],
+      roi: 8.8,
+      views: 68,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      tags: ["high yield", "budget", "investment"]
+    },
+    {
+      id: "prop7",
+      title: "Exclusive 1 Bedroom in Business Bay",
+      description: "Modern 1 bedroom with high rental yield and canal views",
+      type: "apartment",
+      status: "ready",
+      price: 820000,
+      area: 680,
+      bedrooms: 1,
+      bathrooms: 1,
+      location: {
+        area: "Business Bay",
+        community: "Executive Towers"
+      },
+      features: ["Canal View", "Premium Finishes", "Gym"],
+      images: ["/placeholder.svg"],
+      roi: 8.9,
+      views: 90,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      tags: ["high ROI", "high yield", "canal view"]
+    },
+    {
+      id: "prop8",
+      title: "Marina View Studio",
+      description: "Compact studio with marina views and premium amenities",
+      type: "apartment",
+      status: "ready",
+      price: 650000,
+      area: 450,
+      bedrooms: 0,
+      bathrooms: 1,
+      location: {
+        area: "Dubai Marina",
+        community: "Marina Diamond"
+      },
+      features: ["Marina View", "Swimming Pool", "24/7 Security"],
+      images: ["/placeholder.svg"],
+      roi: 7.8,
+      views: 65,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      tags: ["high yield", "marina view", "investment"]
+    },
+    {
+      id: "prop9",
+      title: "Affordable 2 Bedroom in JVC",
+      description: "Spacious 2 bedroom apartment with excellent ROI potential",
+      type: "apartment",
+      status: "ready",
+      price: 750000,
+      area: 1100,
+      bedrooms: 2,
+      bathrooms: 2,
+      location: {
+        area: "Jumeirah Village Circle",
+        community: "JVC"
+      },
+      features: ["Balcony", "Parking", "Pool"],
+      images: ["/placeholder.svg"],
+      roi: 8.3,
+      views: 55,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      tags: ["high ROI", "family-friendly", "investment"]
+    },
+    {
+      id: "prop10",
+      title: "Budget 1 Bedroom in Silicon Oasis",
+      description: "Affordable 1 bedroom with excellent rental yield",
+      type: "apartment",
+      status: "ready",
+      price: 320000,
+      area: 650,
+      bedrooms: 1,
+      bathrooms: 1,
+      location: {
+        area: "Dubai Silicon Oasis",
+        community: "Silicon Gates"
+      },
+      features: ["Balcony", "Parking", "Gym"],
+      images: ["/placeholder.svg"],
+      roi: 9.8,
+      views: 42,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      tags: ["high ROI", "high yield", "budget"]
     }
   ];
 
@@ -177,6 +287,9 @@ export const searchProperties = (query: string): Property[] => {
       p.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
     );
   }
+  
+  // Take only top 3-5 results
+  filtered = filtered.slice(0, Math.min(5, filtered.length));
   
   // Add a match score to each result for demonstration
   return filtered.map(prop => ({
