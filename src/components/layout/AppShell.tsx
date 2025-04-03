@@ -19,7 +19,7 @@ const AppShell = ({ children }: AppShellProps) => {
         
         <div className={cn(
           "flex-1 flex flex-col transition-all duration-300 ease-in-out",
-          sidebarOpen ? "md:ml-64" : "md:ml-20"
+          sidebarOpen ? "md:ml-64" : "md:ml-16"
         )}>
           <Navbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
           <main className="flex-1 p-4 md:p-6 overflow-auto max-w-full">

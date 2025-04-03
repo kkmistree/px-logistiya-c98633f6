@@ -51,9 +51,8 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
     <aside
       className={cn(
         "fixed left-0 top-0 z-40 h-screen bg-black text-white transition-all duration-300 ease-in-out",
-        open ? "w-64" : "w-20",
-        "md:block",
-        !open && "md:hover:w-64"
+        open ? "w-64" : "w-16",
+        "md:block"
       )}
     >
       <div className="flex flex-col h-full">
@@ -80,7 +79,7 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
           )}
         </div>
 
-        <nav className="flex-1 px-3 py-4 overflow-y-auto">
+        <nav className={cn("flex-1 px-3 py-4 overflow-y-auto", open ? "block" : "hidden")}>
           <ul className="space-y-2">
             {navItems.map((item, index) => (
               <li key={index}>
@@ -96,12 +95,7 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
                   }
                 >
                   <item.icon size={20} />
-                  <span
-                    className={cn(
-                      "ml-3 whitespace-nowrap transition-opacity",
-                      open ? "opacity-100" : "opacity-0 md:group-hover:opacity-100"
-                    )}
-                  >
+                  <span className="ml-3 whitespace-nowrap">
                     {item.label}
                   </span>
                 </NavLink>
@@ -110,12 +104,37 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
           </ul>
         </nav>
 
-        {/* Currency Switcher - Added above user info */}
-        <div className={cn(
-          open ? "block" : "hidden md:group-hover:block"
-        )}>
-          <CurrencySwitcher />
-        </div>
+        {/* Icon-only navigation when collapsed */}
+        {!open && (
+          <nav className="flex-1 px-3 py-4 overflow-y-auto">
+            <ul className="space-y-2">
+              {navItems.map((item, index) => (
+                <li key={index}>
+                  <NavLink
+                    to={item.path}
+                    className={({ isActive }) =>
+                      cn(
+                        "flex items-center justify-center py-2 rounded-lg transition-colors",
+                        isActive
+                          ? "bg-white/10 text-white"
+                          : "text-white/70 hover:bg-white/10 hover:text-white"
+                      )
+                    }
+                  >
+                    <item.icon size={20} />
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+
+        {/* Currency Switcher - Show only when expanded */}
+        {open && (
+          <div className="px-3 py-2">
+            <CurrencySwitcher />
+          </div>
+        )}
 
         <div className="p-4 border-t border-white/10">
           <Popover open={userMenuOpen} onOpenChange={setUserMenuOpen}>
