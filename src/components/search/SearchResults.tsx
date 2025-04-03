@@ -16,7 +16,12 @@ const SearchResults = ({ searchResults, onNewSearch, onPropertyClick }: SearchRe
         <h2 className="text-2xl font-medium">
           Search Results <span className="text-purple-600 font-bold">({searchResults.length})</span>
         </h2>
-        <Button variant="outline" size="sm" onClick={onNewSearch}>
+        <Button 
+          variant="outline" 
+          size="sm" 
+          onClick={onNewSearch}
+          className="border-[#1A1F2C] text-[#1A1F2C] hover:bg-[#1A1F2C]/10"
+        >
           <ArrowLeft className="mr-2 h-4 w-4" />
           New Search
         </Button>
@@ -36,7 +41,7 @@ const SearchResults = ({ searchResults, onNewSearch, onPropertyClick }: SearchRe
                 className="w-full h-full object-cover"
               />
               {property.matchScore && (
-                <div className="absolute top-2 right-2 bg-purple-600 text-white text-xs font-medium px-2 py-1 rounded-full">
+                <div className="absolute top-2 right-2 bg-[#1A1F2C] text-white text-xs font-medium px-2 py-1 rounded-full">
                   {property.matchScore}% Match
                 </div>
               )}

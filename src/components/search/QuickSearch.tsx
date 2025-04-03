@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Search as SearchIcon, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -97,7 +98,7 @@ const QuickSearch = ({ onSearch, fullScreen = false, onClose }: QuickSearchProps
               
               <Button 
                 type="submit" 
-                className="h-12 px-6 rounded-r-lg bg-purple-600 hover:bg-purple-700"
+                className="h-12 px-6 rounded-r-lg bg-[#1A1F2C] hover:bg-[#2A2F3C]"
                 disabled={isSearching}
               >
                 {isSearching ? <Loader2 className="h-5 w-5 animate-spin" /> : "Search"}
@@ -152,7 +153,7 @@ const QuickSearch = ({ onSearch, fullScreen = false, onClose }: QuickSearchProps
           type="submit" 
           size="icon"
           variant="ghost" 
-          className="h-8 w-8 bg-sidebar-accent hover:bg-white/20 text-sidebar-accent-foreground"
+          className="h-8 w-8 bg-[#1A1F2C] hover:bg-[#2A2F3C] text-white"
           disabled={isSearching}
         >
           {isSearching ? <Loader2 className="h-4 w-4 animate-spin" /> : <SearchIcon className="h-4 w-4" />}
