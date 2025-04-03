@@ -2,8 +2,6 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import { formatCurrency } from "@/utils/format";
 import { Badge } from "@/components/ui/badge";
 
 // Mock areas data
@@ -95,16 +93,45 @@ const AreasComparison = () => {
     }
   };
 
-  const getPercentageClass = (value: string) => {
-    if (value.startsWith("+")) return "text-green-500";
-    if (value.startsWith("-")) return "text-red-500";
-    return "";
+  // Calculate relative differences between areas
+  const calculateRelativeDifference = (value1: string, value2: string, type: string) => {
+    if (type === 'volume') {
+      const vol1 = parseFloat(value1.replace('K', ''));
+      const vol2 = parseFloat(value2.replace('K', ''));
+      return Math.abs(((vol1 - vol2) / vol2) * 100).toFixed(1);
+    } else if (type === 'value') {
+      const val1 = parseFloat(value1.replace('AED ', '').replace('B', ''));
+      const val2 = parseFloat(value2.replace('AED ', '').replace('B', ''));
+      return Math.abs(((val1 - val2) / val2) * 100).toFixed(1);
+    } else if (type === 'price-sqft') {
+      const price1 = parseFloat(value1.replace('AED ', '').replace(',', ''));
+      const price2 = parseFloat(value2.replace('AED ', '').replace(',', ''));
+      return Math.abs(((price1 - price2) / price2) * 100).toFixed(1);
+    } else if (type === 'price') {
+      const price1 = parseFloat(value1.replace('AED ', '').replace(/,/g, ''));
+      const price2 = parseFloat(value2.replace('AED ', '').replace(/,/g, ''));
+      const diff = ((price1 - price2) / price2) * 100;
+      return diff.toFixed(1);
+    }
+    return "0";
+  };
+
+  // Determine if location1 value is higher than location2
+  const isLocation1Higher = (value1: string, value2: string, type: string) => {
+    if (type === 'volume') {
+      return parseFloat(value1.replace('K', '')) > parseFloat(value2.replace('K', ''));
+    } else if (type === 'value') {
+      return parseFloat(value1.replace('AED ', '').replace('B', '')) > parseFloat(value2.replace('AED ', '').replace('B', ''));
+    } else if (type === 'price-sqft' || type === 'price') {
+      return parseFloat(value1.replace('AED ', '').replace(/,/g, '')) > parseFloat(value2.replace('AED ', '').replace(/,/g, ''));
+    }
+    return false;
   };
 
   return (
     <div className="space-y-6">
       {/* Filters */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
         <div>
           <Select value={propertyType} onValueChange={setPropertyType}>
             <SelectTrigger>
@@ -125,8 +152,8 @@ const AreasComparison = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All</SelectItem>
-              <SelectItem value="readybuilt">Ready built</SelectItem>
-              <SelectItem value="offplan">Off-plan</SelectItem>
+              <SelectItem value="readyBuilt">Ready built</SelectItem>
+              <SelectItem value="offPlan">Off-plan</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -238,7 +265,7 @@ const AreasComparison = () => {
               <p className="text-2xl font-bold">{location1Data?.medianPricePerSqft}</p>
               <div className="mt-1">
                 <Badge variant={getBadgeVariant(location1Data?.trend || "")}>
-                  +3.3% YoY Change
+                  {location1Data?.valueYoY} YoY Change
                 </Badge>
               </div>
             </CardContent>
@@ -251,7 +278,7 @@ const AreasComparison = () => {
               <p className="text-2xl font-bold">{location1Data?.medianPrice}</p>
               <div className="mt-1">
                 <Badge variant={getBadgeVariant(location1Data?.trend || "")}>
-                  +9.7% YoY Change
+                  {location1Data?.valueYoY} YoY Change
                 </Badge>
               </div>
             </CardContent>
@@ -260,10 +287,17 @@ const AreasComparison = () => {
         
         {/* Right column - Location 2 */}
         <div className="space-y-4">
-          {/* Relative difference badge */}
+          {/* Relative difference badge for volume */}
           <div className="flex justify-end mb-[-20px] mr-6 z-10 relative">
-            <Badge className={`px-3 py-1 ${location1Data?.totalVolume.split('K')[0] > location2Data?.totalVolume.split('K')[0] ? 'bg-red-500' : 'bg-green-500'} text-white`}>
-              96.8%
+            <Badge className={`px-3 py-1 ${
+              isLocation1Higher(location1Data?.totalVolume || "0", location2Data?.totalVolume || "0", "volume") ? 
+                'bg-green-500' : 'bg-red-500'} text-white`}
+            >
+              {calculateRelativeDifference(
+                location1Data?.totalVolume || "0", 
+                location2Data?.totalVolume || "0", 
+                "volume"
+              )}%
             </Badge>
           </div>
           
@@ -280,10 +314,17 @@ const AreasComparison = () => {
             </CardContent>
           </Card>
           
-          {/* Relative difference badge */}
+          {/* Relative difference badge for value */}
           <div className="flex justify-end mb-[-20px] mr-6 z-10 relative">
-            <Badge className={`px-3 py-1 ${parseFloat(location1Data?.totalValue.split('AED ')[1]) > parseFloat(location2Data?.totalValue.split('AED ')[1]) ? 'bg-red-500' : 'bg-green-500'} text-white`}>
-              67.7%
+            <Badge className={`px-3 py-1 ${
+              isLocation1Higher(location1Data?.totalValue || "0", location2Data?.totalValue || "0", "value") ? 
+                'bg-green-500' : 'bg-red-500'} text-white`}
+            >
+              {calculateRelativeDifference(
+                location1Data?.totalValue || "0", 
+                location2Data?.totalValue || "0", 
+                "value"
+              )}%
             </Badge>
           </div>
           
@@ -300,10 +341,17 @@ const AreasComparison = () => {
             </CardContent>
           </Card>
           
-          {/* Relative difference badge */}
+          {/* Relative difference badge for price per sqft */}
           <div className="flex justify-end mb-[-20px] mr-6 z-10 relative">
-            <Badge className={`px-3 py-1 ${parseFloat(location1Data?.medianPricePerSqft.split('AED ')[1].replace(',', '')) > parseFloat(location2Data?.medianPricePerSqft.split('AED ')[1].replace(',', '')) ? 'bg-red-500' : 'bg-green-500'} text-white`}>
-              2.9%
+            <Badge className={`px-3 py-1 ${
+              isLocation1Higher(location1Data?.medianPricePerSqft || "0", location2Data?.medianPricePerSqft || "0", "price-sqft") ? 
+                'bg-green-500' : 'bg-red-500'} text-white`}
+            >
+              {calculateRelativeDifference(
+                location1Data?.medianPricePerSqft || "0", 
+                location2Data?.medianPricePerSqft || "0", 
+                "price-sqft"
+              )}%
             </Badge>
           </div>
           
@@ -314,16 +362,23 @@ const AreasComparison = () => {
               <p className="text-2xl font-bold">{location2Data?.medianPricePerSqft}</p>
               <div className="mt-1">
                 <Badge variant={getBadgeVariant(location2Data?.trend || "")}>
-                  +27.5% YoY Change
+                  {location2Data?.valueYoY} YoY Change
                 </Badge>
               </div>
             </CardContent>
           </Card>
           
-          {/* Relative difference badge */}
+          {/* Relative difference badge for median price */}
           <div className="flex justify-end mb-[-20px] mr-6 z-10 relative">
-            <Badge className={`px-3 py-1 ${parseFloat(location1Data?.medianPrice.split('AED ')[1].replace(',', '')) > parseFloat(location2Data?.medianPrice.split('AED ')[1].replace(',', '')) ? 'bg-red-500' : 'bg-green-500'} text-white`}>
-              -17.1%
+            <Badge className={`px-3 py-1 ${
+              isLocation1Higher(location1Data?.medianPrice || "0", location2Data?.medianPrice || "0", "price") ? 
+                'bg-green-500' : 'bg-red-500'} text-white`}
+            >
+              {calculateRelativeDifference(
+                location1Data?.medianPrice || "0", 
+                location2Data?.medianPrice || "0", 
+                "price"
+              )}%
             </Badge>
           </div>
           
@@ -334,7 +389,7 @@ const AreasComparison = () => {
               <p className="text-2xl font-bold">{location2Data?.medianPrice}</p>
               <div className="mt-1">
                 <Badge variant={getBadgeVariant(location2Data?.trend || "")}>
-                  -11.1% YoY Change
+                  {location2Data?.valueYoY} YoY Change
                 </Badge>
               </div>
             </CardContent>
