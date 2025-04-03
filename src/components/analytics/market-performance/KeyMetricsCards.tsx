@@ -1,13 +1,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-
-interface MetricItem {
-  title: string;
-  value: string;
-  change: string;
-  trend: "up" | "down";
-}
+import { MetricItem } from "./marketData";
 
 interface KeyMetricsCardsProps {
   metrics: MetricItem[];

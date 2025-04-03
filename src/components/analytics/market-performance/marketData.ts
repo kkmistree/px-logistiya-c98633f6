@@ -1,4 +1,3 @@
-
 // Market performance data (mock)
 export const marketData = [
   { year: '2009', value: 800000, volume: 32000 },
@@ -57,37 +56,45 @@ export const monthlyData = [
   { month: 'December', volume: 4483 },
 ];
 
-// Market summary stats
-export const marketSummary = [
+// Add or update the MetricItem interface to explicitly define trend type
+export interface MetricItem {
+  title: string;
+  value: string;
+  change: string;
+  trend: "up" | "down";
+}
+
+// Market summary stats with proper typing
+export const marketSummary: MetricItem[] = [
   {
     title: "Total transaction volume (2024)",
     value: "196K",
     change: "+40.7%",
-    trend: "up",
+    trend: "up" as const,
   },
   {
     title: "Total transaction value (2024)",
     value: "AED 426B",
     change: "+36.1%",
-    trend: "up",
+    trend: "up" as const,
   },
   {
     title: "Median price (2024)",
     value: "AED 1,395,000",
     change: "-1.6%",
-    trend: "down",
+    trend: "down" as const,
   },
   {
     title: "Median price per sqft (2024)",
     value: "AED 1,445",
     change: "+3.1%",
-    trend: "up",
+    trend: "up" as const,
   },
   {
     title: "Yield (2024)",
     value: "4.3%",
     change: "+0.2%",
-    trend: "up",
+    trend: "up" as const,
   }
 ];
 
