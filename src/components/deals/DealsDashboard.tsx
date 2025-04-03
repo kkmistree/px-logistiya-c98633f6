@@ -11,8 +11,15 @@ import {
   ResponsiveContainer,
   PieChart,
   Pie,
-  Cell
+  Cell,
+  LineChart,
+  Line,
+  Legend
 } from "recharts";
+import { formatCurrency } from "@/utils/format";
+import { Badge } from "@/components/ui/badge";
+import { ChartContainer, ChartTooltipContent } from "@/components/ui/chart";
+import { ArrowUpRight, CheckCircle, Clock, DollarSign, FileText, Users } from "lucide-react";
 
 // Mock data for deals overview
 const dealsSummary = {
@@ -48,22 +55,22 @@ const monthlyDeals = [
   { name: "Dec", value: 0 }
 ];
 
+// Mock data for match funnel
+const matchFunnel = [
+  { name: "Matches Sent", value: 120 },
+  { name: "Accepted", value: 72 },
+  { name: "Deals Created", value: 48 },
+  { name: "Closed", value: 17 }
+];
+
 // Colors for the pie chart
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-
-// Format currency
-const formatCurrency = (value: number) => {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'AED',
-    notation: 'compact',
-    maximumFractionDigits: 1
-  }).format(value);
-};
 
 const DealsDashboard = () => {
   return (
     <div className="space-y-6">
+      <h2 className="text-xl font-semibold mb-4">Deal Performance Dashboard</h2>
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card>
           <CardHeader className="pb-2">
@@ -86,9 +93,9 @@ const DealsDashboard = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{formatCurrency(dealsSummary.value)}</div>
+            <div className="text-2xl font-bold">{formatCurrency(dealsSummary.value, 'AED')}</div>
             <p className="text-xs text-slate-500 mt-1">
-              Avg. {formatCurrency(dealsSummary.value / dealsSummary.total)} per deal
+              Avg. {formatCurrency(dealsSummary.value / dealsSummary.total, 'AED')} per deal
             </p>
           </CardContent>
         </Card>
@@ -96,11 +103,11 @@ const DealsDashboard = () => {
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-slate-500">
-              Commission Earned
+              Commission Projected
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{formatCurrency(dealsSummary.commission)}</div>
+            <div className="text-2xl font-bold">{formatCurrency(dealsSummary.commission, 'AED')}</div>
             <p className="text-xs text-slate-500 mt-1">
               Avg. {(dealsSummary.commission / dealsSummary.value * 100).toFixed(1)}% rate
             </p>
@@ -154,23 +161,24 @@ const DealsDashboard = () => {
         
         <Card>
           <CardHeader>
-            <CardTitle>Monthly Deals (YTD)</CardTitle>
+            <CardTitle>Match Funnel</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart
-                  data={monthlyDeals}
+                  data={matchFunnel}
+                  layout="vertical"
                   margin={{
                     top: 5,
                     right: 30,
-                    left: 20,
+                    left: 100,
                     bottom: 5,
                   }}
                 >
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
+                  <XAxis type="number" />
+                  <YAxis dataKey="name" type="category" />
                   <Tooltip />
                   <Bar dataKey="value" fill="#8884d8" />
                 </BarChart>
@@ -182,6 +190,34 @@ const DealsDashboard = () => {
       
       <Card>
         <CardHeader>
+          <CardTitle>Monthly Deal Performance</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="h-[300px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart
+                data={monthlyDeals}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="value" stroke="#8884d8" activeDot={{ r: 8 }} name="Deals Created" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </CardContent>
+      </Card>
+      
+      <Card>
+        <CardHeader>
           <CardTitle>Recent Deal Activity</CardTitle>
         </CardHeader>
         <CardContent>
@@ -190,36 +226,48 @@ const DealsDashboard = () => {
               <div className="w-2 h-2 rounded-full bg-green-500 mr-3"></div>
               <div className="flex-1">
                 <p className="font-medium">Palm Jumeirah Villa Deal Closed</p>
-                <p className="text-sm text-slate-500">John Smith • {formatCurrency(3500000)}</p>
+                <p className="text-sm text-slate-500">John Smith • {formatCurrency(3500000, 'AED')}</p>
               </div>
-              <div className="text-sm text-slate-500">2 days ago</div>
+              <div className="flex items-center">
+                <Badge variant="match">Match Score: 92%</Badge>
+                <span className="text-sm text-slate-500 ml-3">2 days ago</span>
+              </div>
             </div>
             
             <div className="flex items-center">
               <div className="w-2 h-2 rounded-full bg-blue-500 mr-3"></div>
               <div className="flex-1">
                 <p className="font-medium">Downtown Apartment SPA Signed</p>
-                <p className="text-sm text-slate-500">Sarah Johnson • {formatCurrency(1800000)}</p>
+                <p className="text-sm text-slate-500">Sarah Johnson • {formatCurrency(1800000, 'AED')}</p>
               </div>
-              <div className="text-sm text-slate-500">3 days ago</div>
+              <div className="flex items-center">
+                <Badge variant="match">Match Score: 88%</Badge>
+                <span className="text-sm text-slate-500 ml-3">3 days ago</span>
+              </div>
             </div>
             
             <div className="flex items-center">
               <div className="w-2 h-2 rounded-full bg-amber-500 mr-3"></div>
               <div className="flex-1">
                 <p className="font-medium">Business Bay Deposit Paid</p>
-                <p className="text-sm text-slate-500">Michael Zhang • {formatCurrency(2100000)}</p>
+                <p className="text-sm text-slate-500">Michael Zhang • {formatCurrency(2100000, 'AED')}</p>
               </div>
-              <div className="text-sm text-slate-500">1 week ago</div>
+              <div className="flex items-center">
+                <Badge variant="match">Match Score: 95%</Badge>
+                <span className="text-sm text-slate-500 ml-3">1 week ago</span>
+              </div>
             </div>
             
             <div className="flex items-center">
               <div className="w-2 h-2 rounded-full bg-purple-500 mr-3"></div>
               <div className="flex-1">
-                <p className="font-medium">JVC Townhouse New Deal Created</p>
-                <p className="text-sm text-slate-500">Fatima Al Mansoori • {formatCurrency(1500000)}</p>
+                <p className="font-medium">New Match Proposal - JVC Townhouse</p>
+                <p className="text-sm text-slate-500">Waiting for broker approval • {formatCurrency(1500000, 'AED')}</p>
               </div>
-              <div className="text-sm text-slate-500">1 week ago</div>
+              <div className="flex items-center">
+                <Badge variant="match">Match Score: 87%</Badge>
+                <span className="text-sm text-slate-500 ml-3">1 week ago</span>
+              </div>
             </div>
           </div>
         </CardContent>

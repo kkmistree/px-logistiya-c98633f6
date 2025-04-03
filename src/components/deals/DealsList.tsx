@@ -1,9 +1,17 @@
-
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { formatCurrency } from "@/utils/format";
 import { Deal } from "@/types/deal";
+import { 
+  FileText, 
+  Users, 
+  Clock, 
+  CheckCircle, 
+  DollarSign,
+  Award
+} from "lucide-react";
 
 interface DealsListProps {
   status: "all" | "initiated" | "docs" | "legal" | "closed";
@@ -201,11 +209,7 @@ const mockDeals: Deal[] = [
 
 // Function to format price
 const formatPrice = (price: number) => {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'AED',
-    maximumFractionDigits: 0
-  }).format(price);
+  return formatCurrency(price, 'AED');
 };
 
 // Function to format date
@@ -238,6 +242,11 @@ const getStatusColor = (status: string) => {
   }
 };
 
+// Generate match score (new function)
+const getMatchScore = (deal: Deal) => {
+  return Math.floor(Math.random() * 31) + 70; // Random score between 70-100
+};
+
 const DealsList = ({ status }: DealsListProps) => {
   // Filter deals based on status
   const filteredDeals = status === "all" 
@@ -257,83 +266,94 @@ const DealsList = ({ status }: DealsListProps) => {
           <p className="text-slate-500">No deals found in this category</p>
         </div>
       ) : (
-        filteredDeals.map(deal => (
-          <Card key={deal.id} className="hover:shadow-md transition-shadow cursor-pointer">
-            <CardContent className="p-6">
-              <div className="flex flex-col md:flex-row justify-between">
-                <div className="flex-1">
-                  <div className="flex flex-wrap gap-2 items-center mb-2">
-                    <h3 className="font-semibold text-lg">{formatPrice(deal.price)} Deal</h3>
-                    <Badge className={getStatusColor(deal.status)}>
-                      {deal.status.charAt(0).toUpperCase() + deal.status.slice(1)}
-                    </Badge>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
-                    <div>
-                      <p className="text-xs text-slate-500">Client</p>
-                      <p className="font-medium">John Smith (Buyer)</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-slate-500">Property</p>
-                      <p className="font-medium">Palm Jumeirah Villa</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-slate-500">Agent</p>
-                      <p className="font-medium">Kaiyan Mistree</p>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <div className="flex justify-between items-center text-sm">
-                      <span>Progress</span>
-                      <span>{calculateProgress(deal)}%</span>
-                    </div>
-                    <Progress value={calculateProgress(deal)} className="h-2" />
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-x-6 gap-y-2 mt-4 text-sm text-slate-600">
-                    {deal.depositPaid && (
-                      <div className="flex items-center">
-                        <span className="w-2 h-2 rounded-full bg-green-500 mr-2"></span>
-                        <span>Deposit Paid: {formatPrice(deal.depositAmount || 0)}</span>
-                      </div>
-                    )}
-                    
-                    <div className="flex items-center">
-                      <span className="w-2 h-2 rounded-full bg-blue-500 mr-2"></span>
-                      <span>Commission: {formatPrice(deal.commissionAmount || 0)}</span>
+        filteredDeals.map(deal => {
+          const matchScore = getMatchScore(deal);
+          
+          return (
+            <Card key={deal.id} className="hover:shadow-md transition-shadow cursor-pointer">
+              <CardContent className="p-6">
+                <div className="flex flex-col md:flex-row justify-between">
+                  <div className="flex-1">
+                    <div className="flex flex-wrap gap-2 items-center mb-2">
+                      <h3 className="font-semibold text-lg">{formatPrice(deal.price)} Deal</h3>
+                      <Badge className={getStatusColor(deal.status)}>
+                        {deal.status.charAt(0).toUpperCase() + deal.status.slice(1)}
+                      </Badge>
+                      <Badge variant="match" className="ml-auto">
+                        <Award size={12} className="mr-1" />
+                        Match Score: {matchScore}%
+                      </Badge>
                     </div>
                     
-                    {deal.documents.length > 0 && (
-                      <div className="flex items-center">
-                        <span className="w-2 h-2 rounded-full bg-purple-500 mr-2"></span>
-                        <span>Documents: {deal.documents.length}</span>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                      <div>
+                        <p className="text-xs text-slate-500">Client</p>
+                        <p className="font-medium">John Smith (Buyer)</p>
                       </div>
-                    )}
+                      <div>
+                        <p className="text-xs text-slate-500">Property</p>
+                        <p className="font-medium">Palm Jumeirah Villa</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500">Transaction Type</p>
+                        <p className="font-medium">Ready Property</p>
+                      </div>
+                    </div>
                     
-                    {deal.closingDate && (
-                      <div className="flex items-center">
-                        <span className="w-2 h-2 rounded-full bg-amber-500 mr-2"></span>
-                        <span>Closing: {formatDate(deal.closingDate)}</span>
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center text-sm">
+                        <span>Deal Progress</span>
+                        <span>{calculateProgress(deal)}%</span>
                       </div>
-                    )}
+                      <Progress value={calculateProgress(deal)} className="h-2" />
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-x-6 gap-y-2 mt-4 text-sm text-slate-600">
+                      {deal.depositPaid && (
+                        <div className="flex items-center">
+                          <CheckCircle size={14} className="text-green-500 mr-2" />
+                          <span>Deposit: {formatPrice(deal.depositAmount || 0)}</span>
+                        </div>
+                      )}
+                      
+                      <div className="flex items-center">
+                        <DollarSign size={14} className="text-blue-500 mr-2" />
+                        <span>Commission: {formatPrice(deal.commissionAmount || 0)}</span>
+                      </div>
+                      
+                      <div className="flex items-center">
+                        <Users size={14} className="text-purple-500 mr-2" />
+                        <span>Both brokers accepted</span>
+                      </div>
+                      
+                      <div className="flex items-center">
+                        <FileText size={14} className="text-amber-500 mr-2" />
+                        <span>Docs: {deal.documents.length}</span>
+                      </div>
+                      
+                      {deal.closingDate && (
+                        <div className="flex items-center">
+                          <Clock size={14} className="text-slate-500 mr-2" />
+                          <span>Closing: {formatDate(deal.closingDate)}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <div className="mt-4 md:mt-0 md:ml-4 flex flex-col justify-center items-end">
+                    <div className="text-xs text-slate-500 mb-1">Last updated</div>
+                    <div className="font-medium">{formatDate(deal.updatedAt)}</div>
+                    <div className="mt-3 space-x-2">
+                      <button className="text-sm text-blue-600 hover:underline">
+                        View Detail
+                      </button>
+                    </div>
                   </div>
                 </div>
-                
-                <div className="mt-4 md:mt-0 md:ml-4 flex flex-col justify-center items-end">
-                  <div className="text-xs text-slate-500 mb-1">Last updated</div>
-                  <div className="font-medium">{formatDate(deal.updatedAt)}</div>
-                  <div className="mt-3 space-x-2">
-                    <button className="text-sm text-blue-600 hover:underline">
-                      View Details
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))
+              </CardContent>
+            </Card>
+          );
+        })
       )}
     </div>
   );

@@ -34,6 +34,8 @@ export interface Deal {
     notes?: string;
   }[];
   notes?: string;
+  matchScore?: number; // AI-generated match score (0-100)
+  transactionType?: 'off-plan' | 'resale' | 'ready'; // Type of transaction
   createdAt: string; // ISO date string
   updatedAt: string; // ISO date string
 }
@@ -68,3 +70,22 @@ export interface DealTemplate {
   createdAt: string; // ISO date string
   updatedAt: string; // ISO date string
 }
+
+export interface DealMatchProposal {
+  id: string;
+  propertyId: string;
+  clientId: string;
+  buyerBrokerId: string;
+  sellerBrokerId: string;
+  price: number;
+  matchScore: number; // AI-generated match score (0-100)
+  commissionAmount: number;
+  commissionSplit: string; // e.g., "50/50" or "60/40"
+  status: 'pending' | 'accepted' | 'rejected' | 'negotiating';
+  requiredDocuments: string[];
+  transactionType: 'off-plan' | 'resale' | 'ready';
+  notes?: string;
+  createdAt: string; // ISO date string
+  updatedAt: string; // ISO date string
+}
+

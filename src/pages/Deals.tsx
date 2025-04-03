@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import DealHeader from "@/components/deals/DealHeader";
 import DealsList from "@/components/deals/DealsList";
 import DealsDashboard from "@/components/deals/DealsDashboard";
+import DealMatchInbox from "@/components/deals/DealMatchInbox";
 
 const Deals = () => {
   const [activeTab, setActiveTab] = useState("all");
@@ -21,6 +22,7 @@ const Deals = () => {
             <TabsTrigger value="docs">Docs in Progress</TabsTrigger>
             <TabsTrigger value="legal">Legal Review</TabsTrigger>
             <TabsTrigger value="closed">Closed</TabsTrigger>
+            <TabsTrigger value="matches">Match Inbox</TabsTrigger>
             <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
           </TabsList>
           
@@ -42,6 +44,10 @@ const Deals = () => {
           
           <TabsContent value="closed">
             <DealsList status="closed" />
+          </TabsContent>
+
+          <TabsContent value="matches">
+            <DealMatchInbox />
           </TabsContent>
           
           <TabsContent value="dashboard">

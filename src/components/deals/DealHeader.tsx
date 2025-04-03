@@ -1,19 +1,29 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, PlusCircle, Filter } from "lucide-react";
+import { Search, PlusCircle, Filter, Bell } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 const DealHeader = () => {
+  const [hasNewMatches, setHasNewMatches] = useState(true);
+  
   return (
     <div className="space-y-4">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold text-estate-primary">Deal Rooms</h1>
-          <p className="text-slate-500">Manage your transactions from initial offer to closing</p>
+          <p className="text-slate-500">Manage your transactions from initial match to closing</p>
         </div>
         
         <div className="flex gap-2 w-full sm:w-auto">
+          <Button className="relative" variant="outline" onClick={() => {}}>
+            <Bell size={18} className="mr-2" />
+            <span>Match Inbox</span>
+            {hasNewMatches && (
+              <Badge className="absolute -top-2 -right-2 bg-red-500" variant="destructive">3</Badge>
+            )}
+          </Button>
           <Button onClick={() => {}}>
             <PlusCircle size={18} className="mr-2" />
             <span>New Deal</span>
