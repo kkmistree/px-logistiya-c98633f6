@@ -10,6 +10,7 @@ import AnalyticsReports from "@/components/analytics/AnalyticsReports";
 import MarketPerformance from "@/components/analytics/market-performance/MarketPerformance";
 import MarketShare from "@/components/analytics/MarketShare";
 import AreasComparison from "@/components/analytics/AreasComparison";
+import AreaAnalysis from "@/components/analytics/AreaAnalysis";
 import TransactionAnalysis from "@/components/analytics/TransactionAnalysis";
 import ReportGenerator from "@/components/analytics/ReportGenerator";
 import { Button } from "@/components/ui/button";
@@ -46,6 +47,7 @@ const Analytics = () => {
             <TabsTrigger value="projects">Project Analytics</TabsTrigger>
             <TabsTrigger value="marketPerformance">Market Performance</TabsTrigger>
             <TabsTrigger value="marketShare">Market Share</TabsTrigger>
+            <TabsTrigger value="areaAnalysis">Area Analysis</TabsTrigger>
             <TabsTrigger value="areasComparison">Areas Comparison</TabsTrigger>
             <TabsTrigger value="transactions">Transactions</TabsTrigger>
             <TabsTrigger value="reports">Reports</TabsTrigger>
@@ -69,6 +71,10 @@ const Analytics = () => {
           
           <TabsContent value="marketShare">
             <MarketShare />
+          </TabsContent>
+          
+          <TabsContent value="areaAnalysis">
+            <AreaAnalysis />
           </TabsContent>
           
           <TabsContent value="areasComparison">
