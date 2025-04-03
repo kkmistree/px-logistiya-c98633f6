@@ -8,7 +8,7 @@ import { searchProperties } from "@/services/propertyService";
 import { useNavigate } from "react-router-dom";
 import { useCurrency } from "@/contexts/CurrencyContext";
 
-const SearchPage = () => {
+const SearchContent = () => {
   const [searchResults, setSearchResults] = useState<Property[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate();
@@ -40,28 +40,35 @@ const SearchPage = () => {
   };
 
   return (
-    <AppShell>
-      <div className="h-full flex flex-col">
-        <QuickSearch fullScreen onSearch={handleSearch} />
-        
-        {/* Search Results Section */}
-        {!isSearching && searchResults.length > 0 && (
-          <SearchResults 
-            searchResults={searchResults}
-            onNewSearch={handleNewSearch}
-            onPropertyClick={handlePropertyClick}
-          />
-        )}
-        
-        {isSearching && (
-          <div className="flex justify-center mt-8">
-            <div className="flex flex-col items-center">
-              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[#1A1F2C]"></div>
-              <p className="mt-4 text-gray-500">Searching for properties...</p>
-            </div>
+    <div className="h-full flex flex-col">
+      <QuickSearch fullScreen onSearch={handleSearch} />
+      
+      {/* Search Results Section */}
+      {!isSearching && searchResults.length > 0 && (
+        <SearchResults 
+          searchResults={searchResults}
+          onNewSearch={handleNewSearch}
+          onPropertyClick={handlePropertyClick}
+        />
+      )}
+      
+      {isSearching && (
+        <div className="flex justify-center mt-8">
+          <div className="flex flex-col items-center">
+            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[#1A1F2C]"></div>
+            <p className="mt-4 text-gray-500">Searching for properties...</p>
           </div>
-        )}
-      </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Separate the page component that uses AppShell from the content that uses the currency context
+const SearchPage = () => {
+  return (
+    <AppShell>
+      <SearchContent />
     </AppShell>
   );
 };
