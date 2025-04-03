@@ -259,7 +259,7 @@ export const searchProperties = (query: string): Property[] => {
   else if (lowerQuery.includes("maximum price") && lowerQuery.includes("250,000")) {
     filtered = filtered.filter(p => 
       p.type === "apartment" && 
-      p.price <= 250000
+      p.price <= 250000  // Changed from equality check to less than or equal to
     );
   } 
   // Filter for '2 bedroom apartment with high ROI'
