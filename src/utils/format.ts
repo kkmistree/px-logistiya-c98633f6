@@ -1,4 +1,3 @@
-
 export const formatCurrency = (value: number, currencyCode: string = 'AED'): string => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -44,4 +43,77 @@ export const formatPhoneNumber = (phone: string): string => {
     }
   }
   return phone;
+};
+
+// Currency conversion rates (fixed rates for demonstration)
+// In a real app, you would fetch these from an API
+export const currencyRates: Record<string, number> = {
+  AED: 1,      // Base currency
+  USD: 3.67,   // 1 USD = 3.67 AED
+  GBP: 4.65,   // 1 GBP = 4.65 AED
+  EUR: 3.98,   // 1 EUR = 3.98 AED
+  SAR: 0.98,   // 1 SAR = 0.98 AED
+  INR: 0.044   // 1 INR = 0.044 AED
+};
+
+// Convert amount from one currency to another
+export const convertCurrency = (
+  amount: number, 
+  fromCurrency: string = 'AED', 
+  toCurrency: string = 'AED'
+): number => {
+  // If currencies are the same, no conversion needed
+  if (fromCurrency === toCurrency) return amount;
+  
+  // Convert from source currency to AED (base currency)
+  const amountInAED = fromCurrency === 'AED' 
+    ? amount 
+    : amount * currencyRates[fromCurrency];
+  
+  // Convert from AED to target currency
+  return toCurrency === 'AED' 
+    ? amountInAED 
+    : amountInAED / currencyRates[toCurrency];
+};
+
+// Extract currency information from a search query
+export const extractCurrencyInfo = (query: string): { 
+  amount: number; 
+  currency: string;
+  originalText: string;
+} | null => {
+  // Match patterns like $250,000 or 250,000 USD or 250k EUR
+  const currencyRegex = /(\$|£|€|₹|﷼|د\.إ)?\s*(\d+[,\d]*(\.\d+)?k?)\s*(USD|EUR|GBP|AED|SAR|INR)?/i;
+  const match = query.match(currencyRegex);
+  
+  if (!match) return null;
+  
+  const symbolToCode: Record<string, string> = {
+    '$': 'USD',
+    '£': 'GBP',
+    '€': 'EUR',
+    '₹': 'INR',
+    '﷼': 'SAR',
+    'د.إ': 'AED'
+  };
+  
+  let currencyCode = match[4]?.toUpperCase() || (match[1] ? symbolToCode[match[1]] : 'AED');
+  
+  // If neither symbol nor code is found, assume platform currency (will be determined later)
+  if (!currencyCode) currencyCode = 'PLATFORM';
+  
+  // Process the amount (handle 'k' suffix for thousands)
+  let amountStr = match[2].replace(/,/g, '');
+  let amount = parseFloat(amountStr.replace('k', ''));
+  
+  // Multiply by 1000 if 'k' is present
+  if (amountStr.toLowerCase().includes('k')) {
+    amount *= 1000;
+  }
+  
+  return {
+    amount,
+    currency: currencyCode,
+    originalText: match[0]
+  };
 };

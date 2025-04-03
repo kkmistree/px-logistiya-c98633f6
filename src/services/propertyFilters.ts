@@ -1,5 +1,6 @@
 
 import { Property } from "@/types/property";
+import { convertCurrency } from "@/utils/format";
 
 // Filter: Undervalued properties in Dubai Marina
 export const filterUndervaluedInMarina = (properties: Property[]): Property[] => {
@@ -19,10 +20,18 @@ export const filterHighYieldStudios = (properties: Property[]): Property[] => {
 };
 
 // Filter: Apartments with a maximum price
-export const filterApartmentsByMaxPrice = (properties: Property[], maxPrice: number): Property[] => {
+export const filterApartmentsByMaxPrice = (
+  properties: Property[], 
+  maxPrice: number, 
+  fromCurrency: string = 'AED',
+  platformCurrency: string = 'AED'
+): Property[] => {
+  // Convert the max price to the platform currency
+  const maxPriceInPlatformCurrency = convertCurrency(maxPrice, fromCurrency, platformCurrency);
+  
   return properties.filter(p => 
     p.type === "apartment" && 
-    p.price <= maxPrice  // Ensure we're using <= to include properties up to the max price
+    p.price <= maxPriceInPlatformCurrency  // Compare with converted value
   );
 };
 

@@ -6,18 +6,20 @@ import AppShell from "@/components/layout/AppShell";
 import { Property } from "@/types/property";
 import { searchProperties } from "@/services/propertyService";
 import { useNavigate } from "react-router-dom";
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 const SearchPage = () => {
   const [searchResults, setSearchResults] = useState<Property[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate();
+  const { currency } = useCurrency(); // Get the current platform currency
   
   const handleSearch = (query: string) => {
     console.log("Search query from page:", query);
     setIsSearching(true);
     
-    // Process the query to filter properties
-    const results = searchProperties(query);
+    // Process the query to filter properties with the current platform currency
+    const results = searchProperties(query, currency.code);
     
     // Simulate API call delay
     setTimeout(() => {

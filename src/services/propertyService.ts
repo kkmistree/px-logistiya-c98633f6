@@ -11,13 +11,20 @@ import {
   addMatchScore,
   limitResults
 } from "./propertyFilters";
+import { extractCurrencyInfo } from "@/utils/format";
+import { currencies, CurrencyCode } from "@/contexts/CurrencyContext";
 
 // This function simulates backend filtering based on search queries
-export const searchProperties = (query: string): Property[] => {
+export const searchProperties = (query: string, platformCurrency: CurrencyCode = 'AED'): Property[] => {
   // Start with all mock properties
   let filtered: Property[] = [...mockProperties];
   
   const lowerQuery = query.toLowerCase();
+  console.log(`Searching for: "${query}" with platform currency: ${platformCurrency}`);
+  
+  // Extract currency information if present in the query
+  const currencyInfo = extractCurrencyInfo(query);
+  console.log("Extracted currency info:", currencyInfo);
   
   // Apply filters based on query content
   if (lowerQuery.includes("undervalued") && lowerQuery.includes("dubai marina")) {
@@ -27,9 +34,23 @@ export const searchProperties = (query: string): Property[] => {
   else if (lowerQuery.includes("high yield") && lowerQuery.includes("studio")) {
     filtered = filterHighYieldStudios(filtered);
   } 
-  // Filter for 'Apartments with a maximum price of $250,000'
-  else if (lowerQuery.includes("maximum price") && lowerQuery.includes("250,000")) {
-    filtered = filterApartmentsByMaxPrice(filtered, 250000);
+  // Filter for apartments with a maximum price
+  else if (
+    lowerQuery.includes("maximum price") || 
+    lowerQuery.includes("max price") || 
+    (currencyInfo && lowerQuery.includes("apartment"))
+  ) {
+    let maxPrice = 250000; // Default value
+    let sourceCurrency: string = platformCurrency;
+    
+    if (currencyInfo) {
+      maxPrice = currencyInfo.amount;
+      sourceCurrency = currencyInfo.currency === 'PLATFORM' ? platformCurrency : currencyInfo.currency;
+      console.log(`Converting ${maxPrice} ${sourceCurrency} to ${platformCurrency}`);
+    }
+    
+    filtered = filterApartmentsByMaxPrice(filtered, maxPrice, sourceCurrency, platformCurrency);
+    console.log(`Found ${filtered.length} properties after price filtering`);
   } 
   // Filter for '2 bedroom apartment with high ROI'
   else if (lowerQuery.includes("2 bedroom") && lowerQuery.includes("high roi")) {
