@@ -14,6 +14,7 @@ import {
   ChevronRight,
   BookOpen,
 } from "lucide-react";
+import QuickSearch from "@/components/search/QuickSearch";
 
 interface SidebarProps {
   open: boolean;
@@ -66,6 +67,9 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
             </div>
           )}
         </div>
+
+        {/* Add QuickSearch as the first item after the logo */}
+        <QuickSearch />
 
         <nav className="flex-1 px-3 py-4 overflow-y-auto">
           <ul className="space-y-2">
