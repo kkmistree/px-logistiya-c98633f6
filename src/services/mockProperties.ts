@@ -231,5 +231,50 @@ export const mockProperties: Property[] = [
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     tags: ["high ROI", "high yield", "budget"]
+  },
+  // Adding two new budget apartments under $250,000
+  {
+    id: "prop11",
+    title: "Budget Studio in International City",
+    description: "Affordable studio apartment perfect for first-time investors",
+    type: "apartment",
+    status: "ready",
+    price: 220000,
+    area: 400,
+    bedrooms: 0,
+    bathrooms: 1,
+    location: {
+      area: "International City",
+      community: "China Cluster"
+    },
+    features: ["Parking", "24/7 Security", "Retail Outlets"],
+    images: ["/placeholder.svg"],
+    roi: 9.5,
+    views: 38,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    tags: ["budget", "high yield", "investment"]
+  },
+  {
+    id: "prop12",
+    title: "Affordable Studio in Dubai Sports City",
+    description: "Compact studio with great community amenities and investment potential",
+    type: "apartment",
+    status: "ready",
+    price: 245000,
+    area: 420,
+    bedrooms: 0,
+    bathrooms: 1,
+    location: {
+      area: "Dubai Sports City",
+      community: "Victory Heights"
+    },
+    features: ["Gym", "Pool", "Sports Facilities"],
+    images: ["/placeholder.svg"],
+    roi: 8.8,
+    views: 45,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    tags: ["affordable", "sports", "investment"]
   }
 ];

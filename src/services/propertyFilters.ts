@@ -22,7 +22,7 @@ export const filterHighYieldStudios = (properties: Property[]): Property[] => {
 export const filterApartmentsByMaxPrice = (properties: Property[], maxPrice: number): Property[] => {
   return properties.filter(p => 
     p.type === "apartment" && 
-    p.price <= maxPrice
+    p.price <= maxPrice  // Ensure we're using <= to include properties up to the max price
   );
 };
 
