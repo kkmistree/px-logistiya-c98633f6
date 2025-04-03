@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 import { NavLink } from "react-router-dom";
 import {
@@ -22,8 +21,8 @@ interface SidebarProps {
 
 const Sidebar = ({ open, setOpen }: SidebarProps) => {
   const navItems = [
-    { icon: Home, label: "Dashboard", path: "/" },
     { icon: Search, label: "Quick Search", path: "/search" },
+    { icon: Home, label: "Command Center", path: "/" },
     { icon: Search, label: "MLS Search", path: "/mls" },
     { icon: Users, label: "Clients & CRM", path: "/clients" },
     { icon: Building, label: "Developer Hub", path: "/developers" },
