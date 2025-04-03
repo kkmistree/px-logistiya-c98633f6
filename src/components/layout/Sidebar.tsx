@@ -1,3 +1,4 @@
+
 import { cn } from "@/lib/utils";
 import { NavLink } from "react-router-dom";
 import {
@@ -13,6 +14,7 @@ import {
   ChevronRight,
   BookOpen,
 } from "lucide-react";
+import CurrencySwitcher from "@/components/currency/CurrencySwitcher";
 
 interface SidebarProps {
   open: boolean;
@@ -96,6 +98,13 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
             ))}
           </ul>
         </nav>
+
+        {/* Currency Switcher - Added above user info */}
+        <div className={cn(
+          open ? "block" : "hidden md:group-hover:block"
+        )}>
+          <CurrencySwitcher />
+        </div>
 
         <div className="p-4 border-t border-white/10">
           <div className={cn(

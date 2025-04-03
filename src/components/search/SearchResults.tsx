@@ -2,6 +2,7 @@
 import { Property } from "@/types/property";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 interface SearchResultsProps {
   searchResults: Property[];
@@ -11,6 +12,15 @@ interface SearchResultsProps {
 
 const SearchResults = ({ searchResults, onNewSearch, onPropertyClick }: SearchResultsProps) => {
   const resultCount = searchResults.length;
+  const { currency } = useCurrency();
+  
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: currency.code,
+      maximumFractionDigits: 0,
+    }).format(price);
+  };
   
   return (
     <div className="mt-8 px-4">
@@ -55,7 +65,7 @@ const SearchResults = ({ searchResults, onNewSearch, onPropertyClick }: SearchRe
                 <p className="text-gray-600 text-sm mb-2">{property.location.area}</p>
                 
                 <div className="flex justify-between items-center">
-                  <span className="font-semibold">${property.price.toLocaleString()}</span>
+                  <span className="font-semibold">{formatPrice(property.price)}</span>
                   {property.roi && (
                     <span className="text-green-600 text-sm font-medium">
                       ROI: {property.roi}%
