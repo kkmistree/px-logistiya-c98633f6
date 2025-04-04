@@ -29,7 +29,7 @@ const PropertyRecommendationList = ({
         Recommended Properties ({recommendations.length})
       </h3>
       
-      <div className={`${isMobile ? 'space-y-4' : 'space-y-6'}`}>
+      <div className="space-y-4">
         {recommendations.map((property) => (
           <PropertyCard 
             key={property.id}
@@ -42,6 +42,13 @@ const PropertyRecommendationList = ({
           />
         ))}
       </div>
+      
+      {recommendations.length === 0 && (
+        <div className="py-8 sm:py-12 text-center">
+          <h3 className="text-lg font-medium text-gray-500">No properties found</h3>
+          <p className="text-gray-400 mt-2">Try selecting a different client</p>
+        </div>
+      )}
     </div>
   );
 };

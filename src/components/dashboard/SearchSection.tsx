@@ -40,24 +40,24 @@ const SearchSection = () => {
           className="text-estate-secondary text-xs sm:text-sm"
           onClick={() => navigate("/mls")}
         >
-          Advanced Search <Search size={isMobile ? 14 : 16} className="ml-1" />
+          {isMobile ? "Advanced" : "Advanced Search"} <Search size={isMobile ? 14 : 16} className="ml-1" />
         </Button>
       </div>
       
       <form onSubmit={handleSearch} className="flex w-full max-w-full gap-2 mb-3 sm:mb-4">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={isMobile ? 16 : 18} />
+          <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-slate-400" size={isMobile ? 16 : 18} />
           <Input 
             type="search" 
-            placeholder={isMobile ? "Search properties..." : "Search properties by location, developer, features..."} 
-            className="pl-10 w-full bg-slate-50"
+            placeholder={isMobile ? "Search properties..." : "Search by location, developer, features..."}
+            className="pl-9 w-full bg-slate-50 h-10 text-sm"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
         <Button 
           type="submit" 
-          className="bg-estate-primary hover:bg-estate-primary/90 text-white whitespace-nowrap text-xs sm:text-sm"
+          className="bg-estate-primary hover:bg-estate-primary/90 text-white whitespace-nowrap text-xs sm:text-sm h-10"
         >
           {isMobile ? "Search" : "Search Properties"}
         </Button>

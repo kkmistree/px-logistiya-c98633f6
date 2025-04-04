@@ -14,27 +14,25 @@ const ClientSelector = ({ clients, selectedClientId, onClientSelect }: ClientSel
   const isMobile = useIsMobile();
   
   return (
-    <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'} gap-4 mb-4`}>
-      <div className="w-full">
-        <label htmlFor="client-select" className="block text-sm font-medium text-slate-700 mb-1">
-          Select Client
-        </label>
-        <Select
-          value={selectedClientId}
-          onValueChange={onClientSelect}
-        >
-          <SelectTrigger id="client-select" className="w-full">
-            <SelectValue placeholder="Select a client" />
-          </SelectTrigger>
-          <SelectContent className="z-50 max-h-[300px]">
-            {clients.map((client) => (
-              <SelectItem key={client.id} value={client.id}>
-                {client.name} ({client.type})
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+    <div className="mb-4 w-full">
+      <label htmlFor="client-select" className="block text-sm font-medium text-slate-700 mb-1">
+        Select Client
+      </label>
+      <Select
+        value={selectedClientId}
+        onValueChange={onClientSelect}
+      >
+        <SelectTrigger id="client-select" className="w-full">
+          <SelectValue placeholder="Select a client" />
+        </SelectTrigger>
+        <SelectContent className="z-50 max-h-[300px]">
+          {clients.map((client) => (
+            <SelectItem key={client.id} value={client.id}>
+              {client.name} ({client.type})
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </div>
   );
 };
