@@ -18,9 +18,10 @@ import {
 interface NavbarProps {
   sidebarOpen: boolean;
   setSidebarOpen: (open: boolean) => void;
+  useMobileDrawer?: boolean;
 }
 
-const Navbar = ({ sidebarOpen, setSidebarOpen }: NavbarProps) => {
+const Navbar = ({ sidebarOpen, setSidebarOpen, useMobileDrawer = false }: NavbarProps) => {
   const [searchOpen, setSearchOpen] = useState(false);
   const location = useLocation();
   const isMobile = useIsMobile();
