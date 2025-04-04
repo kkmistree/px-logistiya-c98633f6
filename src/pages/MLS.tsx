@@ -11,6 +11,7 @@ import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { getProperties } from "@/data/mockData";
 import { PropertyFilter } from "@/types/property";
 import { toast } from "sonner";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Import the new components
 import PropertySearchBar from "@/components/property/PropertySearchBar";
@@ -28,6 +29,7 @@ const MLS = () => {
   const [selectedProperty, setSelectedProperty] = useState<any>(null);
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [showScorecardModal, setShowScorecardModal] = useState(false);
+  const isMobile = useIsMobile();
   
   const properties = getProperties(filters);
 
@@ -63,18 +65,27 @@ const MLS = () => {
     setShowDetailModal(true);
   };
 
+  // Automatically hide filters on mobile
   useEffect(() => {
-    // In a real app, this would fetch properties based on filters
-    console.log("Fetching properties with filters:", filters);
-  }, [filters]);
+    if (isMobile) {
+      setFiltersVisible(false);
+    }
+  }, [isMobile]);
+
+  // Reset filters visibility when switching tabs on mobile
+  useEffect(() => {
+    if (isMobile && filtersVisible) {
+      setFiltersVisible(false);
+    }
+  }, [activeTab, isMobile]);
 
   return (
     <AppShell>
       <div className="space-y-4">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
           <div>
-            <h1 className="text-2xl font-bold text-estate-primary">MLS</h1>
-            <p className="text-slate-500">Search across all properties in Dubai</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-estate-primary">MLS</h1>
+            <p className="text-sm sm:text-base text-slate-500">Search across all properties in Dubai</p>
           </div>
           <PropertyViewOptions 
             viewMode={viewMode}
@@ -84,7 +95,7 @@ const MLS = () => {
           />
         </div>
         
-        <div className="bg-white rounded-lg shadow-sm p-4 border border-slate-200">
+        <div className="bg-white rounded-lg shadow-sm p-3 sm:p-4 border border-slate-200">
           <Tabs defaultValue="all" value={activeTab} onValueChange={handleTabChange}>
             <PropertyTabNav activeTab={activeTab} onTabChange={handleTabChange} />
             
@@ -94,7 +105,7 @@ const MLS = () => {
               savedSearch={savedSearch} 
             />
             
-            <div className="flex justify-end mb-4">
+            <div className="flex justify-end mb-2 sm:mb-4">
               <ResultsHeader 
                 properties={filteredProperties} 
                 sortOption={sortOption}
@@ -102,9 +113,9 @@ const MLS = () => {
               />
             </div>
             
-            <div className="flex gap-4">
+            <div className="flex flex-col md:flex-row gap-4">
               {filtersVisible && (
-                <div className="w-64 shrink-0">
+                <div className={`${isMobile ? 'w-full' : 'w-full md:w-64'} shrink-0`}>
                   <PropertyFilters filters={filters} setFilters={setFilters} />
                 </div>
               )}
@@ -161,7 +172,7 @@ const MLS = () => {
       </div>
       
       <Dialog open={showDetailModal} onOpenChange={setShowDetailModal}>
-        <DialogContent className="max-w-4xl p-0">
+        <DialogContent className={`${isMobile ? 'w-[95vw] max-w-lg p-0' : 'max-w-4xl p-0'}`}>
           {selectedProperty && (
             <ProjectDetail 
               property={selectedProperty} 
@@ -172,7 +183,7 @@ const MLS = () => {
       </Dialog>
       
       <Dialog open={showScorecardModal} onOpenChange={setShowScorecardModal}>
-        <DialogContent className="max-w-4xl p-0">
+        <DialogContent className={`${isMobile ? 'w-[95vw] max-w-lg p-0' : 'max-w-4xl p-0'}`}>
           {selectedProperty && (
             <ProjectScorecard 
               property={selectedProperty} 

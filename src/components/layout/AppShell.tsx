@@ -1,16 +1,27 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import { CurrencyProvider } from "@/contexts/CurrencyContext";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface AppShellProps {
   children: React.ReactNode;
 }
 
 const AppShell = ({ children }: AppShellProps) => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const isMobile = useIsMobile();
+  const [sidebarOpen, setSidebarOpen] = useState(!isMobile);
+
+  // Close sidebar by default on mobile devices
+  useEffect(() => {
+    if (isMobile) {
+      setSidebarOpen(false);
+    } else {
+      setSidebarOpen(true);
+    }
+  }, [isMobile]);
 
   return (
     <CurrencyProvider>
@@ -19,10 +30,11 @@ const AppShell = ({ children }: AppShellProps) => {
         
         <div className={cn(
           "flex-1 flex flex-col transition-all duration-300 ease-in-out",
-          sidebarOpen ? "md:ml-64" : "md:ml-16"
+          sidebarOpen ? "md:ml-64" : "md:ml-16",
+          "w-full" // Ensure the content takes full width
         )}>
           <Navbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-          <main className="flex-1 p-4 md:p-6 overflow-auto max-w-full">
+          <main className="flex-1 p-3 sm:p-4 md:p-6 overflow-auto max-w-full">
             {children}
           </main>
         </div>

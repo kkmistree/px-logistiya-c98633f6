@@ -2,6 +2,7 @@
 import React from "react";
 import { Property } from "@/types/property";
 import PropertyCard from "@/components/clients/page/recommendations/PropertyCard";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface PropertyRecommendationListProps {
   recommendations: Property[];
@@ -20,13 +21,15 @@ const PropertyRecommendationList = ({
   onScheduleViewing,
   onSaveProperty
 }: PropertyRecommendationListProps) => {
+  const isMobile = useIsMobile();
+  
   return (
     <div>
       <h3 className="text-md font-medium mb-3">
         Recommended Properties ({recommendations.length})
       </h3>
       
-      <div className="space-y-6">
+      <div className={`${isMobile ? 'space-y-4' : 'space-y-6'}`}>
         {recommendations.map((property) => (
           <PropertyCard 
             key={property.id}

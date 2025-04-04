@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { formatCurrency } from "@/utils/format";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface SearchResultsProps {
   searchResults: Property[];
@@ -14,11 +15,12 @@ interface SearchResultsProps {
 const SearchResults = ({ searchResults, onNewSearch, onPropertyClick }: SearchResultsProps) => {
   const resultCount = searchResults.length;
   const { currency } = useCurrency();
+  const isMobile = useIsMobile();
   
   return (
-    <div className="mt-8 px-4">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-medium">
+    <div className="mt-4 sm:mt-8 px-2 sm:px-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0 mb-4">
+        <h2 className="text-xl sm:text-2xl font-medium">
           Search Results <span className="text-purple-600 font-bold">({resultCount})</span>
         </h2>
         <Button 
@@ -33,14 +35,14 @@ const SearchResults = ({ searchResults, onNewSearch, onPropertyClick }: SearchRe
       </div>
       
       {resultCount > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className={`grid grid-cols-1 ${isMobile ? '' : 'md:grid-cols-2 lg:grid-cols-3'} gap-4 sm:gap-6`}>
           {searchResults.map(property => (
             <div 
               key={property.id} 
               className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer"
               onClick={() => onPropertyClick && onPropertyClick(property.id)}
             >
-              <div className="h-40 bg-gray-200 relative">
+              <div className="h-36 sm:h-40 bg-gray-200 relative">
                 <img 
                   src={property.images[0] || "/placeholder.svg"} 
                   alt={property.title}
@@ -53,7 +55,7 @@ const SearchResults = ({ searchResults, onNewSearch, onPropertyClick }: SearchRe
                 )}
               </div>
               
-              <div className="p-4">
+              <div className="p-3 sm:p-4">
                 <h3 className="font-medium truncate">{property.title}</h3>
                 <p className="text-gray-600 text-sm mb-2">{property.location.area}</p>
                 
@@ -73,7 +75,7 @@ const SearchResults = ({ searchResults, onNewSearch, onPropertyClick }: SearchRe
                 </div>
                 
                 <div className="mt-3 flex flex-wrap gap-1">
-                  {property.tags.slice(0, 3).map((tag, index) => (
+                  {property.tags.slice(0, isMobile ? 2 : 3).map((tag, index) => (
                     <span key={index} className="text-xs bg-gray-100 px-2 py-1 rounded">
                       {tag}
                     </span>
