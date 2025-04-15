@@ -18,28 +18,28 @@ const DeveloperWatchlist = ({ onViewProperty }: DeveloperWatchlistProps) => {
   const developments = [
     {
       id: "dev1",
-      name: "Sobha SeaHaven",
+      name: "MODON Industrial Park",
       phase: "Phase 2",
       status: "Just Launched",
-      developer: "Sobha",
+      developer: "MODON",
       isHot: true,
       inventory: 24
     },
     {
       id: "dev2",
-      name: "Ellington Reserve",
-      phase: "Penthouse Collection",
+      name: "Logistics Valley",
+      phase: "Warehouse Collection",
       status: "Registration Open",
-      developer: "Ellington",
+      developer: "Saudi Economic Development Co.",
       isHot: false,
       inventory: 8
     },
     {
       id: "dev3",
-      name: "Emaar Beach Vista",
-      phase: "Tower B",
+      name: "Industrial Innovation Hub",
+      phase: "Building B",
       status: "Coming Soon",
-      developer: "Emaar",
+      developer: "KAEC",
       isHot: true,
       inventory: 40
     }
@@ -73,22 +73,20 @@ const DeveloperWatchlist = ({ onViewProperty }: DeveloperWatchlistProps) => {
           id: developmentId,
           title: development.name,
           description: `${development.developer} development - ${development.phase}`,
-          type: "apartment",
-          status: "off-plan",
+          type: "warehouse",
+          status: "under-development",
           price: 2500000,
           area: 1500,
-          bedrooms: 3,
-          bathrooms: 3,
           location: {
-            area: "Dubai Marina",
-            community: "Marina Promenade"
+            area: "Riyadh Industrial City",
+            community: "MODON Zone 1"
           },
-          features: ["Smart Home", "Beach Access", "Panoramic Views"],
+          features: ["Loading Bays", "High Ceiling", "Fire System"],
           images: ["/placeholder.svg"],
           developer: development.developer,
           completionDate: "2025-12-31",
           roi: 6.5,
-          tags: ["Off-Plan", "Premium", development.phase],
+          tags: ["Industrial", "Premium", development.phase],
           directFromDeveloper: true,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()

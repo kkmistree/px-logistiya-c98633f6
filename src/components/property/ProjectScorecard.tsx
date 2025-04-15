@@ -100,12 +100,14 @@ const ProjectScorecard = ({ property, onClose }: ProjectScorecardProps) => {
                   <div className="grid grid-cols-2 gap-2 mb-3">
                     <div>
                       <p className="text-xs text-slate-500">Status</p>
-                      <p className="font-medium capitalize">{property.status === "off-plan" ? "Under construction" : property.status}</p>
+                      <p className="font-medium capitalize">
+                        {property.status === "under-development" ? "Under Construction" : property.status}
+                      </p>
                     </div>
                     
                     <div className="text-right">
-                      <p className="text-xs text-slate-500">Bedrooms</p>
-                      <p className="font-medium">{property.bedrooms} BR</p>
+                      <p className="text-xs text-slate-500">Type</p>
+                      <p className="font-medium capitalize">{property.type}</p>
                     </div>
                   </div>
                   
@@ -115,7 +117,7 @@ const ProjectScorecard = ({ property, onClose }: ProjectScorecardProps) => {
                     </div>
                     <div>
                       <p className="text-xs text-slate-500">Developer</p>
-                      <p className="font-medium">{property.developer || "Sobha Realty"}</p>
+                      <p className="font-medium">{property.developer || "MODON"}</p>
                     </div>
                   </div>
                   
@@ -134,7 +136,7 @@ const ProjectScorecard = ({ property, onClose }: ProjectScorecardProps) => {
                   
                   <div className="flex justify-center mt-2">
                     <Button variant="ghost" size="sm" onClick={handleDownloadTeaser}>
-                      <Download size={16} className="mr-1" />
+                      <Download size={14} className="mr-1" />
                       Download teaser
                     </Button>
                   </div>

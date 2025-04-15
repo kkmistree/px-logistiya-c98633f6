@@ -22,13 +22,13 @@ const ListingPerformance = ({ onAddListing, onViewProperty }: ListingPerformance
       sold: 32
     },
     topViewed: [
-      { id: "p1", title: "Palm Jumeirah Villa", views: 243, saves: 18 },
-      { id: "p2", title: "Downtown Penthouse", views: 187, saves: 15 },
-      { id: "p3", title: "Dubai Hills Villa", views: 165, saves: 12 }
+      { id: "p1", title: "Logistics Warehouse in Riyadh", views: 243, saves: 18 },
+      { id: "p2", title: "Factory Complex in Jeddah", views: 187, saves: 15 },
+      { id: "p3", title: "Industrial Land in Dammam", views: 165, saves: 12 }
     ],
     lowEngagement: [
-      { id: "p4", title: "JVC 2BR Apartment", views: 24, daysSinceUpdate: 14 },
-      { id: "p5", title: "Business Bay Office", views: 31, daysSinceUpdate: 10 }
+      { id: "p4", title: "Office Building in KAEC", views: 24, daysSinceUpdate: 14 },
+      { id: "p5", title: "Mixed-use Land in Jubail", views: 31, daysSinceUpdate: 10 }
     ]
   };
 
@@ -51,21 +51,19 @@ const ListingPerformance = ({ onAddListing, onViewProperty }: ListingPerformance
         id: listingId,
         title: listings.topViewed.find(l => l.id === listingId)?.title || 
                listings.lowEngagement.find(l => l.id === listingId)?.title || 
-               "Property Listing",
-        description: "Luxury property in prime location",
-        type: "apartment",
-        status: "ready",
-        price: 1500000,
-        area: 1200,
-        bedrooms: 2,
-        bathrooms: 2,
+               "Industrial Property Listing",
+        description: "Industrial property with excellent connectivity and infrastructure",
+        type: "warehouse",
+        status: "available",
+        price: 15000000,
+        area: 5000,
         location: {
-          area: "Dubai Marina",
-          community: "Marina Promenade"
+          area: "Riyadh Industrial City",
+          community: "MODON Zone 3"
         },
-        features: ["Balcony", "Pool", "Gym"],
+        features: ["Loading Docks", "High Power Capacity", "Security"],
         images: ["/placeholder.svg"],
-        tags: ["Premium", "Sea View"],
+        tags: ["MODON Approved", "Industrial Zone", "High Specification"],
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       };
@@ -81,7 +79,7 @@ const ListingPerformance = ({ onAddListing, onViewProperty }: ListingPerformance
     } else {
       toast({
         title: "Add New Listing",
-        description: "Create a new property listing"
+        description: "Create a new industrial property listing"
       });
       navigate("/listings/new");
     }

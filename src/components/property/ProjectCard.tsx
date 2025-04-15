@@ -31,13 +31,13 @@ const ProjectCard = ({ property, className, onClick }: ProjectCardProps) => {
   const getStatusColor = (status: Property["status"]) => {
     switch (status) {
       case "available":
-        return "bg-green-500 text-white";
+        return 'bg-green-500 text-white';
       case "under-development":
-        return "bg-estate-secondary text-white";
+        return 'bg-estate-secondary text-white';
       case "investment-opportunity":
-        return "bg-blue-500 text-white";
+        return 'bg-blue-500 text-white';
       default:
-        return "bg-slate-500 text-white";
+        return 'bg-slate-500 text-white';
     }
   };
 
@@ -131,7 +131,7 @@ const ProjectCard = ({ property, className, onClick }: ProjectCardProps) => {
         
         <div className="flex justify-between items-center mb-4">
           <div className="font-semibold">
-            Launch Price: <span className="text-purple-600">{formatCurrency(property.price, "AED")}</span>
+            Launch Price: <span className="text-purple-600">{formatCurrency(property.price, "SAR")}</span>
           </div>
           
           <div className="text-sm">

@@ -1,52 +1,50 @@
 import { Property } from "@/types/property";
 import { convertCurrency } from "@/utils/format";
 
-// Filter: Undervalued properties in Dubai Marina
-export const filterUndervaluedInMarina = (properties: Property[]): Property[] => {
+// Filter: Undervalued properties in Riyadh Industrial City
+export const filterUndervaluedInRiyadh = (properties: Property[]): Property[] => {
   return properties.filter(p => 
-    p.location.area.toLowerCase().includes("dubai marina") && 
-    p.price < 1500000 &&
+    p.location.area.toLowerCase().includes("riyadh industrial") && 
+    p.price < 15000000 &&
     p.roi > 7
   );
 };
 
-// Filter: High yield studios
-export const filterHighYieldStudios = (properties: Property[]): Property[] => {
+// Filter: High yield warehouses
+export const filterHighYieldWarehouses = (properties: Property[]): Property[] => {
   return properties.filter(p => 
-    p.bedrooms === 0 && 
+    p.type === "warehouse" && 
     p.tags.some(tag => tag.toLowerCase().includes("high yield"))
   );
 };
 
-// Filter: Apartments with a maximum price
-export const filterApartmentsByMaxPrice = (
+// Filter: Properties with a maximum price
+export const filterPropertiesByMaxPrice = (
   properties: Property[], 
   maxPrice: number, 
-  fromCurrency: string = 'AED',
-  platformCurrency: string = 'AED'
+  fromCurrency: string = 'SAR',
+  platformCurrency: string = 'SAR'
 ): Property[] => {
   // Convert the max price to the platform currency
   const maxPriceInPlatformCurrency = convertCurrency(maxPrice, fromCurrency, platformCurrency);
   
   return properties.filter(p => 
-    p.type === "apartment" && 
     p.price <= maxPriceInPlatformCurrency  // Compare with converted value
   );
 };
 
-// Filter: Bedrooms with high ROI
-export const filterBedroomsByROI = (properties: Property[], bedrooms: number, minROI: number = 7): Property[] => {
+// Filter: Properties with high ROI
+export const filterPropertiesByROI = (properties: Property[], type: string, minROI: number = 7): Property[] => {
   return properties.filter(p => 
-    p.bedrooms === bedrooms && 
-    p.type === "apartment" &&
+    p.type === type &&
     (p.roi ? p.roi > minROI : false)
   );
 };
 
-// Filter: Specific bedrooms with high ROI and high yield
-export const filterBedroomsWithHighROIAndYield = (properties: Property[], bedrooms: number): Property[] => {
+// Filter: Specific type with high ROI and high yield
+export const filterPropertiesWithHighROIAndYield = (properties: Property[], type: string): Property[] => {
   return properties.filter(p => 
-    p.bedrooms === bedrooms && 
+    p.type === type && 
     (p.roi ? p.roi > 8 : false) &&
     p.tags.some(tag => tag.toLowerCase().includes("high yield"))
   );
