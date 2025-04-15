@@ -1,4 +1,3 @@
-
 import { ArrowUpRight, Eye, Save, Brush } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -33,7 +32,7 @@ const ListingPerformance = ({ onAddListing, onViewProperty }: ListingPerformance
   };
 
   const handleViewAll = () => {
-    navigate("/listings/performance");
+    navigate("/ListingPerformance");
   };
   
   const handleRefreshListing = (listingId: string) => {
@@ -45,7 +44,6 @@ const ListingPerformance = ({ onAddListing, onViewProperty }: ListingPerformance
   };
   
   const handleViewListing = (listingId: string) => {
-    // Convert listing to a Property object and pass it to onViewProperty if available
     if (onViewProperty) {
       const mockProperty: Property = {
         id: listingId,
