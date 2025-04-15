@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import AppShell from "@/components/layout/AppShell";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -64,7 +63,7 @@ const TransactionCenter = () => {
 
   const getStatusBadgeVariant = (status: string) => {
     switch (status) {
-      case "pending-approval": return "warning";
+      case "pending-approval": return "secondary";
       case "documents": return "outline";
       case "negotiation": return "secondary";
       case "completed": return "success";

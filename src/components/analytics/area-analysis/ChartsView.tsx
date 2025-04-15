@@ -2,7 +2,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from "recharts";
 import { AreaItemType, COLORS } from "./areaData";
-import { Button } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { FilterIcon } from "lucide-react";
 import AreaFilters from "./AreaFilters";
 
