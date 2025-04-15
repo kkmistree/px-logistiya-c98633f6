@@ -1,5 +1,5 @@
 
-import { TrendingUp, Warehouse, Users } from "lucide-react";
+import { TrendingUp, Warehouse, Users, Factory } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { formatCurrency } from "@/utils/format";
@@ -16,13 +16,14 @@ const StatCards = () => {
   const navigate = useNavigate();
   
   const stats: StatCard[] = [
-    { label: "Investment Pipeline", value: formatCurrency(42500000), icon: TrendingUp, change: "+12%", onClick: () => navigate("/deals") },
-    { label: "Active Assets", value: "28", icon: Warehouse, change: "+3", onClick: () => navigate("/mls") },
+    { label: "Investment Pipeline", value: formatCurrency(425000000, 'SAR'), icon: TrendingUp, change: "+12%", onClick: () => navigate("/deals") },
+    { label: "Industrial Assets", value: "28", icon: Warehouse, change: "+3", onClick: () => navigate("/mls") },
     { label: "Active Investors", value: "14", icon: Users, change: "+2", onClick: () => navigate("/clients") },
+    { label: "Factory Facilities", value: "12", icon: Factory, change: "+1", onClick: () => navigate("/mls?type=factory") },
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
       {stats.map((stat, index) => (
         <Card 
           key={index} 

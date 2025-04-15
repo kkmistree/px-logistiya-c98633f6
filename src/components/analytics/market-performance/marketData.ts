@@ -28,94 +28,96 @@ export const marketData = [
   { year: '2025', value: 1800000, volume: 75000 }
 ];
 
-// Price range distribution data
+// Price range distribution data for industrial properties
 export const priceRangeData = [
-  { year: '2009', below1M: 65.2, from1Mto2M: 24.1, from2Mto3M: 7.2, from3Mto7M: 3.5, above7M: 0 },
-  { year: '2010', below1M: 52.7, from1Mto2M: 28.9, from2Mto3M: 12.5, from3Mto7M: 5.9, above7M: 0 },
-  { year: '2011', below1M: 50.9, from1Mto2M: 29.5, from2Mto3M: 12.8, from3Mto7M: 6.8, above7M: 0 },
-  { year: '2012', below1M: 42.7, from1Mto2M: 30.5, from2Mto3M: 15.4, from3Mto7M: 11.4, above7M: 0 },
-  { year: '2013', below1M: 42.3, from1Mto2M: 31.1, from2Mto3M: 15.4, from3Mto7M: 11.2, above7M: 0 },
-  { year: '2014', below1M: 42.2, from1Mto2M: 28.8, from2Mto3M: 17.8, from3Mto7M: 11.2, above7M: 0 },
-  { year: '2015', below1M: 43.5, from1Mto2M: 28.5, from2Mto3M: 16.8, from3Mto7M: 11.2, above7M: 0 },
-  { year: '2016', below1M: 46.0, from1Mto2M: 25.8, from2Mto3M: 15.9, from3Mto7M: 12.3, above7M: 0 },
-  { year: '2017', below1M: 46.1, from1Mto2M: 31.5, from2Mto3M: 14.4, from3Mto7M: 8.0, above7M: 0 },
-  { year: '2018', below1M: 50.2, from1Mto2M: 29.1, from2Mto3M: 13.9, from3Mto7M: 6.8, above7M: 0 },
-  { year: '2019', below1M: 48.8, from1Mto2M: 32.9, from2Mto3M: 11.4, from3Mto7M: 6.9, above7M: 0 },
-  { year: '2020', below1M: 45.0, from1Mto2M: 32.5, from2Mto3M: 11.0, from3Mto7M: 11.5, above7M: 0 },
-  { year: '2021', below1M: 41.4, from1Mto2M: 32.0, from2Mto3M: 16.0, from3Mto7M: 9.2, above7M: 1.4 },
-  { year: '2022', below1M: 38.0, from1Mto2M: 33.6, from2Mto3M: 15.9, from3Mto7M: 11.4, above7M: 1.1 },
-  { year: '2023', below1M: 40.2, from1Mto2M: 33.4, from2Mto3M: 13.7, from3Mto7M: 11.2, above7M: 1.5 },
-  { year: '2024', below1M: 39.4, from1Mto2M: 31.3, from2Mto3M: 15.8, from3Mto7M: 11.5, above7M: 2.0 },
-  { year: '2025', below1M: 35.1, from1Mto2M: 32.0, from2Mto3M: 20.3, from3Mto7M: 11.2, above7M: 1.4 }
+  { year: '2009', below50M: 65.2, from50Mto100M: 24.1, from100Mto200M: 7.2, from200Mto500M: 3.5, above500M: 0 },
+  { year: '2010', below50M: 52.7, from50Mto100M: 28.9, from100Mto200M: 12.5, from200Mto500M: 5.9, above500M: 0 },
+  { year: '2011', below50M: 50.9, from50Mto100M: 29.5, from100Mto200M: 12.8, from200Mto500M: 6.8, above500M: 0 },
+  { year: '2012', below50M: 42.7, from50Mto100M: 30.5, from100Mto200M: 15.4, from200Mto500M: 11.4, above500M: 0 },
+  { year: '2013', below50M: 42.3, from50Mto100M: 31.1, from100Mto200M: 15.4, from200Mto500M: 11.2, above500M: 0 },
+  { year: '2014', below50M: 42.2, from50Mto100M: 28.8, from100Mto200M: 17.8, from200Mto500M: 11.2, above500M: 0 },
+  { year: '2015', below50M: 43.5, from50Mto100M: 28.5, from100Mto200M: 16.8, from200Mto500M: 11.2, above500M: 0 },
+  { year: '2016', below50M: 46.0, from50Mto100M: 25.8, from100Mto200M: 15.9, from200Mto500M: 12.3, above500M: 0 },
+  { year: '2017', below50M: 46.1, from50Mto100M: 31.5, from100Mto200M: 14.4, from200Mto500M: 8.0, above500M: 0 },
+  { year: '2018', below50M: 50.2, from50Mto100M: 29.1, from100Mto200M: 13.9, from200Mto500M: 6.8, above500M: 0 },
+  { year: '2019', below50M: 48.8, from50Mto100M: 32.9, from100Mto200M: 11.4, from200Mto500M: 6.9, above500M: 0 },
+  { year: '2020', below50M: 45.0, from50Mto100M: 32.5, from100Mto200M: 11.0, from200Mto500M: 11.5, above500M: 0 },
+  { year: '2021', below50M: 41.4, from50Mto100M: 32.0, from100Mto200M: 16.0, from200Mto500M: 9.2, above500M: 1.4 },
+  { year: '2022', below50M: 38.0, from50Mto100M: 33.6, from100Mto200M: 15.9, from200Mto500M: 11.4, above500M: 1.1 },
+  { year: '2023', below50M: 40.2, from50Mto100M: 33.4, from100Mto200M: 13.7, from200Mto500M: 11.2, above500M: 1.5 },
+  { year: '2024', below50M: 39.4, from50Mto100M: 31.3, from100Mto200M: 15.8, from200Mto500M: 11.5, above500M: 2.0 },
+  { year: '2025', below50M: 35.1, from50Mto100M: 32.0, from100Mto200M: 20.3, from200Mto500M: 11.2, above500M: 1.4 }
 ];
 
-// Monthly volume data
+// Monthly volume data for industrial properties
 export const monthlyData = [
-  { month: 'January', volume: 4237 },
-  { month: 'February', volume: 4180 },
-  { month: 'March', volume: 4205 },
-  { month: 'April', volume: 4231 },
-  { month: 'May', volume: 4250 },
-  { month: 'June', volume: 4276 },
-  { month: 'July', volume: 4133 },
-  { month: 'August', volume: 3892 },
-  { month: 'September', volume: 4023 },
-  { month: 'October', volume: 4356 },
-  { month: 'November', volume: 4150 },
-  { month: 'December', volume: 4483 }
+  { month: 'January', volume: 237 },
+  { month: 'February', volume: 280 },
+  { month: 'March', volume: 305 },
+  { month: 'April', volume: 231 },
+  { month: 'May', volume: 250 },
+  { month: 'June', volume: 276 },
+  { month: 'July', volume: 233 },
+  { month: 'August', volume: 192 },
+  { month: 'September', volume: 223 },
+  { month: 'October', volume: 256 },
+  { month: 'November', volume: 250 },
+  { month: 'December', volume: 283 }
 ];
 
-// Market summary stats with proper typing
+// Market summary stats with proper typing for Saudi industrial market
 export const marketSummary: MetricItem[] = [
   {
     title: "Total transaction volume (2024)",
-    value: "196K",
-    change: "+40.7%",
+    value: "2.8K",
+    change: "+18.7%",
     trend: "up",
   },
   {
     title: "Total transaction value (2024)",
-    value: "AED 426B",
-    change: "+36.1%",
+    value: "SAR 326B",
+    change: "+22.1%",
     trend: "up",
   },
   {
     title: "Median price (2024)",
-    value: "AED 1,395,000",
-    change: "-1.6%",
-    trend: "down",
+    value: "SAR 15,395,000",
+    change: "+4.6%",
+    trend: "up",
   },
   {
-    title: "Median price per sqft (2024)",
-    value: "AED 1,445",
+    title: "Median price per sqm (2024)",
+    value: "SAR 1,845",
     change: "+3.1%",
     trend: "up",
   },
   {
-    title: "Yield (2024)",
-    value: "4.3%",
-    change: "+0.2%",
+    title: "Industrial Yield (2024)",
+    value: "7.3%",
+    change: "+0.4%",
     trend: "up",
   }
 ];
 
-// Property type data
+// Property type data for industrial properties
 export const propertyTypeData = [
-  { type: "Apartment", medianPrice: "AED 1,218,230", pricePerSqft: "AED 979" },
-  { type: "Villa", medianPrice: "AED 2,973,793", pricePerSqft: "AED 1,502" }
+  { type: "Warehouse", medianPrice: "SAR 12,218,230", pricePerSqm: "SAR 1,479" },
+  { type: "Factory", medianPrice: "SAR 29,737,930", pricePerSqm: "SAR 1,902" },
+  { type: "Land", medianPrice: "SAR 35,450,000", pricePerSqm: "SAR 850" },
+  { type: "Logistics", medianPrice: "SAR 18,725,000", pricePerSqm: "SAR 1,650" }
 ];
 
 // Daily transaction data
 export const dailyTransactionData = [
-  { date: '2025-04-01', transactions: 230, value: 715000000 },
-  { date: '2025-04-02', transactions: 245, value: 735000000 },
-  { date: '2025-04-03', transactions: 238, value: 725000000 }
+  { date: '2025-04-01', transactions: 8, value: 115000000 },
+  { date: '2025-04-02', transactions: 12, value: 235000000 },
+  { date: '2025-04-03', transactions: 6, value: 95000000 }
 ];
 
 // Weekly transaction data
 export const weeklyTransactionData = [
-  { week: 'Week 1', transactions: 1652, value: 5100000000 },
-  { week: 'Week 2', transactions: 1785, value: 5200000000 },
-  { week: 'Week 3', transactions: 1705, value: 5000000000 },
-  { week: 'Week 4', transactions: 1894, value: 5400000000 }
+  { week: 'Week 1', transactions: 32, value: 510000000 },
+  { week: 'Week 2', transactions: 45, value: 720000000 },
+  { week: 'Week 3', transactions: 37, value: 580000000 },
+  { week: 'Week 4', transactions: 41, value: 640000000 }
 ];

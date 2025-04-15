@@ -11,106 +11,106 @@ import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import { Badge } from "@/components/ui/badge";
 
-// Mock transaction data
+// Mock transaction data for Saudi industrial properties
 const transactionData = [
   {
     id: 1,
-    location: "Al Qouz 4",
-    propertyType: "Villa",
-    status: "Ready built",
-    price: "AED 300K",
-    area: "10,000 sqft",
-    date: "Mar 17, 2025"
+    location: "Riyadh Industrial City",
+    propertyType: "Warehouse",
+    status: "Available",
+    price: "SAR 15.3M",
+    area: "5,000 sqm",
+    date: "Apr 12, 2025"
   },
   {
     id: 2,
-    location: "Arabian Ranches (Wadi Al Safa 5)",
-    propertyType: "Villa",
-    status: "Ready built",
-    price: "AED 2.2M",
-    area: "8,264 sqft",
-    date: "Mar 17, 2025"
+    location: "Jeddah Industrial City",
+    propertyType: "Factory",
+    status: "Under-Development",
+    price: "SAR 22.5M",
+    area: "8,264 sqm",
+    date: "Apr 10, 2025"
   },
   {
     id: 3,
-    location: "Jumeirah Village Triangle (Al Barsha South 2)",
-    propertyType: "Villa", 
-    status: "Ready built",
-    price: "AED 2.2M",
-    area: "1,938 sqft",
-    date: "Mar 17, 2025"
+    location: "KAEC Industrial Valley",
+    propertyType: "Logistics", 
+    status: "Available",
+    price: "SAR 18.2M",
+    area: "7,938 sqm",
+    date: "Apr 07, 2025"
   },
   {
     id: 4,
-    location: "Emirates Hills 1 / The Meadows 3",
-    propertyType: "Villa",
-    status: "Ready built",
-    price: "AED 7.5M",
-    area: "6,501 sqft",
-    date: "Mar 17, 2025"
+    location: "Dammam Industrial City",
+    propertyType: "Warehouse",
+    status: "Available",
+    price: "SAR 17.5M",
+    area: "6,501 sqm",
+    date: "Apr 05, 2025"
   },
   {
     id: 5,
-    location: "Al Sufouh 1",
-    propertyType: "Villa",
-    status: "Ready built",
-    price: "AED 1.1B",
-    area: "932,234 sqft",
-    date: "Mar 17, 2025"
+    location: "Jubail Industrial City",
+    propertyType: "Factory",
+    status: "Under-Development",
+    price: "SAR 31.1M",
+    area: "12,234 sqm",
+    date: "Mar 28, 2025"
   },
   {
     id: 6,
-    location: "Palm Jumeirah",
-    propertyType: "Villa",
-    status: "Ready built",
-    price: "AED 14.2M",
-    area: "3,818 sqft",
-    date: "Mar 17, 2025"
+    location: "Sudair City for Industry",
+    propertyType: "Land",
+    status: "Available",
+    price: "SAR 14.2M",
+    area: "20,818 sqm",
+    date: "Mar 25, 2025"
   },
   {
     id: 7,
-    location: "Discovery Gardens / The Gardens 1",
-    propertyType: "Villa",
-    status: "Ready built",
-    price: "AED 3.9M",
-    area: "6,458 sqft",
-    date: "Mar 17, 2025"
+    location: "Yanbu Industrial City",
+    propertyType: "Factory",
+    status: "Under-Development",
+    price: "SAR 29.9M",
+    area: "10,458 sqm",
+    date: "Mar 20, 2025"
   },
   {
     id: 8,
-    location: "Al Waheeda",
-    propertyType: "Villa",
-    status: "Ready built",
-    price: "AED 1.6M",
-    area: "7,000 sqft",
-    date: "Mar 17, 2025"
+    location: "Rabigh Industrial Zone",
+    propertyType: "Warehouse",
+    status: "Available",
+    price: "SAR 16.6M",
+    area: "7,000 sqm",
+    date: "Mar 15, 2025"
   }
 ];
 
-// Mock key metrics data
+// Mock key metrics data for Saudi industrial market
 const keyMetrics = [
   {
     title: "Total transactions",
-    value: "39,435",
+    value: "2,845",
     change: "+18.9% YoY Change",
     trend: "up"
   },
   {
     title: "Total transactions value",
-    value: "AED 91,345,196,037",
-    change: "+26.3% YoY Change",
+    value: "SAR 91,345,196,037",
+    change: "+22.3% YoY Change",
     trend: "up"
   },
   {
     title: "Median price",
-    value: "AED 1,481,852",
-    change: "+8.8% YoY Change", 
+    value: "SAR 15,481,852",
+    change: "+4.8% YoY Change", 
     trend: "up"
   },
   {
-    title: "Median price per sqft",
-    value: "AED 1,494",
-    change: "+7.7% YoY Change",
+    title: "Median price per sqm",
+    value: "SAR 1,845",
+    change: "+3.7% YoY Change",
     trend: "up"
   }
 ];
@@ -119,7 +119,7 @@ const TransactionAnalysis = () => {
   const [propertyType, setPropertyType] = useState("all");
   const [status, setStatus] = useState("all");
   const [year, setYear] = useState("2025");
-  const [bedroom, setBedroom] = useState("all");
+  const [size, setSize] = useState("all");
   const [area, setArea] = useState("all");
   const [transactionType, setTransactionType] = useState("sales");
   const [date, setDate] = useState<Date>();
@@ -135,9 +135,12 @@ const TransactionAnalysis = () => {
               <SelectValue placeholder="Property Type" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All</SelectItem>
-              <SelectItem value="apartment">Apartment</SelectItem>
-              <SelectItem value="villa">Villa</SelectItem>
+              <SelectItem value="all">All Types</SelectItem>
+              <SelectItem value="warehouse">Warehouse</SelectItem>
+              <SelectItem value="factory">Factory</SelectItem>
+              <SelectItem value="logistics">Logistics</SelectItem>
+              <SelectItem value="land">Land</SelectItem>
+              <SelectItem value="office">Industrial Office</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -149,8 +152,8 @@ const TransactionAnalysis = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All</SelectItem>
-              <SelectItem value="readyBuilt">Ready built</SelectItem>
-              <SelectItem value="offPlan">Off-plan</SelectItem>
+              <SelectItem value="available">Available</SelectItem>
+              <SelectItem value="under-development">Under-Development</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -162,8 +165,12 @@ const TransactionAnalysis = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All areas</SelectItem>
-              <SelectItem value="dubai-marina">Dubai Marina</SelectItem>
-              <SelectItem value="downtown">Downtown Dubai</SelectItem>
+              <SelectItem value="riyadh">Riyadh Industrial City</SelectItem>
+              <SelectItem value="jeddah">Jeddah Industrial City</SelectItem>
+              <SelectItem value="dammam">Dammam Industrial City</SelectItem>
+              <SelectItem value="jubail">Jubail Industrial City</SelectItem>
+              <SelectItem value="kaec">KAEC Industrial Valley</SelectItem>
+              <SelectItem value="sudair">Sudair City</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -182,15 +189,15 @@ const TransactionAnalysis = () => {
         </div>
         
         <div>
-          <Select value={bedroom} onValueChange={setBedroom}>
+          <Select value={size} onValueChange={setSize}>
             <SelectTrigger>
-              <SelectValue placeholder="Bedrooms" />
+              <SelectValue placeholder="Area Size" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All beds</SelectItem>
-              <SelectItem value="studio">Studio</SelectItem>
-              <SelectItem value="1">1 Bedroom</SelectItem>
-              <SelectItem value="2">2 Bedrooms</SelectItem>
+              <SelectItem value="all">All sizes</SelectItem>
+              <SelectItem value="small">Small (< 5,000 sqm)</SelectItem>
+              <SelectItem value="medium">Medium (5,000-10,000 sqm)</SelectItem>
+              <SelectItem value="large">Large (> 10,000 sqm)</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -217,11 +224,11 @@ const TransactionAnalysis = () => {
           Sales transactions
         </Button>
         <Button 
-          variant={transactionType === "rental" ? "default" : "outline"} 
-          onClick={() => setTransactionType("rental")}
-          className={transactionType === "rental" ? "bg-pink-500 text-white rounded-full px-6" : "rounded-full px-6"}
+          variant={transactionType === "leasing" ? "default" : "outline"} 
+          onClick={() => setTransactionType("leasing")}
+          className={transactionType === "leasing" ? "bg-pink-500 text-white rounded-full px-6" : "rounded-full px-6"}
         >
-          Rental contracts
+          Leasing contracts
         </Button>
       </div>
       
@@ -245,7 +252,7 @@ const TransactionAnalysis = () => {
       {/* Sale transactions table */}
       <div>
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">Sale transactions</h2>
+          <h2 className="text-xl font-semibold">Recent Industrial Transactions</h2>
           <Select value={sortBy} onValueChange={setSortBy}>
             <SelectTrigger className="w-[200px]">
               <SelectValue placeholder="Sort by" />
@@ -264,10 +271,10 @@ const TransactionAnalysis = () => {
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[300px]">Location</TableHead>
-                <TableHead>Property type</TableHead>
+                <TableHead>Property Type</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Price</TableHead>
-                <TableHead>Area (sqft)</TableHead>
+                <TableHead>Area (sqm)</TableHead>
                 <TableHead>Date</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>

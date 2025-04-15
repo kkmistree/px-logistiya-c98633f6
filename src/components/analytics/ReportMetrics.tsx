@@ -61,42 +61,42 @@ const ReportMetrics = ({ timeframe, propertyType = "all", area = "all" }: Report
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <MetricCard
           title="Transaction Volume"
-          value={timeframe === "daily" ? "245" : timeframe === "weekly" ? "1,785" : timeframe === "monthly" ? "18,929" : "196,845"}
-          change={timeframe === "daily" ? "+12.3%" : timeframe === "weekly" ? "+8.7%" : timeframe === "monthly" ? "+14.3%" : "+40.7%"}
+          value={timeframe === "daily" ? "8" : timeframe === "weekly" ? "45" : timeframe === "monthly" ? "185" : "2,845"}
+          change={timeframe === "daily" ? "+12.3%" : timeframe === "weekly" ? "+8.7%" : timeframe === "monthly" ? "+14.3%" : "+18.7%"}
           trend="up"
           timeframe={getTimeframeLabel()}
         />
         
         <MetricCard
           title="Transaction Value"
-          value={timeframe === "daily" ? "AED 735M" : timeframe === "weekly" ? "AED 5.2B" : timeframe === "monthly" ? "AED 40.9B" : "AED 426B"}
-          change={timeframe === "daily" ? "+8.5%" : timeframe === "weekly" ? "+10.2%" : timeframe === "monthly" ? "+14.4%" : "+36.1%"}
+          value={timeframe === "daily" ? "SAR 135M" : timeframe === "weekly" ? "SAR 1.2B" : timeframe === "monthly" ? "SAR 24.9B" : "SAR 326B"}
+          change={timeframe === "daily" ? "+8.5%" : timeframe === "weekly" ? "+10.2%" : timeframe === "monthly" ? "+14.4%" : "+22.1%"}
           trend="up"
           timeframe={getTimeframeLabel()}
         />
         
         <MetricCard
           title="Median Price"
-          value={timeframe === "daily" ? "AED 1,412,500" : timeframe === "weekly" ? "AED 1,385,000" : timeframe === "monthly" ? "AED 1,395,000" : "AED 1,395,000"}
-          change={timeframe === "daily" ? "+0.8%" : timeframe === "weekly" ? "-1.2%" : timeframe === "monthly" ? "-1.6%" : "-1.6%"}
-          trend={timeframe === "daily" ? "up" : "down"}
+          value={timeframe === "daily" ? "SAR 14,125,000" : timeframe === "weekly" ? "SAR 13,850,000" : timeframe === "monthly" ? "SAR 13,950,000" : "SAR 15,395,000"}
+          change={timeframe === "daily" ? "+0.8%" : timeframe === "weekly" ? "+1.2%" : timeframe === "monthly" ? "+3.6%" : "+4.6%"}
+          trend="up"
           timeframe={getTimeframeLabel()}
         />
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <MetricCard
-          title="Median Price per sqft"
-          value={timeframe === "daily" ? "AED 1,452" : timeframe === "weekly" ? "AED 1,448" : timeframe === "monthly" ? "AED 1,445" : "AED 1,445"}
+          title="Median Price per sqm"
+          value={timeframe === "daily" ? "SAR 1,852" : timeframe === "weekly" ? "SAR 1,848" : timeframe === "monthly" ? "SAR 1,845" : "SAR 1,845"}
           change={timeframe === "daily" ? "+1.2%" : timeframe === "weekly" ? "+0.9%" : timeframe === "monthly" ? "+3.1%" : "+3.1%"}
           trend="up"
           timeframe={getTimeframeLabel()}
         />
         
         <MetricCard
-          title="Rental Yield"
-          value={timeframe === "daily" ? "4.5%" : timeframe === "weekly" ? "4.4%" : timeframe === "monthly" ? "4.3%" : "4.3%"}
-          change={timeframe === "daily" ? "+0.3%" : timeframe === "weekly" ? "+0.2%" : timeframe === "monthly" ? "+0.2%" : "+0.2%"}
+          title="Industrial Yield"
+          value={timeframe === "daily" ? "7.5%" : timeframe === "weekly" ? "7.4%" : timeframe === "monthly" ? "7.3%" : "7.3%"}
+          change={timeframe === "daily" ? "+0.3%" : timeframe === "weekly" ? "+0.2%" : timeframe === "monthly" ? "+0.4%" : "+0.4%"}
           trend="up"
           timeframe={getTimeframeLabel()}
         />
@@ -104,25 +104,25 @@ const ReportMetrics = ({ timeframe, propertyType = "all", area = "all" }: Report
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <MetricCard
-          title="Off-Plan Sales"
-          value={timeframe === "daily" ? "167" : timeframe === "weekly" ? "1,202" : timeframe === "monthly" ? "13,467" : "128,984"}
-          change={timeframe === "daily" ? "+15.2%" : timeframe === "weekly" ? "+12.8%" : timeframe === "monthly" ? "+18.4%" : "+47.2%"}
+          title="Under-Development Sales"
+          value={timeframe === "daily" ? "5" : timeframe === "weekly" ? "28" : timeframe === "monthly" ? "85" : "1,284"}
+          change={timeframe === "daily" ? "+15.2%" : timeframe === "weekly" ? "+12.8%" : timeframe === "monthly" ? "+18.4%" : "+27.2%"}
           trend="up"
           timeframe={getTimeframeLabel()}
         />
         
         <MetricCard
           title="Ready Property Sales"
-          value={timeframe === "daily" ? "78" : timeframe === "weekly" ? "583" : timeframe === "monthly" ? "5,462" : "67,861"}
-          change={timeframe === "daily" ? "+5.4%" : timeframe === "weekly" ? "+3.2%" : timeframe === "monthly" ? "+7.1%" : "+29.5%"}
+          value={timeframe === "daily" ? "3" : timeframe === "weekly" ? "17" : timeframe === "monthly" ? "100" : "1,561"}
+          change={timeframe === "daily" ? "+5.4%" : timeframe === "weekly" ? "+3.2%" : timeframe === "monthly" ? "+7.1%" : "+9.5%"}
           trend="up"
           timeframe={getTimeframeLabel()}
         />
         
         <MetricCard
           title="Average Time on Market"
-          value={timeframe === "daily" ? "7.3 weeks" : timeframe === "weekly" ? "7.2 weeks" : timeframe === "monthly" ? "7.19 weeks" : "8.25 weeks"}
-          change={timeframe === "daily" ? "-2.7%" : timeframe === "weekly" ? "-3.5%" : timeframe === "monthly" ? "-10.2%" : "-12.4%"}
+          value={timeframe === "daily" ? "16.3 weeks" : timeframe === "weekly" ? "16.2 weeks" : timeframe === "monthly" ? "16.9 weeks" : "17.5 weeks"}
+          change={timeframe === "daily" ? "-2.7%" : timeframe === "weekly" ? "-3.5%" : timeframe === "monthly" ? "-7.2%" : "-8.4%"}
           trend="down"
           timeframe={getTimeframeLabel()}
         />
