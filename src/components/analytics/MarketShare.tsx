@@ -5,92 +5,48 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 
-// Property types market share data
+// Property types market share data for industrial properties
 const propertyTypeData = [
-  { year: '2009', apartment: 55.8, villa: 5.5 },
-  { year: '2010', apartment: 39.3, villa: 7.3 },
-  { year: '2011', apartment: 35.6, villa: 7.4 },
-  { year: '2012', apartment: 37.3, villa: 6.9 },
-  { year: '2013', apartment: 49.5, villa: 13.5 },
-  { year: '2014', apartment: 43.3, villa: 13.8 },
-  { year: '2015', apartment: 34.5, villa: 12.6 },
-  { year: '2016', apartment: 35.8, villa: 11.3 },
-  { year: '2017', apartment: 35.9, villa: 12.7 },
-  { year: '2018', apartment: 35.0, villa: 9.0 },
-  { year: '2019', apartment: 31.7, villa: 11.9 },
-  { year: '2020', apartment: 28.9, villa: 12.3 },
-  { year: '2021', apartment: 46.5, villa: 19.5 },
-  { year: '2022', apartment: 74.1, villa: 25.9 },
-  { year: '2023', apartment: 111.4, villa: 34.7 },
-  { year: '2024', apartment: 155.7, villa: 30.3 },
-  { year: '2025', apartment: 59.5, villa: 7.8 },
+  { year: '2020', warehouse: 42.3, factory: 28.5, logistics: 29.2 },
+  { year: '2021', warehouse: 44.8, factory: 27.2, logistics: 28.0 },
+  { year: '2022', warehouse: 45.2, factory: 26.8, logistics: 28.0 },
+  { year: '2023', warehouse: 46.5, factory: 25.9, logistics: 27.6 },
+  { year: '2024', warehouse: 47.8, factory: 24.7, logistics: 27.5 },
+  { year: '2025', warehouse: 48.2, factory: 24.5, logistics: 27.3 }
 ];
 
 // Price performance data by property type
 const pricePerformanceData = [
-  { year: '2009', apartment: 850000, villa: 1800000 },
-  { year: '2010', apartment: 890000, villa: 1850000 },
-  { year: '2011', apartment: 870000, villa: 1750000 },
-  { year: '2012', apartment: 930000, villa: 2150000 },
-  { year: '2013', apartment: 1000000, villa: 2550000 },
-  { year: '2014', apartment: 1050000, villa: 2550000 },
-  { year: '2015', apartment: 980000, villa: 2600000 },
-  { year: '2016', apartment: 900000, villa: 2550000 },
-  { year: '2017', apartment: 880000, villa: 2600000 },
-  { year: '2018', apartment: 850000, villa: 2150000 },
-  { year: '2019', apartment: 820000, villa: 1700000 },
-  { year: '2020', apartment: 850000, villa: 1750000 },
-  { year: '2021', apartment: 950000, villa: 2100000 },
-  { year: '2022', apartment: 1050000, villa: 2200000 },
-  { year: '2023', apartment: 1100000, villa: 2550000 },
-  { year: '2024', apartment: 1220000, villa: 3100000 },
-  { year: '2025', apartment: 1250000, villa: 3200000 },
+  { year: '2020', warehouse: 1850, factory: 2100, logistics: 1950 },
+  { year: '2021', warehouse: 1920, factory: 2180, logistics: 2020 },
+  { year: '2022', warehouse: 1980, factory: 2250, logistics: 2080 },
+  { year: '2023', warehouse: 2050, factory: 2320, logistics: 2150 },
+  { year: '2024', warehouse: 2120, factory: 2400, logistics: 2220 },
+  { year: '2025', warehouse: 2200, factory: 2480, logistics: 2290 }
 ];
 
-// Off-plan vs. Ready built market share data
-const propertyStatusData = [
-  { year: '2009', offplan: 36.3, readybuilt: 40.8 },
-  { year: '2010', offplan: 34.7, readybuilt: 36.3 },
-  { year: '2011', offplan: 30.0, readybuilt: 13.0 },
-  { year: '2012', offplan: 41.9, readybuilt: 18.4 },
-  { year: '2013', offplan: 50.6, readybuilt: 35.4 },
-  { year: '2014', offplan: 41.8, readybuilt: 38.8 },
-  { year: '2015', offplan: 33.6, readybuilt: 41.3 },
-  { year: '2016', offplan: 41.3, readybuilt: 41.9 },
-  { year: '2017', offplan: 23.3, readybuilt: 43.3 },
-  { year: '2018', offplan: 24.4, readybuilt: 34.9 },
-  { year: '2019', offplan: 25.4, readybuilt: 36.3 },
-  { year: '2020', offplan: 15.5, readybuilt: 46.4 },
-  { year: '2021', offplan: 23.5, readybuilt: 58.5 },
-  { year: '2022', offplan: 42.8, readybuilt: 77.3 },
-  { year: '2023', offplan: 87.3, readybuilt: 116.7 },
-  { year: '2024', offplan: 108.5, readybuilt: 17.5 },
-  { year: '2025', offplan: 21.5, readybuilt: 49.5 },
+// Development status market share data
+const developmentStatusData = [
+  { year: '2020', operational: 65.3, underConstruction: 34.7 },
+  { year: '2021', operational: 68.7, underConstruction: 31.3 },
+  { year: '2022', operational: 70.2, underConstruction: 29.8 },
+  { year: '2023', operational: 72.5, underConstruction: 27.5 },
+  { year: '2024', operational: 74.8, underConstruction: 25.2 },
+  { year: '2025', operational: 76.5, underConstruction: 23.5 }
 ];
 
 // Status price performance data
 const statusPriceData = [
-  { year: '2009', offplan: 750000, readybuilt: 820000 },
-  { year: '2010', offplan: 950000, readybuilt: 850000 },
-  { year: '2011', offplan: 850000, readybuilt: 800000 },
-  { year: '2012', offplan: 1200000, readybuilt: 950000 },
-  { year: '2013', offplan: 1500000, readybuilt: 1000000 },
-  { year: '2014', offplan: 1350000, readybuilt: 1100000 },
-  { year: '2015', offplan: 1250000, readybuilt: 1050000 },
-  { year: '2016', offplan: 1200000, readybuilt: 1050000 },
-  { year: '2017', offplan: 1050000, readybuilt: 1200000 },
-  { year: '2018', offplan: 950000, readybuilt: 1150000 },
-  { year: '2019', offplan: 900000, readybuilt: 1100000 },
-  { year: '2020', offplan: 850000, readybuilt: 1050000 },
-  { year: '2021', offplan: 1100000, readybuilt: 1250000 },
-  { year: '2022', offplan: 1200000, readybuilt: 1400000 },
-  { year: '2023', offplan: 1350000, readybuilt: 1450000 },
-  { year: '2024', offplan: 1500000, readybuilt: 1600000 },
-  { year: '2025', offplan: 1600000, readybuilt: 1650000 },
+  { year: '2020', operational: 1950, underConstruction: 1750 },
+  { year: '2021', operational: 2020, underConstruction: 1820 },
+  { year: '2022', operational: 2080, underConstruction: 1890 },
+  { year: '2023', operational: 2150, underConstruction: 1950 },
+  { year: '2024', operational: 2220, underConstruction: 2020 },
+  { year: '2025', operational: 2290, underConstruction: 2090 }
 ];
 
 const MarketShare = () => {
-  const [propertyType, setPropertyType] = useState("apartment-vs-villa");
+  const [propertyType, setPropertyType] = useState("property-types");
   const [area, setArea] = useState("all");
   const [chartView, setChartView] = useState("volume");
 
@@ -99,49 +55,50 @@ const MarketShare = () => {
       {/* Filters */}
       <div className="flex flex-col sm:flex-row justify-between gap-4">
         <div className="space-y-2">
-          <div className="text-sm font-medium">Go to</div>
+          <div className="text-sm font-medium">Analysis Type</div>
           <div className="flex gap-2">
             <Button 
-              variant={propertyType === "apartment-vs-villa" ? "default" : "outline"} 
-              onClick={() => setPropertyType("apartment-vs-villa")}
-              className={propertyType === "apartment-vs-villa" ? "bg-estate-primary text-white" : ""}
+              variant={propertyType === "property-types" ? "default" : "outline"} 
+              onClick={() => setPropertyType("property-types")}
+              className={propertyType === "property-types" ? "bg-estate-primary text-white" : ""}
               size="sm"
             >
-              Apartment vs. Villa
+              Property Types
             </Button>
             <Button 
-              variant={propertyType === "offplan-vs-ready" ? "default" : "outline"} 
-              onClick={() => setPropertyType("offplan-vs-ready")}
-              className={propertyType === "offplan-vs-ready" ? "bg-estate-primary text-white" : ""}
+              variant={propertyType === "development-status" ? "default" : "outline"} 
+              onClick={() => setPropertyType("development-status")}
+              className={propertyType === "development-status" ? "bg-estate-primary text-white" : ""}
               size="sm"
             >
-              Off-plan vs. Ready built
+              Development Status
             </Button>
           </div>
         </div>
 
         <div className="space-y-2">
-          <div className="text-sm font-medium">Choose area</div>
+          <div className="text-sm font-medium">Industrial City</div>
           <Select value={area} onValueChange={setArea}>
             <SelectTrigger className="w-[200px]">
               <SelectValue placeholder="Choose area" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All areas</SelectItem>
-              <SelectItem value="dubai-marina">Dubai Marina</SelectItem>
-              <SelectItem value="downtown">Downtown Dubai</SelectItem>
-              <SelectItem value="palm-jumeirah">Palm Jumeirah</SelectItem>
+              <SelectItem value="all">All Cities</SelectItem>
+              <SelectItem value="riyadh">Riyadh Industrial City</SelectItem>
+              <SelectItem value="jeddah">Jeddah Industrial City</SelectItem>
+              <SelectItem value="dammam">Dammam Industrial City</SelectItem>
+              <SelectItem value="sudair">Sudair Industrial City</SelectItem>
             </SelectContent>
           </Select>
         </div>
       </div>
 
-      {/* Apartment vs. Villa section */}
-      {propertyType === "apartment-vs-villa" && (
+      {/* Property Types section */}
+      {propertyType === "property-types" && (
         <>
           <div className="bg-slate-900 text-white p-4 rounded-lg">
-            <h2 className="text-lg font-semibold mb-1">Apartment vs. Villa</h2>
-            <p className="text-sm text-slate-300">Analyze the distribution of property types in Dubai's real estate market.</p>
+            <h2 className="text-lg font-semibold mb-1">Industrial Property Types Analysis</h2>
+            <p className="text-sm text-slate-300">Analyze the distribution of industrial property types in Saudi Arabia's industrial cities.</p>
           </div>
 
           <div className="grid grid-cols-1 gap-6">
@@ -149,7 +106,7 @@ const MarketShare = () => {
             <Card>
               <CardContent className="pt-6">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-semibold">Market share of apartment vs. villa</h3>
+                  <h3 className="text-lg font-semibold">Market share by property type</h3>
                   <div className="flex gap-2">
                     <Button 
                       variant={chartView === "volume" ? "default" : "outline"} 
@@ -173,11 +130,15 @@ const MarketShare = () => {
                 <div className="flex justify-center mb-2 text-xs space-x-6">
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-pink-400 mr-1"></div>
-                    <span>Apartment</span>
+                    <span>Warehouses</span>
                   </div>
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-cyan-400 mr-1"></div>
-                    <span>Villa</span>
+                    <span>Factories</span>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-purple-400 mr-1"></div>
+                    <span>Logistics Facilities</span>
                   </div>
                 </div>
 
@@ -190,10 +151,11 @@ const MarketShare = () => {
                     >
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="year" />
-                      <YAxis tickFormatter={(value) => `${value}K`} />
-                      <Tooltip formatter={(value) => [`${value.toLocaleString()}K`, '']} />
-                      <Bar dataKey="apartment" stackId="a" name="Apartment" fill="#d946ef" />
-                      <Bar dataKey="villa" stackId="a" name="Villa" fill="#22d3ee" />
+                      <YAxis tickFormatter={(value) => `${value}%`} />
+                      <Tooltip formatter={(value) => [`${value}%`, '']} />
+                      <Bar dataKey="warehouse" stackId="a" name="Warehouses" fill="#d946ef" />
+                      <Bar dataKey="factory" stackId="a" name="Factories" fill="#22d3ee" />
+                      <Bar dataKey="logistics" stackId="a" name="Logistics" fill="#a855f7" />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -204,7 +166,7 @@ const MarketShare = () => {
             <Card>
               <CardContent className="pt-6">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-semibold">Price performance (AED)</h3>
+                  <h3 className="text-lg font-semibold">Price performance (SAR/sqm)</h3>
                   <div className="flex gap-2">
                     <Button 
                       variant={chartView === "price" ? "default" : "outline"} 
@@ -215,12 +177,12 @@ const MarketShare = () => {
                       Price
                     </Button>
                     <Button 
-                      variant={chartView === "pricePerSqft" ? "default" : "outline"} 
-                      onClick={() => setChartView("pricePerSqft")}
+                      variant={chartView === "pricePerSqm" ? "default" : "outline"} 
+                      onClick={() => setChartView("pricePerSqm")}
                       size="sm"
-                      className={chartView === "pricePerSqft" ? "bg-pink-500 text-white" : ""}
+                      className={chartView === "pricePerSqm" ? "bg-pink-500 text-white" : ""}
                     >
-                      Price per sqft
+                      Price per sqm
                     </Button>
                   </div>
                 </div>
@@ -228,11 +190,15 @@ const MarketShare = () => {
                 <div className="flex justify-center mb-2 text-xs space-x-6">
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-pink-400 mr-1 rounded-full"></div>
-                    <span>Apartment</span>
+                    <span>Warehouses</span>
                   </div>
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-cyan-400 mr-1 rounded-full"></div>
-                    <span>Villa</span>
+                    <span>Factories</span>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-purple-400 mr-1 rounded-full"></div>
+                    <span>Logistics</span>
                   </div>
                 </div>
 
@@ -245,11 +211,11 @@ const MarketShare = () => {
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="year" />
                       <YAxis />
-                      <Tooltip formatter={(value) => [`AED ${value.toLocaleString()}`, '']} />
+                      <Tooltip formatter={(value) => [`SAR ${value.toLocaleString()}/sqm`, '']} />
                       <Line 
                         type="monotone" 
-                        dataKey="apartment" 
-                        name="Apartment" 
+                        dataKey="warehouse" 
+                        name="Warehouses" 
                         stroke="#d946ef" 
                         dot={{ stroke: '#d946ef', strokeWidth: 2, r: 4 }} 
                         activeDot={{ r: 6 }}
@@ -257,10 +223,19 @@ const MarketShare = () => {
                       />
                       <Line 
                         type="monotone" 
-                        dataKey="villa" 
-                        name="Villa" 
+                        dataKey="factory" 
+                        name="Factories" 
                         stroke="#22d3ee" 
                         dot={{ stroke: '#22d3ee', strokeWidth: 2, r: 4 }} 
+                        activeDot={{ r: 6 }}
+                        strokeWidth={2}
+                      />
+                      <Line 
+                        type="monotone" 
+                        dataKey="logistics" 
+                        name="Logistics" 
+                        stroke="#a855f7" 
+                        dot={{ stroke: '#a855f7', strokeWidth: 2, r: 4 }} 
                         activeDot={{ r: 6 }}
                         strokeWidth={2}
                       />
@@ -273,12 +248,12 @@ const MarketShare = () => {
         </>
       )}
 
-      {/* Off-plan vs. Ready built section */}
-      {propertyType === "offplan-vs-ready" && (
+      {/* Development Status section */}
+      {propertyType === "development-status" && (
         <>
           <div className="bg-slate-900 text-white p-4 rounded-lg">
-            <h2 className="text-lg font-semibold mb-1">Off-plan vs. Ready built</h2>
-            <p className="text-sm text-slate-300">Analyze the distribution between off-plan and ready property transactions in Dubai's real estate market.</p>
+            <h2 className="text-lg font-semibold mb-1">Development Status Analysis</h2>
+            <p className="text-sm text-slate-300">Analyze the distribution between operational and under-construction industrial properties.</p>
           </div>
 
           <div className="grid grid-cols-1 gap-6">
@@ -286,7 +261,7 @@ const MarketShare = () => {
             <Card>
               <CardContent className="pt-6">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-semibold">Market share of off-plan vs. ready built</h3>
+                  <h3 className="text-lg font-semibold">Market share by development status</h3>
                   <div className="flex gap-2">
                     <Button 
                       variant={chartView === "volume" ? "default" : "outline"} 
@@ -310,27 +285,27 @@ const MarketShare = () => {
                 <div className="flex justify-center mb-2 text-xs space-x-6">
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-pink-400 mr-1"></div>
-                    <span>Off-plan</span>
+                    <span>Operational</span>
                   </div>
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-cyan-400 mr-1"></div>
-                    <span>Ready built</span>
+                    <span>Under Construction</span>
                   </div>
                 </div>
 
                 <div className="h-[500px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart
-                      data={propertyStatusData}
+                      data={developmentStatusData}
                       margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
                       barCategoryGap={10}
                     >
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="year" />
-                      <YAxis tickFormatter={(value) => `${value}K`} />
-                      <Tooltip formatter={(value) => [`${value.toLocaleString()}K`, '']} />
-                      <Bar dataKey="offplan" stackId="a" name="Off-plan" fill="#d946ef" />
-                      <Bar dataKey="readybuilt" stackId="a" name="Ready built" fill="#22d3ee" />
+                      <YAxis tickFormatter={(value) => `${value}%`} />
+                      <Tooltip formatter={(value) => [`${value}%`, '']} />
+                      <Bar dataKey="operational" stackId="a" name="Operational" fill="#d946ef" />
+                      <Bar dataKey="underConstruction" stackId="a" name="Under Construction" fill="#22d3ee" />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -341,7 +316,7 @@ const MarketShare = () => {
             <Card>
               <CardContent className="pt-6">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-semibold">Price performance (AED)</h3>
+                  <h3 className="text-lg font-semibold">Price performance (SAR/sqm)</h3>
                   <div className="flex gap-2">
                     <Button 
                       variant={chartView === "price" ? "default" : "outline"} 
@@ -352,12 +327,12 @@ const MarketShare = () => {
                       Price
                     </Button>
                     <Button 
-                      variant={chartView === "pricePerSqft" ? "default" : "outline"} 
-                      onClick={() => setChartView("pricePerSqft")}
+                      variant={chartView === "pricePerSqm" ? "default" : "outline"} 
+                      onClick={() => setChartView("pricePerSqm")}
                       size="sm"
-                      className={chartView === "pricePerSqft" ? "bg-pink-500 text-white" : ""}
+                      className={chartView === "pricePerSqm" ? "bg-pink-500 text-white" : ""}
                     >
-                      Price per sqft
+                      Price per sqm
                     </Button>
                   </div>
                 </div>
@@ -365,11 +340,11 @@ const MarketShare = () => {
                 <div className="flex justify-center mb-2 text-xs space-x-6">
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-pink-400 mr-1 rounded-full"></div>
-                    <span>Off-plan</span>
+                    <span>Operational</span>
                   </div>
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-cyan-400 mr-1 rounded-full"></div>
-                    <span>Ready built</span>
+                    <span>Under Construction</span>
                   </div>
                 </div>
 
@@ -382,11 +357,11 @@ const MarketShare = () => {
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="year" />
                       <YAxis />
-                      <Tooltip formatter={(value) => [`AED ${value.toLocaleString()}`, '']} />
+                      <Tooltip formatter={(value) => [`SAR ${value.toLocaleString()}/sqm`, '']} />
                       <Line 
                         type="monotone" 
-                        dataKey="offplan" 
-                        name="Off-plan" 
+                        dataKey="operational" 
+                        name="Operational" 
                         stroke="#d946ef" 
                         dot={{ stroke: '#d946ef', strokeWidth: 2, r: 4 }} 
                         activeDot={{ r: 6 }}
@@ -394,8 +369,8 @@ const MarketShare = () => {
                       />
                       <Line 
                         type="monotone" 
-                        dataKey="readybuilt" 
-                        name="Ready built" 
+                        dataKey="underConstruction" 
+                        name="Under Construction" 
                         stroke="#22d3ee" 
                         dot={{ stroke: '#22d3ee', strokeWidth: 2, r: 4 }} 
                         activeDot={{ r: 6 }}
@@ -414,3 +389,4 @@ const MarketShare = () => {
 };
 
 export default MarketShare;
+
