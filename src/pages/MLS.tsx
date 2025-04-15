@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import AppShell from "@/components/layout/AppShell";
 import AIAssistant from "@/components/home/AIAssistant";
-import { getProperties } from "@/data/mockData";
+import { getProperties } from "@/data/mocks/properties";
 import { PropertyFilter } from "@/types/property";
 import { toast } from "sonner";
 import { useIsMobile } from "@/hooks/use-mobile";

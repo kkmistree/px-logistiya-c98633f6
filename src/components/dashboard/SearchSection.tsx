@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import PropertyCard from "@/components/property/PropertyCard";
-import { getProperties } from "@/data/mockData";
+import { getProperties } from "@/data/mocks/properties";
 import { PropertyFilter } from "@/types/property";
 import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
