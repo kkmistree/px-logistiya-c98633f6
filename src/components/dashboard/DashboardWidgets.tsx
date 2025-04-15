@@ -23,7 +23,7 @@ const DashboardWidgets = ({ onAddListing, onAddClient, onViewProperty }: Dashboa
   return (
     <>
       {/* Level 2: Main Widgets Grid - First Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
         <div className="md:col-span-1">
           <MandatesSummary />
         </div>
@@ -36,7 +36,7 @@ const DashboardWidgets = ({ onAddListing, onAddClient, onViewProperty }: Dashboa
       </div>
       
       {/* Level 2: Main Widgets Grid - Second Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
         <div className="md:col-span-1">
           <CommissionTracker />
         </div>
@@ -49,7 +49,7 @@ const DashboardWidgets = ({ onAddListing, onAddClient, onViewProperty }: Dashboa
       </div>
       
       {/* Level 2: Main Widgets Grid - Third Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
         <div className="md:col-span-1">
           <DeveloperWatchlist onViewProperty={onViewProperty} />
         </div>
@@ -62,7 +62,7 @@ const DashboardWidgets = ({ onAddListing, onAddClient, onViewProperty }: Dashboa
       </div>
       
       {/* Level 3: Personalized Feed */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         <div className="md:col-span-1">
           <AIAssistantFeed />
         </div>

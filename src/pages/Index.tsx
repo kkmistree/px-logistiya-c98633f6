@@ -36,7 +36,7 @@ const Index = () => {
 
   return (
     <AppShell>
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6 w-full max-w-full">
         <DashboardHeader 
           getCurrentDate={getCurrentDate} 
           onAddListing={handleAddListing}
@@ -59,7 +59,7 @@ const Index = () => {
       <ClientDialog open={showAddClient} onOpenChange={setShowAddClient} />
       
       <Dialog open={!!selectedProperty} onOpenChange={(open) => !open && setSelectedProperty(null)}>
-        <DialogContent className="sm:max-w-[1000px] p-0">
+        <DialogContent className="sm:max-w-[1000px] p-0 w-[95vw] max-w-full">
           {selectedProperty && (
             <ProjectDetail 
               property={selectedProperty} 

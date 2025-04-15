@@ -30,7 +30,7 @@ const Navbar = ({ sidebarOpen, setSidebarOpen, useMobileDrawer = false }: Navbar
   const isSearchPage = location.pathname === "/search";
 
   return (
-    <div className="sticky top-0 z-30 bg-white border-b border-estate-muted flex items-center justify-between h-14 sm:h-16 px-3 sm:px-4 md:px-6 shadow-sm">
+    <div className="sticky top-0 z-30 bg-white border-b border-estate-muted flex items-center justify-between h-14 sm:h-16 px-3 sm:px-4 md:px-6 shadow-sm w-full">
       <div className="flex items-center">
         <Button
           variant="ghost"
