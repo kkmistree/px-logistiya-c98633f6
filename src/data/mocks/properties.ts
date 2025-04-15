@@ -19,7 +19,7 @@ export const properties: Property[] = [
     },
     features: ["Loading Docks", "High Ceiling", "Security System", "Fire System", "Office Space"],
     images: [
-      "/lovable-uploads/5a614438-6506-41ce-ba5f-4b8208744eb1.png",
+      "/lovable-uploads/f6ee3927-d73f-4aaf-8d91-38a12314d6ba.png",
       "/lovable-uploads/1c0bbef2-a150-4840-be85-c4610bd91d4f.png"
     ],
     developer: "MODON Development",
@@ -50,7 +50,7 @@ export const properties: Property[] = [
     },
     features: ["High Power Capacity", "Water Supply", "Loading Docks", "Office Space"],
     images: [
-      "/lovable-uploads/979314aa-eaf0-4acb-9623-da8142016022.png",
+      "/lovable-uploads/84e27764-eb7b-4219-91a5-479e5ffcaaa7.png",
       "/lovable-uploads/53ffa3eb-4728-4360-b338-329f0f6c8359.png"
     ],
     developer: "Saudi Industrial Co.",
@@ -103,9 +103,7 @@ export const properties: Property[] = [
     },
     features: ["Flat Terrain", "Utilities Connected", "Road Access", "Seaport Proximity"],
     images: [
-      "/placeholder.svg", 
-      "/placeholder.svg",
-      "/placeholder.svg"
+      "/lovable-uploads/0fd1798b-18a4-427a-b90e-6fce5280ea30.png"
     ],
     developer: "Jeddah Industrial Development",
     roi: 6.2,
