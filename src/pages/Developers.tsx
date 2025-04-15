@@ -31,7 +31,7 @@ const Developers = () => {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={18} />
                 <Input
                   type="search"
-                  placeholder="Search projects by name, developer, area..."
+                  placeholder="Search industrial projects by name, developer, location..."
                   className="pl-10 w-full"
                 />
               </div>

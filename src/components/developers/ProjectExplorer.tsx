@@ -7,58 +7,58 @@ interface ProjectExplorerProps {
   viewMode: "grid" | "list";
 }
 
-// Mock data for projects
+// Mock data for KSA industrial projects
 const projects = [
   {
     id: "p1",
-    name: "Beach Vista",
-    developer: "Emaar Properties",
-    image: "https://placehold.co/600x400?text=Beach+Vista",
-    location: "Dubai Marina",
-    type: "Apartment",
-    startingPrice: 1500000,
+    name: "Riyadh Industrial City - Advanced Manufacturing Zone",
+    developer: "MODON",
+    image: "https://placehold.co/600x400?text=Riyadh+Industrial",
+    location: "Northern Riyadh",
+    type: "Industrial Park",
+    startingPrice: 8500000,
     handoverDate: "Q4 2025",
     roi: 6.5,
     stage: "active",
-    badges: ["Exclusive", "Sea View"],
+    badges: ["Exclusive", "Advanced Utilities"],
     paymentPlan: "60/40"
   },
   {
     id: "p2",
-    name: "The Grand",
-    developer: "DAMAC Properties",
-    image: "https://placehold.co/600x400?text=The+Grand",
-    location: "Downtown Dubai",
-    type: "Apartment",
-    startingPrice: 2800000,
+    name: "Jeddah Industrial Logistics Hub",
+    developer: "Saudi Industrial Development Company",
+    image: "https://placehold.co/600x400?text=Jeddah+Logistics",
+    location: "South Jeddah",
+    type: "Logistics Zone",
+    startingPrice: 5200000,
     handoverDate: "Q2 2026",
     roi: 5.8,
     stage: "active",
-    badges: ["Premium"],
+    badges: ["Port Access"],
     paymentPlan: "50/50"
   },
   {
     id: "p3",
-    name: "Palm Residences",
-    developer: "Nakheel",
-    image: "https://placehold.co/600x400?text=Palm+Residences",
-    location: "Palm Jumeirah",
-    type: "Villa",
-    startingPrice: 8900000,
+    name: "NEOM Industrial Valley",
+    developer: "NEOM",
+    image: "https://placehold.co/600x400?text=NEOM+Industrial",
+    location: "NEOM Region",
+    type: "Advanced Manufacturing",
+    startingPrice: 12700000,
     handoverDate: "Q3 2026",
     roi: 4.9,
     stage: "active",
-    badges: ["Beach Access"],
+    badges: ["Renewable Energy"],
     paymentPlan: "30/70"
   },
   {
     id: "p4",
-    name: "Horizon Towers",
-    developer: "Dubai Properties",
-    image: "https://placehold.co/600x400?text=Horizon+Towers",
-    location: "Business Bay",
-    type: "Apartment",
-    startingPrice: 1200000,
+    name: "Jubail Petrochemical Zone",
+    developer: "Royal Commission for Jubail",
+    image: "https://placehold.co/600x400?text=Jubail+Petrochemical",
+    location: "Jubail Industrial City",
+    type: "Specialized Industrial",
+    startingPrice: 7800000,
     handoverDate: "Q1 2027",
     roi: 7.2,
     stage: "coming_soon",
@@ -67,39 +67,39 @@ const projects = [
   },
   {
     id: "p5",
-    name: "Garden Villas",
-    developer: "Sobha",
-    image: "https://placehold.co/600x400?text=Garden+Villas",
-    location: "MBR City",
-    type: "Villa",
+    name: "Dammam Logistics Park",
+    developer: "Dammam Industrial City",
+    image: "https://placehold.co/600x400?text=Dammam+Logistics",
+    location: "Eastern Province",
+    type: "Logistics Center",
     startingPrice: 6500000,
     handoverDate: "Q4 2025",
     roi: 5.3,
     stage: "active",
-    badges: ["Private Pool"],
+    badges: ["Export Facilities"],
     paymentPlan: "40/60"
   },
   {
     id: "p6",
-    name: "Downtown Views",
-    developer: "Emaar Properties",
-    image: "https://placehold.co/600x400?text=Downtown+Views",
-    location: "Downtown Dubai",
-    type: "Apartment",
-    startingPrice: 2200000,
+    name: "Sudair Industrial City",
+    developer: "Sudair City for Industry and Business",
+    image: "https://placehold.co/600x400?text=Sudair+Industrial",
+    location: "Sudair",
+    type: "Industrial Zone",
+    startingPrice: 4200000,
     handoverDate: "Q2 2025",
     roi: 6.0,
     stage: "active",
-    badges: ["Burj Views"],
+    badges: ["Vision 2030"],
     paymentPlan: "25/75"
   },
 ];
 
 const formatPrice = (price: number) => {
   if (price >= 1000000) {
-    return `AED ${(price / 1000000).toFixed(1)}M`;
+    return `SAR ${(price / 1000000).toFixed(1)}M`;
   }
-  return `AED ${(price / 1000).toFixed(0)}K`;
+  return `SAR ${(price / 1000).toFixed(0)}K`;
 };
 
 const ProjectExplorer = ({ viewMode }: ProjectExplorerProps) => {
