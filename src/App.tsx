@@ -21,7 +21,7 @@ import ListingPerformance from "@/pages/ListingPerformance";
 
 function App() {
   return (
-    <div className="App min-h-screen">
+    <div className="App min-h-screen w-full max-w-[100vw] overflow-x-hidden">
       <RouterProvider router={createBrowserRouter([
         {
           path: "/",
