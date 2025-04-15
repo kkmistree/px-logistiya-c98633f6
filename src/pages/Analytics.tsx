@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import AppShell from "@/components/layout/AppShell";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -13,6 +14,23 @@ import TransactionAnalysis from "@/components/analytics/TransactionAnalysis";
 import InvestmentAnalysis from "@/components/analytics/investment/InvestmentAnalysis";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
+
+// Simple ReportGenerator component
+const ReportGenerator = () => {
+  return (
+    <div className="p-4 border rounded-md bg-slate-50">
+      <h3 className="text-lg font-medium mb-3">Custom Report Generator</h3>
+      <p className="text-slate-500 mb-4">Select metrics and areas to include in your custom report</p>
+      <div className="flex flex-wrap gap-3">
+        <Button variant="outline" size="sm">Market Performance</Button>
+        <Button variant="outline" size="sm">Property Analysis</Button>
+        <Button variant="outline" size="sm">Investment Metrics</Button>
+        <Button variant="outline" size="sm">Area Comparison</Button>
+        <Button variant="outline" size="sm">Generate PDF</Button>
+      </div>
+    </div>
+  );
+};
 
 const Analytics = () => {
   const [activeTab, setActiveTab] = useState("investment");
