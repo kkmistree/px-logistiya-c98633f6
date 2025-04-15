@@ -61,7 +61,7 @@ const searchSuggestions = [
     metrics: {
       roi: "9.2%",
       growth: "+14%",
-      potential: "high"
+      potential: "high" as "high" // Type assertion to match the required enum type
     }
   },
   {
@@ -71,7 +71,7 @@ const searchSuggestions = [
     metrics: {
       roi: "8.5%",
       growth: "+7%",
-      potential: "medium"
+      potential: "medium" as "medium" // Type assertion to match the required enum type
     }
   },
   {
@@ -81,7 +81,7 @@ const searchSuggestions = [
     metrics: {
       roi: "6.8%",
       growth: "+11%",
-      potential: "high"
+      potential: "high" as "high" // Type assertion to match the required enum type
     }
   }
 ];
