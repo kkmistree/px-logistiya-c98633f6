@@ -3,7 +3,6 @@ import { useState } from "react";
 import AppShell from "@/components/layout/AppShell";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AnalyticsHeader from "@/components/analytics/AnalyticsHeader";
-import BrokerPerformance from "@/components/analytics/BrokerPerformance";
 import MarketInsights from "@/components/analytics/MarketInsights";
 import ProjectAnalytics from "@/components/analytics/ProjectAnalytics";
 import AnalyticsReports from "@/components/analytics/AnalyticsReports";
@@ -17,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 
 const Analytics = () => {
-  const [activeTab, setActiveTab] = useState("performance");
+  const [activeTab, setActiveTab] = useState("market");
   const [showReportGenerator, setShowReportGenerator] = useState(false);
 
   return (
@@ -42,7 +41,6 @@ const Analytics = () => {
         
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="mb-6 flex flex-wrap">
-            <TabsTrigger value="performance">Broker Performance</TabsTrigger>
             <TabsTrigger value="market">Market Insights</TabsTrigger>
             <TabsTrigger value="projects">Project Analytics</TabsTrigger>
             <TabsTrigger value="marketPerformance">Market Performance</TabsTrigger>
@@ -52,10 +50,6 @@ const Analytics = () => {
             <TabsTrigger value="transactions">Transactions</TabsTrigger>
             <TabsTrigger value="reports">Reports</TabsTrigger>
           </TabsList>
-          
-          <TabsContent value="performance">
-            <BrokerPerformance />
-          </TabsContent>
           
           <TabsContent value="market">
             <MarketInsights />
