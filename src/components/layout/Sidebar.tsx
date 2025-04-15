@@ -15,7 +15,8 @@ import {
   BookOpen,
   LogOut,
   User,
-  CreditCard
+  CreditCard,
+  Command
 } from "lucide-react";
 import CurrencySwitcher from "@/components/currency/CurrencySwitcher";
 import { useState } from "react";
@@ -34,8 +35,8 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   
   const navItems = [
-    { icon: Search, label: "Quick Search", path: "/search" },
     { icon: Home, label: "Command Center", path: "/" },
+    { icon: Search, label: "Quick Search", path: "/search" },
     { icon: Search, label: "MLS Search", path: "/mls" },
     { icon: Users, label: "Clients & CRM", path: "/clients" },
     { icon: Building, label: "Developer Hub", path: "/developers" },
