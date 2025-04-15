@@ -12,9 +12,9 @@ import {
   CheckCircle, 
   AlertCircle,
   BarChart2,
-  Home,
-  Maximize2,
-  Users
+  Square,
+  Factory,
+  Warehouse
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -80,13 +80,13 @@ const ProjectDetail = ({ property, onClose }: ProjectDetailProps) => {
             </Button>
           )}
           <div className="absolute bottom-4 left-4 flex gap-2">
-            {property.status === "off-plan" && (
-              <Badge className="bg-estate-secondary text-white">Off-Plan</Badge>
+            {property.status === "under-development" && (
+              <Badge className="bg-estate-secondary text-white">Under Development</Badge>
             )}
             {property.exclusive && (
               <Badge className="bg-purple-600 text-white">Exclusive</Badge>
             )}
-            {property.directFromDeveloper && (
+            {property.developer && (
               <Badge className="bg-blue-600 text-white">Direct from Developer</Badge>
             )}
           </div>
@@ -104,10 +104,10 @@ const ProjectDetail = ({ property, onClose }: ProjectDetailProps) => {
             
             <div className="text-right">
               <div className="text-2xl font-bold text-estate-primary">
-                {formatCurrency(property.price, "AED")}
+                {formatCurrency(property.price, "SAR")}
               </div>
               <div className="text-sm text-slate-500">
-                {formatCurrency(Math.round(property.price / property.area), "AED")}/sqft
+                {formatCurrency(Math.round(property.price / property.area), "SAR")}/sqm
               </div>
             </div>
           </div>
@@ -127,7 +127,7 @@ const ProjectDetail = ({ property, onClose }: ProjectDetailProps) => {
               </div>
               
               <div className="flex items-center gap-2">
-                <Home size={18} className="text-estate-primary" />
+                <Factory size={18} className="text-estate-primary" />
                 <span className="font-medium">Property Type:</span>
                 <span className="capitalize">{property.type}</span>
               </div>
@@ -135,15 +135,15 @@ const ProjectDetail = ({ property, onClose }: ProjectDetailProps) => {
             
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
-                <Maximize2 size={18} className="text-estate-primary" />
+                <Square size={18} className="text-estate-primary" />
                 <span className="font-medium">Area:</span>
-                <span>{property.area} sqft</span>
+                <span>{property.area} sqm</span>
               </div>
               
               <div className="flex items-center gap-2">
-                <Users size={18} className="text-estate-primary" />
-                <span className="font-medium">Bedrooms:</span>
-                <span>{property.bedrooms}</span>
+                <Warehouse size={18} className="text-estate-primary" />
+                <span className="font-medium">Zoning:</span>
+                <span>{property.zoning || "Industrial"}</span>
               </div>
               
               {property.paymentPlan && (

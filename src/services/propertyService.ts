@@ -2,11 +2,11 @@
 import { Property } from "@/types/property";
 import { mockProperties } from "./mockProperties";
 import { 
-  filterUndervaluedInMarina,
-  filterHighYieldStudios,
-  filterApartmentsByMaxPrice,
-  filterBedroomsByROI,
-  filterBedroomsWithHighROIAndYield,
+  filterUndervaluedInRiyadh,
+  filterHighYieldWarehouses,
+  filterPropertiesByMaxPrice,
+  filterPropertiesByROI,
+  filterPropertiesWithHighROIAndYield,
   filterByKeyword,
   addMatchScore,
   limitResults
@@ -15,7 +15,7 @@ import { extractCurrencyInfo } from "@/utils/format";
 import { currencies, CurrencyCode } from "@/contexts/CurrencyContext";
 
 // This function simulates backend filtering based on search queries
-export const searchProperties = (query: string, platformCurrency: CurrencyCode = 'AED'): Property[] => {
+export const searchProperties = (query: string, platformCurrency: CurrencyCode = 'SAR'): Property[] => {
   // Start with all mock properties
   let filtered: Property[] = [...mockProperties];
   
@@ -27,20 +27,20 @@ export const searchProperties = (query: string, platformCurrency: CurrencyCode =
   console.log("Extracted currency info:", currencyInfo);
   
   // Apply filters based on query content
-  if (lowerQuery.includes("undervalued") && lowerQuery.includes("dubai marina")) {
-    filtered = filterUndervaluedInMarina(filtered);
+  if (lowerQuery.includes("undervalued") && lowerQuery.includes("riyadh industrial")) {
+    filtered = filterUndervaluedInRiyadh(filtered);
   } 
-  // Filter for 'High yield studios'
-  else if (lowerQuery.includes("high yield") && lowerQuery.includes("studio")) {
-    filtered = filterHighYieldStudios(filtered);
+  // Filter for 'High yield warehouses'
+  else if (lowerQuery.includes("high yield") && lowerQuery.includes("warehouse")) {
+    filtered = filterHighYieldWarehouses(filtered);
   } 
-  // Filter for apartments with a maximum price
+  // Filter for properties with a maximum price
   else if (
     lowerQuery.includes("maximum price") || 
     lowerQuery.includes("max price") || 
-    (currencyInfo && lowerQuery.includes("apartment"))
+    (currencyInfo && lowerQuery.includes("property"))
   ) {
-    let maxPrice = 250000; // Default value
+    let maxPrice = 15000000; // Default value for industrial
     let sourceCurrency: string = platformCurrency;
     
     if (currencyInfo) {
@@ -49,33 +49,25 @@ export const searchProperties = (query: string, platformCurrency: CurrencyCode =
       console.log(`Converting ${maxPrice} ${sourceCurrency} to ${platformCurrency}`);
     }
     
-    filtered = filterApartmentsByMaxPrice(filtered, maxPrice, sourceCurrency, platformCurrency);
+    filtered = filterPropertiesByMaxPrice(filtered, maxPrice, sourceCurrency, platformCurrency);
     console.log(`Found ${filtered.length} properties after price filtering`);
   } 
-  // Filter for '2 bedroom apartment with high ROI'
-  else if (lowerQuery.includes("2 bedroom") && lowerQuery.includes("high roi")) {
-    filtered = filterBedroomsByROI(filtered, 2);
+  // Filter for properties with high ROI
+  else if (lowerQuery.includes("warehouse") && lowerQuery.includes("high roi")) {
+    filtered = filterPropertiesByROI(filtered, "warehouse");
   } 
-  // Filter for '1 bed, high ROI and high yield'
-  else if (lowerQuery.includes("1 bed") && lowerQuery.includes("high roi") && lowerQuery.includes("high yield")) {
-    filtered = filterBedroomsWithHighROIAndYield(filtered, 1);
+  // Filter for high ROI and high yield
+  else if (lowerQuery.includes("factory") && lowerQuery.includes("high roi") && lowerQuery.includes("high yield")) {
+    filtered = filterPropertiesWithHighROIAndYield(filtered, "factory");
   } 
-  // Generic search (fallback) - ALWAYS return 3-5 properties for any query
+  // Generic search (fallback)
   else {
-    // For any search, find properties with relevant keywords if possible
     const keywordFiltered = filterByKeyword(filtered, lowerQuery);
-    
-    // If we found matches with keywords, use those, otherwise just return random properties
-    if (keywordFiltered.length > 0) {
-      filtered = keywordFiltered;
-    } else {
-      // Shuffle the array to get random properties
-      filtered = [...mockProperties].sort(() => Math.random() - 0.5);
-    }
+    filtered = keywordFiltered.length > 0 ? keywordFiltered : filtered;
   }
   
-  // Always limit results to 3-5 properties and add match scores
-  filtered = limitResults(filtered, Math.floor(Math.random() * 3) + 3); // Random number between 3 and 5
+  // Always limit results and add match scores
+  filtered = limitResults(filtered);
   filtered = addMatchScore(filtered);
   
   return filtered;

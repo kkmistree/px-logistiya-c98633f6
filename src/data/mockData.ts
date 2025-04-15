@@ -1,4 +1,3 @@
-
 import { Property } from "@/types/property";
 import { User } from "@/types/user";
 import { Client } from "@/types/client";
@@ -318,7 +317,21 @@ export const users: User[] = [
   },
 ];
 
-// Sample client data
+const clientRequirements = {
+  budget: {
+    min: 10000000,
+    max: 25000000,
+  },
+  location: ["Riyadh Industrial City", "KAEC Industrial Valley", "Jeddah Industrial City"],
+  propertyType: ["warehouse", "logistics"],
+  minArea: 5000,
+  features: ["Loading Docks", "Security", "High Ceiling"],
+  timeline: "6 months",
+  purpose: "investment" as const,
+  paymentPreference: "cash" as const,
+};
+
+// Update the first client with industrial requirements
 export const clients: Client[] = [
   {
     id: "c1",
@@ -328,19 +341,7 @@ export const clients: Client[] = [
     type: "investor",
     assignedTo: "u1",
     status: "active",
-    requirements: {
-      budget: {
-        min: 10000000,
-        max: 25000000,
-      },
-      location: ["Riyadh Industrial City", "KAEC Industrial Valley", "Jeddah Industrial City"],
-      propertyType: ["warehouse", "logistics"],
-      minArea: 5000,
-      features: ["Loading Docks", "Security", "High Ceiling"],
-      timeline: "6 months",
-      purpose: "investment",
-      paymentPreference: "cash",
-    },
+    requirements: clientRequirements,
     documents: [
       {
         id: "d1",
@@ -388,17 +389,13 @@ export const clients: Client[] = [
     assignedTo: "u2",
     status: "active",
     requirements: {
-      budget: {
-        min: 15000000,
-        max: 35000000,
-      },
-      location: ["KAEC Industrial Valley", "Jubail Industrial City"],
+      ...clientRequirements,
       propertyType: ["factory", "land"],
+      location: ["KAEC Industrial Valley", "Jubail Industrial City"],
       minArea: 10000,
       features: ["High Power Capacity", "Water Supply", "Road Access"],
       timeline: "12 months",
-      purpose: "investment",
-      paymentPreference: "payment-plan",
+      paymentPreference: "payment-plan" as const,
     },
     documents: [
       {
