@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -18,7 +17,6 @@ import {
   Legend
 } from "recharts";
 
-// Mock data for price per sqm trend for Saudi industrial areas
 const pricePerSqmData = [
   { month: 'Jan', riyadh: 1900, jeddah: 1800, dammam: 1850, kaec: 2080, jubail: 2130 },
   { month: 'Feb', riyadh: 1920, jeddah: 1820, dammam: 1860, kaec: 2090, jubail: 2140 },
@@ -28,7 +26,6 @@ const pricePerSqmData = [
   { month: 'Jun', riyadh: 1965, jeddah: 1860, dammam: 1880, kaec: 2110, jubail: 2165 },
 ];
 
-// Mock data for ROI by area in Saudi industrial market
 const roiData = [
   { area: 'Riyadh Industrial City', roi: 7.2 },
   { area: 'Jeddah Industrial City', roi: 6.9 },
@@ -38,7 +35,6 @@ const roiData = [
   { area: 'Sudair City', roi: 7.6 }
 ];
 
-// Mock data for transaction volume
 const transactionData = [
   { quarter: 'Q1 2024', volume: 652, value: 98.5 },
   { quarter: 'Q2 2024', volume: 715, value: 111.2 },
@@ -47,7 +43,6 @@ const transactionData = [
   { quarter: 'Q1 2025', volume: 725, value: 116.2 }
 ];
 
-// Format currency
 const formatCurrency = (value: number) => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -56,6 +51,29 @@ const formatCurrency = (value: number) => {
     maximumFractionDigits: 1
   }).format(value);
 };
+
+const marketInsights = [
+  {
+    title: "Industrial Growth",
+    description: "Riyadh Industrial City sees 8% MoM increase in warehouse prices",
+    action: "Consider investment opportunities in logistics facilities."
+  },
+  {
+    title: "New Development",
+    description: "MODON announces Phase 3 expansion in 30 days",
+    action: "Alert investors interested in industrial development."
+  },
+  {
+    title: "Yield Analysis",
+    description: "Industrial yields rising in Jubail Industrial City",
+    subtext: "Current average yield 8.1%, up from 7.5% last quarter."
+  },
+  {
+    title: "Market Trend",
+    description: "Dammam industrial corridor showing steady appreciation",
+    subtext: "15.9% year-on-year increase in property values."
+  }
+];
 
 const MarketInsights = () => {
   const [propertyType, setPropertyType] = useState("warehouse");
@@ -204,20 +222,14 @@ const MarketInsights = () => {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
-              <h3 className="font-medium">Jubail Industrial City Growth</h3>
-              <p className="text-sm text-slate-600 mt-1">Prices in Jubail Industrial City have increased by 8.3% in the last quarter, outperforming the market average of 4.8% due to petrochemical sector expansion.</p>
-            </div>
-            
-            <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded">
-              <h3 className="font-medium">Vision 2030 Impact</h3>
-              <p className="text-sm text-slate-600 mt-1">Saudi Vision 2030 initiatives continue to drive industrial real estate demand, with factory facilities showing a 15% increase in transaction volume year-over-year.</p>
-            </div>
-            
-            <div className="bg-green-50 border-l-4 border-green-500 p-4 rounded">
-              <h3 className="font-medium">Logistics Sector Growth</h3>
-              <p className="text-sm text-slate-600 mt-1">Logistics facilities near major ports and industrial cities showed the strongest yield performance at 7.8%, particularly in the Dammam-Jubail corridor.</p>
-            </div>
+            {marketInsights.map((insight, index) => (
+              <div key={index} className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                <h3 className="font-medium">{insight.title}</h3>
+                <p className="text-sm text-slate-600 mt-1">{insight.description}</p>
+                {insight.action && <p className="text-sm text-slate-600 mt-1">{insight.action}</p>}
+                {insight.subtext && <p className="text-sm text-slate-600 mt-1">{insight.subtext}</p>}
+              </div>
+            ))}
           </div>
         </CardContent>
       </Card>

@@ -1,76 +1,65 @@
-
 // Sample area comparison data for Saudi industrial areas
 export interface AreaPerformanceData {
-  area: string; 
-  transactions: number; 
-  avgPrice: number; 
-  yoyPrice: number; 
-  yield: number; 
-  offPlanPercentage: number; 
+  area: string;
+  transactions: number;
+  avgPrice: number;
+  yoyPrice: number;
+  yield: number;
+  offPlanPercentage: number;
   readyPercentage: number;
   avgRental: number;
 }
 
 export const areaPerformanceData: AreaPerformanceData[] = [
-  { 
-    area: "Riyadh Industrial City", 
-    transactions: 178, 
-    avgPrice: 23500, 
-    yoyPrice: 7.2, 
-    yield: 7.8, 
-    offPlanPercentage: 65, 
+  {
+    area: "Riyadh Industrial City",
+    transactions: 178,
+    avgPrice: 23500,
+    yoyPrice: 7.2,
+    yield: 7.8,
+    offPlanPercentage: 65,
     readyPercentage: 35,
     avgRental: 1890000
   },
-  { 
-    area: "Jeddah Industrial City", 
-    transactions: 152, 
-    avgPrice: 22450, 
-    yoyPrice: 9.8, 
-    yield: 6.9, 
-    offPlanPercentage: 58, 
+  {
+    area: "Jeddah Industrial City",
+    transactions: 152,
+    avgPrice: 22450,
+    yoyPrice: 9.8,
+    yield: 6.9,
+    offPlanPercentage: 58,
     readyPercentage: 42,
     avgRental: 1550000
   },
-  { 
-    area: "Jubail Industrial City", 
-    transactions: 95, 
-    avgPrice: 35400, 
-    yoyPrice: 11.2, 
-    yield: 8.1, 
-    offPlanPercentage: 45, 
+  {
+    area: "Jubail Industrial City",
+    transactions: 95,
+    avgPrice: 35400,
+    yoyPrice: 11.2,
+    yield: 8.1,
+    offPlanPercentage: 45,
     readyPercentage: 55,
     avgRental: 2870000
   },
-  { 
-    area: "Dammam Industrial City", 
-    transactions: 231, 
-    avgPrice: 18920, 
-    yoyPrice: 7.3, 
-    yield: 7.5, 
-    offPlanPercentage: 72, 
+  {
+    area: "Dammam Industrial City",
+    transactions: 231,
+    avgPrice: 18920,
+    yoyPrice: 7.3,
+    yield: 7.5,
+    offPlanPercentage: 72,
     readyPercentage: 28,
     avgRental: 1420000
   },
-  { 
-    area: "KAEC Industrial Valley", 
-    transactions: 164, 
-    avgPrice: 20850, 
-    yoyPrice: 6.7, 
-    yield: 6.8, 
-    offPlanPercentage: 62, 
+  {
+    area: "KAEC Industrial Valley",
+    transactions: 164,
+    avgPrice: 20850,
+    yoyPrice: 6.7,
+    yield: 6.8,
+    offPlanPercentage: 62,
     readyPercentage: 38,
     avgRental: 1420000
-  },
-  { 
-    area: "Sudair City", 
-    transactions: 110, 
-    avgPrice: 21600, 
-    yoyPrice: 8.3, 
-    yield: 7.6, 
-    offPlanPercentage: 55, 
-    readyPercentage: 45,
-    avgRental: 1640000
   }
 ];
 
