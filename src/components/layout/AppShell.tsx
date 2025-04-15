@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import { CurrencyProvider } from "@/contexts/CurrencyContext";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { Drawer, DrawerContent } from "@/components/ui/drawer";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -56,7 +56,6 @@ const AppShell = ({ children }: AppShellProps) => {
         {/* Mobile drawer for small screens */}
         {useMobileDrawer && (
           <Drawer>
-            <DrawerTrigger className="sr-only">Open Sidebar</DrawerTrigger>
             <DrawerContent className="h-[80vh]">
               <div className="p-4 h-full overflow-auto">
                 <Sidebar open={true} setOpen={() => {}} />
