@@ -9,66 +9,66 @@ import { ExternalLink, Download } from "lucide-react";
 const developerInfo = [
   {
     id: "d1",
-    name: "Emaar Properties",
-    logo: "https://placehold.co/100x60?text=Emaar",
+    name: "MODON",
+    logo: "https://placehold.co/100x60?text=MODON",
     tier: "Platinum",
     commission: {
       primary: 3,
       secondary: 2
     },
-    registrationProcess: "Complete Emaar Broker Portal registration, attend training session, submit broker license and passport copies.",
-    incentives: ["3% commission on primary sales", "Volume-based bonuses", "Early access to launches"],
+    registrationProcess: "Complete MODON Partner Portal registration, attend industrial development training session, submit broker license and commercial registration.",
+    incentives: ["3% commission on primary industrial sales", "Volume-based bonuses", "Early access to industrial zone releases"],
     contacts: [
-      { name: "Sarah Ahmed", role: "Broker Relations", email: "sarah.a@emaar.com", phone: "+971 5x xxx xxxx" },
-      { name: "Mohammed Al Farsi", role: "Sales Director", email: "mohammed.f@emaar.com", phone: "+971 5x xxx xxxx" }
+      { name: "Abdullah Al-Otaibi", role: "Industrial Broker Relations", email: "abdullah.o@modon.gov.sa", phone: "+966 5x xxx xxxx" },
+      { name: "Sarah Al-Qahtani", role: "Investment Director", email: "sarah.q@modon.gov.sa", phone: "+966 5x xxx xxxx" }
     ]
   },
   {
     id: "d2",
-    name: "DAMAC Properties",
-    logo: "https://placehold.co/100x60?text=DAMAC",
+    name: "Saudi Economic Development Co.",
+    logo: "https://placehold.co/100x60?text=SEDC",
     tier: "Gold",
     commission: {
       primary: 3,
       secondary: 2
     },
-    registrationProcess: "Register on DAMAC Partner Portal, submit RERA license, attend orientation, sign broker agreement.",
-    incentives: ["3% standard commission", "Additional 1% on luxury units", "International client bonuses"],
+    registrationProcess: "Register on SEDC Partner Portal, submit commercial license, attend industrial orientation, sign broker agreement.",
+    incentives: ["3% standard commission", "Additional 1% on specialized industrial units", "International investor bonuses"],
     contacts: [
-      { name: "James Wilson", role: "Broker Channel Manager", email: "james.w@damac.com", phone: "+971 5x xxx xxxx" },
-      { name: "Aisha Mahmood", role: "Marketing Director", email: "aisha.m@damac.com", phone: "+971 5x xxx xxxx" }
+      { name: "Mohammed Al-Harbi", role: "Commercial Channel Manager", email: "mohammed.h@sedc.com.sa", phone: "+966 5x xxx xxxx" },
+      { name: "Layla Al-Ghamdi", role: "Business Development Director", email: "layla.g@sedc.com.sa", phone: "+966 5x xxx xxxx" }
     ]
   },
   {
     id: "d3",
-    name: "Nakheel",
-    logo: "https://placehold.co/100x60?text=Nakheel",
+    name: "KAEC Industrial Valley",
+    logo: "https://placehold.co/100x60?text=KAEC",
     tier: "Platinum",
     commission: {
       primary: 2.5,
       secondary: 2
     },
-    registrationProcess: "Apply through Nakheel Broker Relations, provide company trade license and RERA certificates, attend Nakheel product training.",
+    registrationProcess: "Apply through KAEC Broker Relations, provide company commercial registration and industry certificates, attend KAEC industrial product training.",
     incentives: ["2.5% base commission", "Quarterly performance bonuses", "Co-marketing opportunities"],
     contacts: [
-      { name: "Thomas Lee", role: "Broker Relations Manager", email: "thomas.l@nakheel.com", phone: "+971 5x xxx xxxx" },
-      { name: "Fatima Al Suwaidi", role: "Sales Director", email: "fatima.s@nakheel.com", phone: "+971 5x xxx xxxx" }
+      { name: "Faisal Al-Zahrani", role: "Broker Relations Manager", email: "faisal.z@kaec.sa", phone: "+966 5x xxx xxxx" },
+      { name: "Nora Al-Shammari", role: "Investment Director", email: "nora.s@kaec.sa", phone: "+966 5x xxx xxxx" }
     ]
   },
   {
     id: "d4",
-    name: "Dubai Properties",
-    logo: "https://placehold.co/100x60?text=DP",
+    name: "Royal Commission for Jubail",
+    logo: "https://placehold.co/100x60?text=RCJ",
     tier: "Gold",
     commission: {
       primary: 3,
       secondary: 2
     },
-    registrationProcess: "Submit registration on DP Partner Portal, provide broker license documentation, complete Dubai Properties product knowledge course.",
+    registrationProcess: "Submit registration on RCJ Industrial Partner Portal, provide broker license documentation, complete Jubail Industrial City product knowledge course.",
     incentives: ["3% standard commission", "Tiered incentive program", "Launch event invitations"],
     contacts: [
-      { name: "Emma Thompson", role: "Channel Sales Manager", email: "emma.t@dp.com", phone: "+971 5x xxx xxxx" },
-      { name: "Rashid Al Hashemi", role: "Partner Relations", email: "rashid.h@dp.com", phone: "+971 5x xxx xxxx" }
+      { name: "Khalid Al-Dosari", role: "Industrial Channel Manager", email: "khalid.d@rcjubail.gov.sa", phone: "+966 5x xxx xxxx" },
+      { name: "Hanan Al-Mutairi", role: "Partner Relations", email: "hanan.m@rcjubail.gov.sa", phone: "+966 5x xxx xxxx" }
     ]
   }
 ];
@@ -175,9 +175,9 @@ const DeveloperHandbook = () => {
                   <div className="mt-4 p-4 bg-blue-50 border-l-4 border-blue-500 rounded">
                     <h4 className="font-medium mb-1">Required Documents</h4>
                     <ul className="text-sm text-slate-600 list-disc pl-5 space-y-1">
-                      <li>Valid RERA broker card</li>
+                      <li>Valid commercial registration</li>
                       <li>Company trade license</li>
-                      <li>Emirates ID (for UAE residents)</li>
+                      <li>Saudi national ID (for Saudi nationals)</li>
                       <li>Passport copy</li>
                       <li>Profile photo</li>
                     </ul>
@@ -201,9 +201,9 @@ const DeveloperHandbook = () => {
                     </ul>
                     
                     <div className="p-4 bg-green-50 border-l-4 border-green-500 rounded">
-                      <h4 className="font-medium mb-1">VIP Broker Program</h4>
+                      <h4 className="font-medium mb-1">Vision 2030 Aligned Broker Program</h4>
                       <p className="text-sm text-slate-600">
-                        Achieve VIP broker status by selling {developer.tier === "Platinum" ? "5" : "3"} units in a quarter to unlock additional benefits, including higher commissions, early access to launches, and exclusive client events.
+                        Achieve Vision 2030 broker status by selling {developer.tier === "Platinum" ? "5" : "3"} industrial units in a quarter to unlock additional benefits, including higher commissions, early access to industrial zone launches, and exclusive investor events.
                       </p>
                     </div>
                   </div>
@@ -217,28 +217,28 @@ const DeveloperHandbook = () => {
                 <CardContent>
                   <div className="space-y-3">
                     <div className="flex justify-between items-center p-3 bg-slate-50 rounded">
-                      <span>Broker Registration Form</span>
+                      <span>Industrial Broker Registration Form</span>
                       <button className="text-sm text-blue-600 hover:underline flex items-center">
                         <Download size={16} className="mr-2" />
                         Download
                       </button>
                     </div>
                     <div className="flex justify-between items-center p-3 bg-slate-50 rounded">
-                      <span>Commission Policy Document</span>
+                      <span>Industrial Commission Policy</span>
                       <button className="text-sm text-blue-600 hover:underline flex items-center">
                         <Download size={16} className="mr-2" />
                         Download
                       </button>
                     </div>
                     <div className="flex justify-between items-center p-3 bg-slate-50 rounded">
-                      <span>Product Brochures</span>
+                      <span>Industrial Zone Brochures</span>
                       <button className="text-sm text-blue-600 hover:underline flex items-center">
                         <Download size={16} className="mr-2" />
                         Download
                       </button>
                     </div>
                     <div className="flex justify-between items-center p-3 bg-slate-50 rounded">
-                      <span>Marketing Materials</span>
+                      <span>Vision 2030 Industrial Marketing Materials</span>
                       <button className="text-sm text-blue-600 hover:underline flex items-center">
                         <Download size={16} className="mr-2" />
                         Download

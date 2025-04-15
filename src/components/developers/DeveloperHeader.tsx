@@ -8,7 +8,7 @@ const DeveloperHeader = () => {
     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
       <div>
         <h1 className="text-2xl font-bold text-estate-primary">Developer Hub</h1>
-        <p className="text-slate-500">Browse and manage industrial developers, projects, and investment opportunities</p>
+        <p className="text-slate-500">Browse and manage industrial developers, projects, and investment opportunities across KSA</p>
       </div>
       
       <div className="flex gap-2 w-full sm:w-auto">
