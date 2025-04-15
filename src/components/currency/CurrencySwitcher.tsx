@@ -9,16 +9,20 @@ import {
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import { Currency, currencies, useCurrency } from "@/contexts/CurrencyContext";
+import { toast } from "sonner";
 
 const CurrencySwitcher = () => {
   const { currency, setCurrency } = useCurrency();
   const [open, setOpen] = useState(false);
 
   const handleSelect = (selected: Currency) => {
-    setCurrency(selected);
+    // Only update if different from current
+    if (selected.code !== currency.code) {
+      setCurrency(selected);
+      // Show visual indication of currency change
+      toast.success(`Currency changed to ${selected.name}`);
+    }
     setOpen(false);
-    // Show visual indication of currency change
-    console.log(`Currency changed to ${selected.code}`);
   };
 
   return (

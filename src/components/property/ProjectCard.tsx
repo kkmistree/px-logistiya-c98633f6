@@ -1,12 +1,12 @@
-
 import { Property } from "@/types/property";
 import { cn } from "@/lib/utils";
 import { Building, Calendar, MapPin, Heart, Share2, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { formatCurrency } from "@/utils/format";
+import { formatCurrency, convertCurrency } from "@/utils/format";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 interface ProjectCardProps {
   property: Property;
@@ -16,6 +16,9 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ property, className, onClick }: ProjectCardProps) => {
   const [isSaved, setIsSaved] = useState(false);
+  const { currency } = useCurrency();
+  
+  const displayPrice = convertCurrency(property.price, "SAR", currency.code);
   
   const handleSaveProject = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -131,7 +134,7 @@ const ProjectCard = ({ property, className, onClick }: ProjectCardProps) => {
         
         <div className="flex justify-between items-center mb-4">
           <div className="font-semibold">
-            Launch Price: <span className="text-purple-600">{formatCurrency(property.price, "SAR")}</span>
+            Launch Price: <span className="text-purple-600">{formatCurrency(displayPrice, currency.code)}</span>
           </div>
           
           <div className="text-sm">

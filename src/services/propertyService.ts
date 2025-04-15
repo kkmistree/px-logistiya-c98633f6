@@ -47,9 +47,14 @@ export const searchProperties = (query: string, platformCurrency: CurrencyCode =
       maxPrice = currencyInfo.amount;
       sourceCurrency = currencyInfo.currency === 'PLATFORM' ? platformCurrency : currencyInfo.currency;
       console.log(`Converting ${maxPrice} ${sourceCurrency} to ${platformCurrency}`);
+      
+      // Convert to the platform currency for filtering
+      if (sourceCurrency !== platformCurrency) {
+        maxPrice = convertCurrency(maxPrice, sourceCurrency, platformCurrency);
+      }
     }
     
-    filtered = filterPropertiesByMaxPrice(filtered, maxPrice, sourceCurrency, platformCurrency);
+    filtered = filterPropertiesByMaxPrice(filtered, maxPrice, platformCurrency, platformCurrency);
     console.log(`Found ${filtered.length} properties after price filtering`);
   } 
   // Filter for properties with high ROI

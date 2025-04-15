@@ -1,11 +1,11 @@
-
 import React from "react";
 import { Property } from "@/types/property";
 import { Building, MapPin, Warehouse, Square, ArrowUpRight } from "lucide-react";
-import { formatCurrency } from "@/utils/format";
+import { formatCurrency, convertCurrency } from "@/utils/format";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 interface PropertyCardProps {
   property: Property;
@@ -13,6 +13,11 @@ interface PropertyCardProps {
 }
 
 const PropertyCard = ({ property, onClick }: PropertyCardProps) => {
+  const { currency } = useCurrency();
+  
+  // Convert property price to selected currency
+  const displayPrice = convertCurrency(property.price, "SAR", currency.code);
+
   return (
     <Card className="overflow-hidden hover:shadow-md transition-shadow cursor-pointer border border-slate-200" onClick={onClick}>
       <div className="relative">
@@ -43,7 +48,7 @@ const PropertyCard = ({ property, onClick }: PropertyCardProps) => {
         <div className="p-3">
           <div className="flex justify-between items-start mb-2">
             <h3 className="font-medium text-base line-clamp-1">{property.title}</h3>
-            <span className="font-bold text-estate-primary">{formatCurrency(property.price)}</span>
+            <span className="font-bold text-estate-primary">{formatCurrency(displayPrice, currency.code)}</span>
           </div>
           
           <div className="flex items-center text-sm text-slate-500 mb-2">

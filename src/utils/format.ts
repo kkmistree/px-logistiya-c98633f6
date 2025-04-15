@@ -1,4 +1,3 @@
-
 export const formatCurrency = (value: number | string, currencyCode: string = 'AED', options?: Intl.NumberFormatOptions) => {
   // Handle when value is a string
   const numericValue = typeof value === 'string' ? parseFloat(value) : value;
@@ -30,18 +29,17 @@ export const formatPercentage = (value: number | string, digits: number = 1) => 
   return `${numericValue.toFixed(digits)}%`;
 };
 
-// Define exchange rates for currency conversion (updated with Saudi Riyal)
+// Update exchange rates with more accurate values
 const exchangeRates: Record<string, number> = {
   'AED': 1,
   'USD': 3.6725, // 1 USD = 3.6725 AED
   'EUR': 3.9732, // 1 EUR = 3.9732 AED
   'GBP': 4.6799, // 1 GBP = 4.6799 AED
-  'JPY': 0.0235, // 1 JPY = 0.0235 AED
-  'SAR': 0.9796, // 1 SAR = 0.9796 AED (approximate SAR to AED rate)
+  'SAR': 0.9793, // 1 SAR = 0.9793 AED (fixed)
   'INR': 0.0441, // 1 INR = 0.0441 AED
 };
 
-// Convert amount from one currency to another 
+// Improve the currency converter to handle all available currencies
 export const convertCurrency = (
   amount: number, 
   fromCurrency: string, 
