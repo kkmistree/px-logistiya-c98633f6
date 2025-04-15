@@ -1,13 +1,29 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCurrency, currencies, CurrencyCode } from "@/contexts/CurrencyContext";
+import { useToast } from "@/hooks/use-toast";
 
 const SettingsPersonal = () => {
+  const { currency, setCurrency } = useCurrency();
+  const { toast } = useToast();
+
+  const handleCurrencyChange = (value: string) => {
+    const selectedCurrency = currencies.find(c => c.code.toLowerCase() === value);
+    if (selectedCurrency) {
+      setCurrency(selectedCurrency);
+      toast({
+        title: "Currency Updated",
+        description: `Default currency set to ${selectedCurrency.name}`,
+      });
+    }
+  };
+
   return (
     <div className="space-y-6">
       <Card>
@@ -132,16 +148,20 @@ const SettingsPersonal = () => {
         <CardContent className="space-y-6">
           <div className="space-y-2">
             <Label>Default Currency</Label>
-            <Select defaultValue="aed">
+            <Select 
+              value={currency.code.toLowerCase()}
+              onValueChange={handleCurrencyChange}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Select Currency" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="aed">AED - UAE Dirham</SelectItem>
+                <SelectItem value="sar">SAR - Saudi Riyal</SelectItem>
                 <SelectItem value="usd">USD - US Dollar</SelectItem>
+                <SelectItem value="aed">AED - UAE Dirham</SelectItem>
                 <SelectItem value="eur">EUR - Euro</SelectItem>
                 <SelectItem value="gbp">GBP - British Pound</SelectItem>
-                <SelectItem value="cny">CNY - Chinese Yuan</SelectItem>
+                <SelectItem value="inr">INR - Indian Rupee</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -154,11 +174,12 @@ const SettingsPersonal = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="none">None</SelectItem>
+                <SelectItem value="sar">SAR - Saudi Riyal</SelectItem>
                 <SelectItem value="aed">AED - UAE Dirham</SelectItem>
                 <SelectItem value="usd">USD - US Dollar</SelectItem>
                 <SelectItem value="eur">EUR - Euro</SelectItem>
                 <SelectItem value="gbp">GBP - British Pound</SelectItem>
-                <SelectItem value="cny">CNY - Chinese Yuan</SelectItem>
+                <SelectItem value="inr">INR - Indian Rupee</SelectItem>
               </SelectContent>
             </Select>
             <p className="text-xs text-slate-500">Prices will be shown in both currencies when available</p>

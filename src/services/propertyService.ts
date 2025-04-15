@@ -11,7 +11,7 @@ import {
   addMatchScore,
   limitResults
 } from "./propertyFilters";
-import { extractCurrencyInfo } from "@/utils/format";
+import { extractCurrencyInfo, convertCurrency } from "@/utils/format";
 import { currencies, CurrencyCode } from "@/contexts/CurrencyContext";
 
 // This function simulates backend filtering based on search queries

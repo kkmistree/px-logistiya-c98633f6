@@ -17,6 +17,8 @@ const CurrencySwitcher = () => {
   const handleSelect = (selected: Currency) => {
     setCurrency(selected);
     setOpen(false);
+    // Show visual indication of currency change
+    console.log(`Currency changed to ${selected.code}`);
   };
 
   return (

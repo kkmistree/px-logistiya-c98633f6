@@ -1,16 +1,16 @@
 
-export const formatCurrency = (value: number | string, currency: string = 'AED', options?: Intl.NumberFormatOptions) => {
+export const formatCurrency = (value: number | string, currencyCode: string = 'AED', options?: Intl.NumberFormatOptions) => {
   // Handle when value is a string
   const numericValue = typeof value === 'string' ? parseFloat(value) : value;
   
   if (isNaN(numericValue)) {
-    return `${currency} 0`;
+    return `${currencyCode} 0`;
   }
   
   // Default options
   const defaultOptions: Intl.NumberFormatOptions = {
     style: 'currency',
-    currency: currency,
+    currency: currencyCode,
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
     ...options
@@ -30,13 +30,15 @@ export const formatPercentage = (value: number | string, digits: number = 1) => 
   return `${numericValue.toFixed(digits)}%`;
 };
 
-// Define exchange rates for currency conversion (simplified approach)
+// Define exchange rates for currency conversion (updated with Saudi Riyal)
 const exchangeRates: Record<string, number> = {
   'AED': 1,
   'USD': 3.6725, // 1 USD = 3.6725 AED
   'EUR': 3.9732, // 1 EUR = 3.9732 AED
   'GBP': 4.6799, // 1 GBP = 4.6799 AED
   'JPY': 0.0235, // 1 JPY = 0.0235 AED
+  'SAR': 0.9796, // 1 SAR = 0.9796 AED (approximate SAR to AED rate)
+  'INR': 0.0441, // 1 INR = 0.0441 AED
 };
 
 // Convert amount from one currency to another 
@@ -68,15 +70,19 @@ export const extractCurrencyInfo = (query: string) => {
     '£': 'GBP',
     '€': 'EUR',
     '¥': 'JPY',
+    '﷼': 'SAR',
+    '₹': 'INR',
     'AED': 'AED',
     'USD': 'USD',
     'EUR': 'EUR',
     'GBP': 'GBP',
-    'JPY': 'JPY'
+    'JPY': 'JPY',
+    'SAR': 'SAR',
+    'INR': 'INR'
   };
 
   // This regex looks for a currency symbol or code followed by a number, or a number followed by a currency code
-  const currencyRegex = /(\$|£|€|¥|AED|USD|EUR|GBP|JPY)\s*([0-9,.]+[KkMmBb]?)|([0-9,.]+[KkMmBb]?)\s*(AED|USD|EUR|GBP|JPY)/i;
+  const currencyRegex = /(\$|£|€|¥|﷼|₹|AED|USD|EUR|GBP|JPY|SAR|INR)\s*([0-9,.]+[KkMmBb]?)|([0-9,.]+[KkMmBb]?)\s*(AED|USD|EUR|GBP|JPY|SAR|INR)/i;
   const match = query.match(currencyRegex);
 
   if (!match) {

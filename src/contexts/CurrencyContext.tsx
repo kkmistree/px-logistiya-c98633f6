@@ -10,11 +10,11 @@ export interface Currency {
 }
 
 export const currencies: Currency[] = [
-  { code: "AED", symbol: "د.إ", name: "UAE Dirham" },
+  { code: "SAR", symbol: "﷼", name: "Saudi Riyal" },
   { code: "USD", symbol: "$", name: "US Dollar" },
+  { code: "AED", symbol: "د.إ", name: "UAE Dirham" },
   { code: "GBP", symbol: "£", name: "British Pound" },
   { code: "EUR", symbol: "€", name: "Euro" },
-  { code: "SAR", symbol: "﷼", name: "Saudi Riyal" },
   { code: "INR", symbol: "₹", name: "Indian Rupee" },
 ];
 
@@ -26,7 +26,7 @@ interface CurrencyContextType {
 const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined);
 
 export const CurrencyProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [currency, setCurrency] = useState<Currency>(currencies[0]); // Default to AED
+  const [currency, setCurrency] = useState<Currency>(currencies[0]); // Default to SAR
 
   return (
     <CurrencyContext.Provider value={{ currency, setCurrency }}>
