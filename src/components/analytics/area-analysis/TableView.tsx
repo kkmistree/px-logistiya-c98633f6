@@ -20,7 +20,7 @@ const TableView = ({ areaData }: TableViewProps) => {
               <TableHead>Total Value (2024)</TableHead>
               <TableHead>Total Volume (2024)</TableHead>
               <TableHead>Median Price (2024)</TableHead>
-              <TableHead>Median Price/sqft (2024)</TableHead>
+              <TableHead>Median Price/sqm (2024)</TableHead>
               <TableHead>Value YoY</TableHead>
               <TableHead>Volume YoY</TableHead>
               <TableHead>Existing Units</TableHead>
@@ -34,7 +34,7 @@ const TableView = ({ areaData }: TableViewProps) => {
                 <TableCell>{area.totalValue}</TableCell>
                 <TableCell>{area.totalVolume}</TableCell>
                 <TableCell>{area.medianPrice}</TableCell>
-                <TableCell>{area.medianPricePerSqft}</TableCell>
+                <TableCell>{area.medianPricePerSqm}</TableCell>
                 <TableCell>
                   <Badge variant={getBadgeVariant(area.trend)}>
                     {area.valueYoY}

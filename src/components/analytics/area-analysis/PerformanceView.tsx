@@ -24,8 +24,8 @@ const PerformanceView = ({ areaData }: PerformanceViewProps) => {
               <div className="text-slate-300">Median Price (2024)</div>
               <div className="text-right">{area.medianPrice}</div>
               
-              <div className="text-slate-300">Median Price/sqft (2024)</div>
-              <div className="text-right">{area.medianPricePerSqft}</div>
+              <div className="text-slate-300">Median Price/sqm (2024)</div>
+              <div className="text-right">{area.medianPricePerSqm}</div>
               
               <div className="text-slate-300">Value YoY</div>
               <div className={`text-right ${getPercentageClass(area.valueYoY)}`}>
