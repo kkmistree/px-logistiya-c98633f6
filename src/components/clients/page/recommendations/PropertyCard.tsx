@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Building, Clock, Heart, Share2 } from "lucide-react";
+import { Building, Clock, Heart, Share2, Square, MapPin } from "lucide-react";
 import { formatCurrency } from "@/utils/format";
 
 interface PropertyCardProps {
@@ -59,10 +59,16 @@ const PropertyCard = ({
           <div className="grid grid-cols-3 gap-2 my-3 text-sm text-slate-600">
             <div className="flex items-center gap-1">
               <Building size={14} />
-              <span>{property.bedrooms} {property.bedrooms === 1 ? 'bed' : 'beds'}</span>
+              <span>{property.type}</span>
             </div>
-            <div>{property.bathrooms} {property.bathrooms === 1 ? 'bath' : 'baths'}</div>
-            <div>{property.area} sqft</div>
+            <div className="flex items-center gap-1">
+              <Square size={14} />
+              <span>{property.area} sqm</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <MapPin size={14} />
+              <span>{property.location.area}</span>
+            </div>
           </div>
           
           <p className="text-sm text-slate-600 line-clamp-2 mb-3">{property.description}</p>
@@ -75,7 +81,7 @@ const PropertyCard = ({
           
           <div className="mt-4">
             <Textarea 
-              placeholder="Add a note to send to the client"
+              placeholder="Add a note to send to the investor"
               value={messageText}
               onChange={(e) => onMessageChange(e.target.value)}
               className="text-sm mb-2"
@@ -88,7 +94,7 @@ const PropertyCard = ({
                 className="flex-1"
                 onClick={() => onShareWithClient(property.id)}
               >
-                <Share2 size={14} className="mr-1" /> Share with Client
+                <Share2 size={14} className="mr-1" /> Share with Investor
               </Button>
               <Button 
                 variant="outline" 
@@ -96,7 +102,7 @@ const PropertyCard = ({
                 className="flex-1"
                 onClick={() => onScheduleViewing(property.id)}
               >
-                <Clock size={14} className="mr-1" /> Schedule Viewing
+                <Clock size={14} className="mr-1" /> Schedule Site Visit
               </Button>
               <Button 
                 variant="outline" 

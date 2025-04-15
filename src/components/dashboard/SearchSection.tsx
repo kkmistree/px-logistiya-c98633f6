@@ -33,7 +33,7 @@ const SearchSection = () => {
   return (
     <div className="bg-white rounded-lg shadow-sm p-3 sm:p-4 border border-slate-200">
       <div className="flex justify-between items-center mb-3 sm:mb-4">
-        <h2 className="text-base sm:text-lg font-semibold text-estate-primary">Smart MLS Search</h2>
+        <h2 className="text-base sm:text-lg font-semibold text-estate-primary">Smart Asset Search</h2>
         <Button 
           variant="ghost" 
           size="sm" 
@@ -49,7 +49,7 @@ const SearchSection = () => {
           <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-slate-400" size={isMobile ? 16 : 18} />
           <Input 
             type="search" 
-            placeholder={isMobile ? "Search properties..." : "Search by location, developer, features..."}
+            placeholder={isMobile ? "Search industrial assets..." : "Search by location, developer, zoning, features..."}
             className="pl-9 w-full bg-slate-50 h-10 text-sm"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -59,7 +59,7 @@ const SearchSection = () => {
           type="submit" 
           className="bg-estate-primary hover:bg-estate-primary/90 text-white whitespace-nowrap text-xs sm:text-sm h-10"
         >
-          {isMobile ? "Search" : "Search Properties"}
+          {isMobile ? "Search" : "Search Assets"}
         </Button>
       </form>
       

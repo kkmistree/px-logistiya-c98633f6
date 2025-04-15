@@ -26,7 +26,7 @@ const PropertyRecommendationList = ({
   return (
     <div>
       <h3 className="text-md font-medium mb-3">
-        Recommended Properties ({recommendations.length})
+        Recommended Industrial Assets ({recommendations.length})
       </h3>
       
       <div className="space-y-4">
@@ -45,8 +45,8 @@ const PropertyRecommendationList = ({
       
       {recommendations.length === 0 && (
         <div className="py-8 sm:py-12 text-center">
-          <h3 className="text-lg font-medium text-gray-500">No properties found</h3>
-          <p className="text-gray-400 mt-2">Try selecting a different client</p>
+          <h3 className="text-lg font-medium text-gray-500">No assets found</h3>
+          <p className="text-gray-400 mt-2">Try selecting a different investor</p>
         </div>
       )}
     </div>

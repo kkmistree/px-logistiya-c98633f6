@@ -3,12 +3,10 @@ export interface Property {
   id: string;
   title: string;
   description: string;
-  type: 'apartment' | 'villa' | 'townhouse' | 'penthouse' | 'land';
-  status: 'ready' | 'off-plan' | 'resale';
+  type: 'warehouse' | 'factory' | 'logistics' | 'land' | 'office' | 'mixed-use';
+  status: 'available' | 'under-development' | 'investment-opportunity';
   price: number;
-  area: number; // sqft
-  bedrooms: number;
-  bathrooms: number;
+  area: number; // sqm
   location: {
     area: string;
     community: string;
@@ -20,7 +18,7 @@ export interface Property {
   features: string[];
   images: string[];
   developer?: string;
-  completionDate?: string; // ISO date string for off-plan properties
+  completionDate?: string; // ISO date string for under-development properties
   roi?: number; // Return on Investment percentage
   paymentPlan?: {
     downPayment: number; // percentage
@@ -33,11 +31,16 @@ export interface Property {
   createdAt: string; // ISO date string
   updatedAt: string; // ISO date string
   matchScore?: number; // AI-generated match score (0-100)
-  tags: string[]; // e.g., "sea view", "high floor", "furnished"
-  furnishing?: 'Furnished' | 'Semi-Furnished' | 'Unfurnished';
+  tags: string[]; // e.g., "MODON approved", "SEZ", "logistics corridor"
+  zoning?: string;
   exclusive?: boolean;
   directFromDeveloper?: boolean;
   developerRating?: number; // 1-5 stars
+  esgRating?: number; // Environmental, Social, and Governance rating (1-100)
+  vision2030Alignment?: string[]; // Alignment with Saudi Vision 2030 initiatives
+  seaportDistance?: number; // Distance to nearest seaport in km
+  airportDistance?: number; // Distance to nearest airport in km
+  highwayDistance?: number; // Distance to major highway in km
 }
 
 export interface PropertyFilter {
@@ -45,21 +48,23 @@ export interface PropertyFilter {
   maxPrice?: number;
   minArea?: number;
   maxArea?: number;
-  bedrooms?: number[];
   location?: string[];
   propertyType?: string[];
-  status?: ('ready' | 'off-plan' | 'resale')[];
+  status?: ('available' | 'under-development' | 'investment-opportunity')[];
   features?: string[];
   minROI?: number;
   developer?: string[];
   completionYear?: number;
-  handoverYear?: string[];
-  paymentPlan?: string[];
-  furnishing?: string[];
+  zoning?: string[];
+  vision2030Alignment?: string[];
+  minEsgRating?: number;
   exclusive?: boolean;
   directFromDeveloper?: boolean;
   developerRating?: number;
   listingAge?: string;
+  maxSeaportDistance?: number;
+  maxAirportDistance?: number;
+  maxHighwayDistance?: number;
 }
 
 export interface PropertySearchResult {

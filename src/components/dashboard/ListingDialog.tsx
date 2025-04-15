@@ -35,15 +35,13 @@ const propertySchema = z.object({
   price: z.string().min(1, { message: "Price is required" }),
   location: z.object({
     area: z.string().min(1, { message: "Area is required" }),
-    community: z.string().min(1, { message: "Community is required" }),
+    community: z.string().min(1, { message: "City/Community is required" }),
   }),
   type: z.string().min(1, { message: "Property type is required" }),
-  bedrooms: z.string().min(1, { message: "Number of bedrooms is required" }),
-  bathrooms: z.string().min(1, { message: "Number of bathrooms is required" }),
-  area: z.string().min(1, { message: "Area in sqft is required" }),
+  area: z.string().min(1, { message: "Area in sqm is required" }),
   description: z.string().min(10, { message: "Description must be at least 10 characters" }),
   features: z.array(z.string()).optional(),
-  status: z.string().min(1, { message: "Property status is required" }),
+  status: z.string().min(1, { message: "Asset status is required" }),
   developer: z.string().optional(),
   completionDate: z.date().optional(),
   isExclusive: z.boolean().default(false),
@@ -71,12 +69,10 @@ const ListingDialog = ({ open, onOpenChange }: ListingDialogProps) => {
         community: "",
       },
       type: "",
-      bedrooms: "",
-      bathrooms: "",
       area: "",
       description: "",
       features: [],
-      status: "ready",
+      status: "available",
       developer: "",
       isExclusive: false,
       isDirectFromDeveloper: false,
@@ -90,7 +86,7 @@ const ListingDialog = ({ open, onOpenChange }: ListingDialogProps) => {
     
     onOpenChange(false);
     toast({
-      title: "Listing created",
+      title: "Asset listing created",
       description: `${values.title} has been added successfully`,
     });
     form.reset();
@@ -108,9 +104,9 @@ const ListingDialog = ({ open, onOpenChange }: ListingDialogProps) => {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Add New Property Listing</DialogTitle>
+          <DialogTitle>Add New Industrial Asset</DialogTitle>
           <DialogDescription>
-            Enter the details of the new property listing below.
+            Enter the details of the industrial property or land for investment.
           </DialogDescription>
         </DialogHeader>
         
@@ -123,9 +119,9 @@ const ListingDialog = ({ open, onOpenChange }: ListingDialogProps) => {
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Property Title</FormLabel>
+                      <FormLabel>Asset Title</FormLabel>
                       <FormControl>
-                        <Input placeholder="Enter property title" {...field} />
+                        <Input placeholder="Enter asset title" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -137,7 +133,7 @@ const ListingDialog = ({ open, onOpenChange }: ListingDialogProps) => {
                   name="price"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Price (AED)</FormLabel>
+                      <FormLabel>Price (SAR)</FormLabel>
                       <FormControl>
                         <Input type="number" placeholder="Enter price" {...field} />
                       </FormControl>
@@ -151,23 +147,23 @@ const ListingDialog = ({ open, onOpenChange }: ListingDialogProps) => {
                   name="location.area"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Area</FormLabel>
+                      <FormLabel>Region/Industrial Zone</FormLabel>
                       <Select 
                         onValueChange={field.onChange} 
                         defaultValue={field.value}
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select area" />
+                            <SelectValue placeholder="Select region or industrial zone" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="Dubai Marina">Dubai Marina</SelectItem>
-                          <SelectItem value="Downtown Dubai">Downtown Dubai</SelectItem>
-                          <SelectItem value="Palm Jumeirah">Palm Jumeirah</SelectItem>
-                          <SelectItem value="Jumeirah Village Circle">Jumeirah Village Circle</SelectItem>
-                          <SelectItem value="Business Bay">Business Bay</SelectItem>
-                          <SelectItem value="Dubai Hills">Dubai Hills</SelectItem>
+                          <SelectItem value="Riyadh Industrial City">Riyadh Industrial City</SelectItem>
+                          <SelectItem value="Jeddah Industrial City">Jeddah Industrial City</SelectItem>
+                          <SelectItem value="Dammam Industrial City">Dammam Industrial City</SelectItem>
+                          <SelectItem value="MODON Sudair">MODON Sudair</SelectItem>
+                          <SelectItem value="KAEC Industrial Valley">KAEC Industrial Valley</SelectItem>
+                          <SelectItem value="Jubail Industrial City">Jubail Industrial City</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -180,9 +176,9 @@ const ListingDialog = ({ open, onOpenChange }: ListingDialogProps) => {
                   name="location.community"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Community</FormLabel>
+                      <FormLabel>City/Area</FormLabel>
                       <FormControl>
-                        <Input placeholder="Enter community" {...field} />
+                        <Input placeholder="Enter city or area" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -194,23 +190,23 @@ const ListingDialog = ({ open, onOpenChange }: ListingDialogProps) => {
                   name="type"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Property Type</FormLabel>
+                      <FormLabel>Asset Type</FormLabel>
                       <Select 
                         onValueChange={field.onChange} 
                         defaultValue={field.value}
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select property type" />
+                            <SelectValue placeholder="Select asset type" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="apartment">Apartment</SelectItem>
-                          <SelectItem value="villa">Villa</SelectItem>
-                          <SelectItem value="townhouse">Townhouse</SelectItem>
-                          <SelectItem value="penthouse">Penthouse</SelectItem>
-                          <SelectItem value="office">Office</SelectItem>
-                          <SelectItem value="retail">Retail</SelectItem>
+                          <SelectItem value="warehouse">Warehouse</SelectItem>
+                          <SelectItem value="factory">Factory</SelectItem>
+                          <SelectItem value="logistics">Logistics Center</SelectItem>
+                          <SelectItem value="land">Industrial Land</SelectItem>
+                          <SelectItem value="office">Industrial Office</SelectItem>
+                          <SelectItem value="mixed-use">Mixed-Use Industrial</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -222,71 +218,12 @@ const ListingDialog = ({ open, onOpenChange }: ListingDialogProps) => {
               <div className="space-y-4">
                 <FormField
                   control={form.control}
-                  name="bedrooms"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Bedrooms</FormLabel>
-                      <Select 
-                        onValueChange={field.onChange} 
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select number of bedrooms" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="studio">Studio</SelectItem>
-                          <SelectItem value="1">1</SelectItem>
-                          <SelectItem value="2">2</SelectItem>
-                          <SelectItem value="3">3</SelectItem>
-                          <SelectItem value="4">4</SelectItem>
-                          <SelectItem value="5">5</SelectItem>
-                          <SelectItem value="6+">6+</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="bathrooms"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Bathrooms</FormLabel>
-                      <Select 
-                        onValueChange={field.onChange} 
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select number of bathrooms" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="1">1</SelectItem>
-                          <SelectItem value="2">2</SelectItem>
-                          <SelectItem value="3">3</SelectItem>
-                          <SelectItem value="4">4</SelectItem>
-                          <SelectItem value="5">5</SelectItem>
-                          <SelectItem value="6+">6+</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
                   name="area"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Area (sqft)</FormLabel>
+                      <FormLabel>Area (sqm)</FormLabel>
                       <FormControl>
-                        <Input type="number" placeholder="Enter area in sqft" {...field} />
+                        <Input type="number" placeholder="Enter area in sqm" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -298,20 +235,20 @@ const ListingDialog = ({ open, onOpenChange }: ListingDialogProps) => {
                   name="status"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Property Status</FormLabel>
+                      <FormLabel>Asset Status</FormLabel>
                       <Select 
                         onValueChange={field.onChange} 
                         defaultValue={field.value}
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select property status" />
+                            <SelectValue placeholder="Select asset status" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="ready">Ready</SelectItem>
-                          <SelectItem value="off-plan">Off-Plan</SelectItem>
-                          <SelectItem value="resale">Resale</SelectItem>
+                          <SelectItem value="available">Available</SelectItem>
+                          <SelectItem value="under-development">Under Development</SelectItem>
+                          <SelectItem value="investment-opportunity">Investment Opportunity</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -332,6 +269,45 @@ const ListingDialog = ({ open, onOpenChange }: ListingDialogProps) => {
                     </FormItem>
                   )}
                 />
+                
+                <FormField
+                  control={form.control}
+                  name="completionDate"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <FormLabel>Completion Date</FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant="outline"
+                              className="w-full text-left font-normal justify-start h-10"
+                            >
+                              <CalendarIcon className="mr-2 h-4 w-4" />
+                              {field.value ? (
+                                format(field.value, "PPP")
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            disabled={(date) =>
+                              date < new Date()
+                            }
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
             </div>
             
@@ -343,7 +319,7 @@ const ListingDialog = ({ open, onOpenChange }: ListingDialogProps) => {
                   <FormLabel>Description</FormLabel>
                   <FormControl>
                     <Textarea 
-                      placeholder="Enter property description" 
+                      placeholder="Enter asset description" 
                       rows={4}
                       {...field} 
                     />
@@ -392,45 +368,6 @@ const ListingDialog = ({ open, onOpenChange }: ListingDialogProps) => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <FormField
-                control={form.control}
-                name="completionDate"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col">
-                    <FormLabel>Completion Date</FormLabel>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <FormControl>
-                          <Button
-                            variant="outline"
-                            className="w-full text-left font-normal justify-start h-10"
-                          >
-                            <CalendarIcon className="mr-2 h-4 w-4" />
-                            {field.value ? (
-                              format(field.value, "PPP")
-                            ) : (
-                              <span>Pick a date</span>
-                            )}
-                          </Button>
-                        </FormControl>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0">
-                        <Calendar
-                          mode="single"
-                          selected={field.value}
-                          onSelect={field.onChange}
-                          disabled={(date) =>
-                            date < new Date()
-                          }
-                          initialFocus
-                        />
-                      </PopoverContent>
-                    </Popover>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
               <div className="flex flex-col space-y-3 justify-end">
                 <FormField
                   control={form.control}
@@ -474,7 +411,7 @@ const ListingDialog = ({ open, onOpenChange }: ListingDialogProps) => {
               <Button variant="outline" type="button" onClick={() => onOpenChange(false)}>
                 Cancel
               </Button>
-              <Button type="submit">Save Listing</Button>
+              <Button type="submit">Save Asset Listing</Button>
             </DialogFooter>
           </form>
         </Form>

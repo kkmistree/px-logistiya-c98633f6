@@ -1,5 +1,5 @@
 
-import { TrendingUp, Building, Users } from "lucide-react";
+import { TrendingUp, Warehouse, Users } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { formatCurrency } from "@/utils/format";
@@ -16,9 +16,9 @@ const StatCards = () => {
   const navigate = useNavigate();
   
   const stats: StatCard[] = [
-    { label: "Deal Pipeline", value: formatCurrency(42500000), icon: TrendingUp, change: "+12%", onClick: () => navigate("/deals") },
-    { label: "Active Listings", value: "28", icon: Building, change: "+3", onClick: () => navigate("/mls") },
-    { label: "Active Clients", value: "14", icon: Users, change: "+2", onClick: () => navigate("/clients") },
+    { label: "Investment Pipeline", value: formatCurrency(42500000), icon: TrendingUp, change: "+12%", onClick: () => navigate("/deals") },
+    { label: "Active Assets", value: "28", icon: Warehouse, change: "+3", onClick: () => navigate("/mls") },
+    { label: "Active Investors", value: "14", icon: Users, change: "+2", onClick: () => navigate("/clients") },
   ];
 
   return (

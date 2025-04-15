@@ -19,7 +19,7 @@ const Deals = () => {
           <TabsList className="mb-6">
             <TabsTrigger value="all">All Deals</TabsTrigger>
             <TabsTrigger value="initiated">Initiated</TabsTrigger>
-            <TabsTrigger value="docs">Docs in Progress</TabsTrigger>
+            <TabsTrigger value="docs">Documentation</TabsTrigger>
             <TabsTrigger value="legal">Legal Review</TabsTrigger>
             <TabsTrigger value="closed">Closed</TabsTrigger>
             <TabsTrigger value="matches">Match Inbox</TabsTrigger>
