@@ -14,8 +14,8 @@ const AreasComparison = () => {
   const [status, setStatus] = useState("all");
   const [year, setYear] = useState("2025");
   const [bedroom, setBedroom] = useState("all");
-  const [location1, setLocation1] = useState("downtown-dubai");
-  const [location2, setLocation2] = useState("dubai-marina");
+  const [location1, setLocation1] = useState("riyadh-industrial");
+  const [location2, setLocation2] = useState("jeddah-industrial");
   
   const location1Data = areaData.find(area => area.id === location1);
   const location2Data = areaData.find(area => area.id === location2);
