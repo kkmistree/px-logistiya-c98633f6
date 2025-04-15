@@ -23,6 +23,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
+  TooltipProvider,
 } from "@/components/ui/tooltip";
 
 export interface NavItem {
@@ -87,26 +88,28 @@ const NavigationItems = ({ items, open }: NavigationItemsProps) => {
       <ul className="space-y-2">
         {items.map((item, index) => (
           <li key={index}>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <NavLink
-                  to={item.path}
-                  className={({ isActive }) =>
-                    cn(
-                      "flex items-center justify-center py-2 rounded-lg transition-colors",
-                      isActive
-                        ? "bg-white/10 text-white"
-                        : "text-white/70 hover:bg-white/10 hover:text-white"
-                    )
-                  }
-                >
-                  <item.icon size={20} />
-                </NavLink>
-              </TooltipTrigger>
-              <TooltipContent side="right">
-                {item.label}
-              </TooltipContent>
-            </Tooltip>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <NavLink
+                    to={item.path}
+                    className={({ isActive }) =>
+                      cn(
+                        "flex items-center justify-center py-2 rounded-lg transition-colors",
+                        isActive
+                          ? "bg-white/10 text-white"
+                          : "text-white/70 hover:bg-white/10 hover:text-white"
+                      )
+                    }
+                  >
+                    <item.icon size={20} />
+                  </NavLink>
+                </TooltipTrigger>
+                <TooltipContent side="right">
+                  {item.label}
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </li>
         ))}
       </ul>

@@ -6,6 +6,7 @@ import Sidebar from "./Sidebar";
 import { CurrencyProvider } from "@/contexts/CurrencyContext";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Drawer, DrawerContent } from "@/components/ui/drawer";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -32,37 +33,39 @@ const AppShell = ({ children }: AppShellProps) => {
 
   return (
     <CurrencyProvider>
-      <div className="min-h-screen bg-estate-background flex w-full overflow-hidden">
-        {/* Standard sidebar for desktop and tablets */}
-        {!useMobileDrawer && (
-          <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
-        )}
-        
-        <div className={cn(
-          "flex-1 flex flex-col transition-all duration-300 ease-in-out w-full overflow-hidden",
-          !useMobileDrawer && sidebarOpen ? "md:ml-64" : "md:ml-16"
-        )}>
-          <Navbar 
-            sidebarOpen={sidebarOpen} 
-            setSidebarOpen={setSidebarOpen} 
-            useMobileDrawer={useMobileDrawer}
-          />
-          <main className="flex-1 p-2 sm:p-4 md:p-6 overflow-auto w-full">
-            {children}
-          </main>
-        </div>
+      <TooltipProvider>
+        <div className="min-h-screen bg-estate-background flex w-full overflow-hidden">
+          {/* Standard sidebar for desktop and tablets */}
+          {!useMobileDrawer && (
+            <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
+          )}
+          
+          <div className={cn(
+            "flex-1 flex flex-col transition-all duration-300 ease-in-out w-full overflow-hidden",
+            !useMobileDrawer && sidebarOpen ? "md:ml-64" : "md:ml-16"
+          )}>
+            <Navbar 
+              sidebarOpen={sidebarOpen} 
+              setSidebarOpen={setSidebarOpen} 
+              useMobileDrawer={useMobileDrawer}
+            />
+            <main className="flex-1 p-2 sm:p-4 md:p-6 overflow-auto w-full">
+              {children}
+            </main>
+          </div>
 
-        {/* Mobile drawer for small screens */}
-        {useMobileDrawer && (
-          <Drawer>
-            <DrawerContent className="h-[80vh]">
-              <div className="p-4 h-full overflow-auto">
-                <Sidebar open={true} setOpen={() => {}} />
-              </div>
-            </DrawerContent>
-          </Drawer>
-        )}
-      </div>
+          {/* Mobile drawer for small screens */}
+          {useMobileDrawer && (
+            <Drawer>
+              <DrawerContent className="h-[80vh]">
+                <div className="p-4 h-full overflow-auto">
+                  <Sidebar open={true} setOpen={() => {}} />
+                </div>
+              </DrawerContent>
+            </Drawer>
+          )}
+        </div>
+      </TooltipProvider>
     </CurrencyProvider>
   );
 };
