@@ -1,24 +1,58 @@
 
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import { Search, Filter, Building2, MapPin, TrendingUp, ArrowUpCircle, ChevronRight, BarChart3, PieChart, LineChart, Rocket, Lightbulb, Eye } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { useToast } from "@/hooks/use-toast";
-import SearchSuggestions from './SearchSuggestions';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Lightbulb } from "lucide-react";
+import PropertyCategoryCard from './categories/PropertyCategoryCard';
+import MarketInsightCard from './insights/MarketInsightCard';
+import SearchSuggestionCard from './suggestions/SearchSuggestionCard';
 import RecentSearches from './RecentSearches';
 import MarketTrends from './MarketTrends';
+
+const propertyCategories = {
+  title: "Industrial Property Categories",
+  description: "Browse properties by category and location",
+  items: [
+    { label: "Warehouses", location: "riyadh", count: 45 },
+    { label: "Logistics Centers", location: "jeddah", count: 32 },
+    { label: "Manufacturing", location: "dammam", count: 28 },
+    { label: "Distribution Hubs", location: "industrial-city", count: 24 }
+  ]
+};
+
+const searchSuggestions = [
+  {
+    query: "High-yield warehouses in Riyadh Industrial City",
+    description: "Properties with ROI > 8% in prime industrial zones",
+    tags: ["High Yield", "Prime Location", "Warehouses"]
+  },
+  {
+    query: "Manufacturing facilities near seaports",
+    description: "Industrial properties with easy port access",
+    tags: ["Manufacturing", "Logistics", "Port Access"]
+  },
+  {
+    query: "Modern logistics centers with cold storage",
+    description: "Specialized facilities with temperature control",
+    tags: ["Cold Storage", "Modern", "Logistics"]
+  }
+];
 
 const SearchDashboard = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleOpenMls = () => {
-    navigate('/mls');
+  const handleCategoryClick = (location: string) => {
+    navigate(`/mls?location=${location}`);
     toast({
-      description: "Opening the Industrial Assets page"
+      description: `Viewing properties in ${location}`
     });
+  };
+
+  const handleSuggestionClick = (query: string) => {
+    navigate(`/search?q=${encodeURIComponent(query)}`);
   };
 
   return (
@@ -30,102 +64,14 @@ const SearchDashboard = () => {
           <TabsTrigger value="trends">Market Trends</TabsTrigger>
           <TabsTrigger value="saved">Saved Search Alerts</TabsTrigger>
         </TabsList>
-        
+
         <TabsContent value="discover" className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center">
-                  <Building2 size={18} className="mr-2 text-blue-500" /> 
-                  Property Categories
-                </CardTitle>
-                <CardDescription>Browse properties by category</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 gap-2">
-                  <Button variant="outline" size="sm" className="justify-start">
-                    <MapPin size={14} className="mr-2" /> Industrial Warehouses
-                  </Button>
-                  <Button variant="outline" size="sm" className="justify-start">
-                    <MapPin size={14} className="mr-2" /> Logistics Facilities
-                  </Button>
-                  <Button variant="outline" size="sm" className="justify-start">
-                    <MapPin size={14} className="mr-2" /> Manufacturing Plants
-                  </Button>
-                  <Button variant="outline" size="sm" className="justify-start">
-                    <MapPin size={14} className="mr-2" /> Distribution Centers
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center">
-                  <TrendingUp size={18} className="mr-2 text-green-500" /> 
-                  Investment Performance
-                </CardTitle>
-                <CardDescription>Market trends and analytics</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center p-2 bg-slate-50 rounded">
-                    <span className="text-sm">High ROI Properties</span>
-                    <div className="flex items-center text-green-600">
-                      <ArrowUpCircle size={14} className="mr-1" /> 12%
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center p-2 bg-slate-50 rounded">
-                    <span className="text-sm">Top Performing Areas</span>
-                    <ChevronRight size={14} />
-                  </div>
-                  <Button variant="secondary" size="sm" className="w-full" onClick={() => navigate('/analytics')}>
-                    View Full Analytics
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center">
-                  <Filter size={18} className="mr-2 text-purple-500" /> 
-                  Refined Search
-                </CardTitle>
-                <CardDescription>Advanced search tools</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  <Button variant="outline" size="sm" className="w-full justify-between" onClick={handleOpenMls}>
-                    <span>Advanced Filters</span>
-                    <Filter size={14} />
-                  </Button>
-                  <Button variant="outline" size="sm" className="w-full justify-between">
-                    <span>Map-Based Search</span>
-                    <MapPin size={14} />
-                  </Button>
-                  <Button variant="outline" size="sm" className="w-full justify-between">
-                    <span>Property Comparison</span>
-                    <BarChart3 size={14} />
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="md:col-span-2">
-              <CardHeader>
-                <CardTitle>Smart Search Suggestions</CardTitle>
-                <CardDescription>
-                  Based on your recent activities and preferences
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <SearchSuggestions />
-              </CardContent>
-            </Card>
-            
+            <PropertyCategoryCard 
+              {...propertyCategories}
+              onItemClick={handleCategoryClick}
+            />
+            <MarketInsightCard />
             <Card>
               <CardHeader>
                 <CardTitle>Search Tips</CardTitle>
@@ -134,64 +80,46 @@ const SearchDashboard = () => {
                 <div className="space-y-4">
                   <div className="flex space-x-3">
                     <Lightbulb className="text-amber-500 h-5 w-5 flex-shrink-0" />
-                    <p className="text-sm text-slate-700">Use natural language like "high yield warehouses in Riyadh"</p>
+                    <p className="text-sm">Use natural language like "warehouses near industrial zones"</p>
                   </div>
                   <div className="flex space-x-3">
                     <Lightbulb className="text-amber-500 h-5 w-5 flex-shrink-0" />
-                    <p className="text-sm text-slate-700">Specify price ranges with "under 5 million SAR"</p>
+                    <p className="text-sm">Filter by ROI range: "properties with ROI above 8%"</p>
                   </div>
                   <div className="flex space-x-3">
                     <Lightbulb className="text-amber-500 h-5 w-5 flex-shrink-0" />
-                    <p className="text-sm text-slate-700">Include investment criteria like "ROI above 8%"</p>
+                    <p className="text-sm">Specify amenities: "warehouse with loading docks and high ceiling"</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
           </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="md:col-span-2">
+              <SearchSuggestionCard 
+                suggestions={searchSuggestions}
+                onSuggestionClick={handleSuggestionClick}
+              />
+            </div>
+          </div>
         </TabsContent>
-        
+
         <TabsContent value="recent">
-          <Card>
-            <CardHeader>
-              <CardTitle>Recent Search Activity</CardTitle>
-              <CardDescription>
-                Your recent property searches and views
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <RecentSearches />
-            </CardContent>
-          </Card>
+          <RecentSearches />
         </TabsContent>
-        
+
         <TabsContent value="trends">
-          <Card>
-            <CardHeader>
-              <CardTitle>Market Trends & Insights</CardTitle>
-              <CardDescription>
-                Latest trends in the industrial property market
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <MarketTrends />
-            </CardContent>
-          </Card>
+          <MarketTrends />
         </TabsContent>
-        
+
         <TabsContent value="saved">
           <Card>
-            <CardHeader>
-              <CardTitle>Saved Search Alerts</CardTitle>
-              <CardDescription>
-                Get notified when new properties match your criteria
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-8">
-                <Eye className="h-12 w-12 mx-auto text-slate-300 mb-3" />
-                <p className="text-slate-500">You don't have any saved searches yet.</p>
+            <CardContent className="py-8">
+              <div className="text-center">
+                <p className="text-slate-500">No saved searches yet.</p>
                 <p className="text-sm text-slate-400 mt-1">
-                  Run a search and click "Save Search" to create alerts.
+                  Save your searches to get notifications about new matching properties.
                 </p>
               </div>
             </CardContent>
