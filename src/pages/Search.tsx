@@ -95,12 +95,6 @@ const Search = () => {
           </div>
         </div>
 
-        <PropertySearchBar 
-          onSearch={handleSearch} 
-          onSaveSearch={handleSaveSearch}
-          savedSearch={savedSearch}
-        />
-
         {hasSearched ? (
           <SearchResults 
             searchResults={searchResults} 
@@ -108,7 +102,19 @@ const Search = () => {
             onPropertyClick={handlePropertyClick}
           />
         ) : (
-          <SearchDashboard />
+          <div>
+            <div className="mb-6 max-w-3xl">
+              <PropertySearchBar 
+                onSearch={handleSearch} 
+                onSaveSearch={handleSaveSearch}
+                savedSearch={savedSearch}
+              />
+            </div>
+            <SearchDashboard 
+              onSearch={handleSearch} 
+              onCategoryClick={handleSearch} 
+            />
+          </div>
         )}
       </div>
     </AppShell>

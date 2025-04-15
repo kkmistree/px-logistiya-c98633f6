@@ -10,7 +10,7 @@ interface DashboardHeaderProps {
 
 const DashboardHeader = ({ getCurrentDate, onAddListing, onAddClient }: DashboardHeaderProps) => {
   return (
-    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-4 rounded-lg border border-slate-200 shadow-sm mb-6">
       <div>
         <h1 className="text-xl sm:text-2xl font-bold text-estate-primary">Command Center</h1>
         <p className="text-sm sm:text-base text-slate-500">{getCurrentDate()}</p>
