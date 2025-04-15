@@ -3,79 +3,79 @@ import React from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-// Mock data for area guides
+// Mock data for industrial area guides in Saudi Arabia
 const areaGuides = [
   {
     id: "a1",
-    name: "Downtown Dubai",
-    image: "https://placehold.co/600x400?text=Downtown+Dubai",
-    description: "The heart of Dubai featuring Burj Khalifa, Dubai Mall, and Dubai Opera.",
+    name: "Riyadh Industrial City",
+    image: "https://placehold.co/600x400?text=Riyadh+Industrial+City",
+    description: "Primary industrial hub in Riyadh with multiple manufacturing and logistics facilities.",
     stats: {
-      avgPrice: 2350,
-      roi: 4.8,
+      avgPrice: 1900,
+      roi: 7.8,
       demand: "High"
     },
-    features: ["Iconic Views", "Luxury Lifestyle", "Tourist Hub"]
+    features: ["MODON Approved", "Logistics Hub", "Manufacturing"]
   },
   {
     id: "a2",
-    name: "Dubai Marina",
-    image: "https://placehold.co/600x400?text=Dubai+Marina",
-    description: "Vibrant waterfront community with a stunning skyline and marina promenade.",
+    name: "Jeddah Industrial City",
+    image: "https://placehold.co/600x400?text=Jeddah+Industrial+City",
+    description: "Major industrial complex with access to Red Sea shipping routes and logistics networks.",
     stats: {
-      avgPrice: 1900,
-      roi: 5.3,
+      avgPrice: 1797,
+      roi: 6.9,
       demand: "High"
     },
-    features: ["Waterfront", "Walkable", "Beach Access"]
+    features: ["Port Access", "Manufacturing", "Export Hub"]
   },
   {
     id: "a3",
-    name: "Palm Jumeirah",
-    image: "https://placehold.co/600x400?text=Palm+Jumeirah",
-    description: "Iconic man-made island with luxury villas and apartments.",
+    name: "Jubail Industrial City",
+    image: "https://placehold.co/600x400?text=Jubail+Industrial+City",
+    description: "World's largest industrial city focusing on petrochemical industries and manufacturing.",
     stats: {
-      avgPrice: 3200,
-      roi: 4.2,
+      avgPrice: 2137,
+      roi: 8.1,
       demand: "High"
     },
-    features: ["Beachfront", "Exclusive", "Luxury"]
+    features: ["Petrochemical Hub", "Energy Industry", "Port Access"]
   },
   {
     id: "a4",
-    name: "Jumeirah Village Circle",
-    image: "https://placehold.co/600x400?text=JVC",
-    description: "Family-friendly community with a mix of apartments and villas.",
+    name: "Dammam Industrial City",
+    image: "https://placehold.co/600x400?text=Dammam+Industrial+City",
+    description: "Strategic industrial area with access to Arabian Gulf and proximity to key markets.",
     stats: {
-      avgPrice: 950,
-      roi: 7.1,
+      avgPrice: 1849,
+      roi: 7.5,
       demand: "Medium"
     },
-    features: ["Affordable", "Family-Friendly", "Community"]
+    features: ["Energy Sector", "Logistics", "Manufacturing"]
   },
   {
     id: "a5",
-    name: "Dubai Hills Estate",
-    image: "https://placehold.co/600x400?text=Dubai+Hills",
-    description: "Upscale residential community with parks, golf course, and retail.",
+    name: "KAEC Industrial Valley",
+    image: "https://placehold.co/600x400?text=KAEC+Industrial+Valley",
+    description: "Emerging industrial and economic city with state-of-the-art infrastructure and business facilities.",
     stats: {
-      avgPrice: 1650,
-      roi: 5.8,
+      avgPrice: 2081,
+      roi: 6.8,
       demand: "High"
     },
-    features: ["Golf Course", "New Development", "Green Spaces"]
+    features: ["SEZ Benefits", "Vision 2030 Project", "Logistics Hub"]
   },
   {
     id: "a6",
-    name: "Business Bay",
-    image: "https://placehold.co/600x400?text=Business+Bay",
-    description: "Commercial and residential hub adjacent to Downtown Dubai.",
+    name: "Sudair City for Industry",
+    image: "https://placehold.co/600x400?text=Sudair+City",
+    description: "Developing industrial city focused on manufacturing, logistics, and warehousing operations.",
     stats: {
-      avgPrice: 1750,
-      roi: 5.6,
+      avgPrice: 2201,
+      roi: 7.6,
       demand: "Medium"
     },
-    features: ["Central Location", "Canal Views", "Mixed-Use"]
+    features: ["Vision 2030 Initiative", "Manufacturing Hub", "Strategic Location"]
   }
 ];
 
@@ -99,7 +99,7 @@ const AreaGuides = () => {
               
               <div className="grid grid-cols-3 gap-2 mb-4">
                 <div className="text-center p-2 bg-slate-50 rounded">
-                  <p className="text-xs text-slate-500">Avg. AED/sqft</p>
+                  <p className="text-xs text-slate-500">Avg. SAR/sqm</p>
                   <p className="font-medium">{area.stats.avgPrice}</p>
                 </div>
                 <div className="text-center p-2 bg-slate-50 rounded">

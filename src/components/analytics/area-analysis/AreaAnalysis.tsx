@@ -30,13 +30,13 @@ const AreaAnalysis = () => {
       case "volume-low-to-high":
         return parseFloat(a.totalVolume.replace("K", "")) - parseFloat(b.totalVolume.replace("K", ""));
       case "value-high-to-low":
-        return parseFloat(b.totalValue.replace("AED ", "").replace("B", "")) - parseFloat(a.totalValue.replace("AED ", "").replace("B", ""));
+        return parseFloat(b.totalValue.replace("SAR ", "").replace("B", "")) - parseFloat(a.totalValue.replace("SAR ", "").replace("B", ""));
       case "value-low-to-high":
-        return parseFloat(a.totalValue.replace("AED ", "").replace("B", "")) - parseFloat(b.totalValue.replace("AED ", "").replace("B", ""));
+        return parseFloat(a.totalValue.replace("SAR ", "").replace("B", "")) - parseFloat(b.totalValue.replace("SAR ", "").replace("B", ""));
       case "price-high-to-low":
-        return parseFloat(b.medianPrice.replace("AED ", "").replace(",", "")) - parseFloat(a.medianPrice.replace("AED ", "").replace(",", ""));
+        return parseFloat(b.medianPrice.replace("SAR ", "").replace(",", "")) - parseFloat(a.medianPrice.replace("SAR ", "").replace(",", ""));
       case "price-low-to-high":
-        return parseFloat(a.medianPrice.replace("AED ", "").replace(",", "")) - parseFloat(b.medianPrice.replace("AED ", "").replace(",", ""));
+        return parseFloat(a.medianPrice.replace("SAR ", "").replace(",", "")) - parseFloat(b.medianPrice.replace("SAR ", "").replace(",", ""));
       default:
         return 0;
     }
@@ -47,8 +47,8 @@ const AreaAnalysis = () => {
   return (
     <div className="space-y-6">
       <div className="bg-slate-900 text-white p-4 rounded-lg">
-        <h2 className="text-lg font-semibold mb-1">Dubai Area Analysis</h2>
-        <p className="text-sm text-slate-300">Comprehensive metrics for Dubai's main residential and commercial areas</p>
+        <h2 className="text-lg font-semibold mb-1">Saudi Arabia Industrial Area Analysis</h2>
+        <p className="text-sm text-slate-300">Comprehensive metrics for Saudi Arabia's main industrial and commercial areas</p>
       </div>
 
       <div className="flex flex-col sm:flex-row justify-between gap-4">

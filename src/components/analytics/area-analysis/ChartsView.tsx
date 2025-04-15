@@ -1,7 +1,8 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from "recharts";
 import { AreaItemType, COLORS } from "./areaData";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/card";
 import { FilterIcon } from "lucide-react";
 import AreaFilters from "./AreaFilters";
 
@@ -57,10 +58,10 @@ const ChartsView = ({
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Price per sqft comparison */}
+        {/* Price per sqm comparison */}
         <Card>
           <CardContent className="pt-6">
-            <h3 className="text-lg font-semibold mb-4">Median Price per sqft (AED)</h3>
+            <h3 className="text-lg font-semibold mb-4">Median Price per sqm (SAR)</h3>
             <div className="h-[400px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart
@@ -75,7 +76,7 @@ const ChartsView = ({
                     dataKey="name" 
                     width={80}
                   />
-                  <Tooltip formatter={(value) => [`${value} AED/sqft`, 'Median Price']} />
+                  <Tooltip formatter={(value) => [`${value} SAR/sqm`, 'Median Price']} />
                   <Bar dataKey="price" fill="#8884d8">
                     {filteredPricePerSqftData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -90,7 +91,7 @@ const ChartsView = ({
         {/* Transaction volume comparison */}
         <Card>
           <CardContent className="pt-6">
-            <h3 className="text-lg font-semibold mb-4">Transaction Volume (thousands)</h3>
+            <h3 className="text-lg font-semibold mb-4">Transaction Volume</h3>
             <div className="h-[400px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart
@@ -105,76 +106,12 @@ const ChartsView = ({
                     dataKey="name" 
                     width={80}
                   />
-                  <Tooltip formatter={(value) => [`${value}K`, 'Transactions']} />
+                  <Tooltip formatter={(value) => [value, 'Transaction Volume']} />
                   <Bar dataKey="volume" fill="#82ca9d">
                     {filteredVolumeData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Area Value YoY */}
-        <Card>
-          <CardContent className="pt-6">
-            <h3 className="text-lg font-semibold mb-4">Value Year-over-Year Change (%)</h3>
-            <div className="h-[400px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={filteredAreaData.map(area => ({
-                    name: area.name.split(' ')[0],
-                    change: parseFloat(area.valueYoY.replace("+", "").replace("%", "")),
-                    positive: area.valueYoY.startsWith("+")
-                  }))}
-                  layout="vertical"
-                  margin={{ top: 5, right: 30, left: 100, bottom: 5 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis type="number" />
-                  <YAxis 
-                    type="category" 
-                    dataKey="name" 
-                    width={80}
-                  />
-                  <Tooltip formatter={(value) => [`${value}%`, 'YoY Change']} />
-                  <Bar dataKey="change" fill="#82ca9d">
-                    {filteredAreaData.map((entry, index) => (
-                      <Cell 
-                        key={`cell-${index}`} 
-                        fill={entry.valueYoY.startsWith("+") ? "#4ade80" : "#ef4444"} 
-                      />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Existing vs Upcoming Units */}
-        <Card>
-          <CardContent className="pt-6">
-            <h3 className="text-lg font-semibold mb-4">Existing vs. Upcoming Units</h3>
-            <div className="h-[400px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={filteredAreaData.map(area => ({
-                    name: area.name.split(' ')[0],
-                    existing: parseInt(area.existingUnits.replace(",", "")),
-                    upcoming: parseInt(area.upcomingUnits.replace(",", ""))
-                  }))}
-                  margin={{ top: 5, right: 30, left: 30, bottom: 5 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip formatter={(value) => [`${value.toLocaleString()}`, '']} />
-                  <Legend />
-                  <Bar dataKey="existing" name="Existing Units" fill="#8884d8" />
-                  <Bar dataKey="upcoming" name="Upcoming Units" fill="#82ca9d" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
