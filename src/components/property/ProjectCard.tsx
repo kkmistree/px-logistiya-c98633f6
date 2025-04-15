@@ -30,11 +30,11 @@ const ProjectCard = ({ property, className, onClick }: ProjectCardProps) => {
 
   const getStatusColor = (status: Property["status"]) => {
     switch (status) {
-      case "ready":
+      case "available":
         return "bg-green-500 text-white";
-      case "off-plan":
+      case "under-development":
         return "bg-estate-secondary text-white";
-      case "resale":
+      case "investment-opportunity":
         return "bg-blue-500 text-white";
       default:
         return "bg-slate-500 text-white";
@@ -58,8 +58,8 @@ const ProjectCard = ({ property, className, onClick }: ProjectCardProps) => {
       <div className="relative">
         <div className="absolute top-3 left-3 z-10 flex flex-col gap-2">
           <Badge className={cn("rounded-md", getStatusColor(property.status))}>
-            {property.status === "ready" ? "Ready" : 
-             property.status === "off-plan" ? "Off-Plan" : "Resale"}
+            {property.status === "available" ? "Available" : 
+             property.status === "under-development" ? "Under Development" : "Investment Opportunity"}
           </Badge>
           
           {property.matchScore && (
@@ -135,7 +135,7 @@ const ProjectCard = ({ property, className, onClick }: ProjectCardProps) => {
           </div>
           
           <div className="text-sm">
-            {property.bedrooms} Beds
+            {property.area} sqm
           </div>
         </div>
         

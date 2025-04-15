@@ -34,6 +34,7 @@ const ClientsPage = () => {
         },
         location: ["Riyadh Industrial City", "Jeddah Industrial City"],
         propertyType: ["warehouse", "logistics"],
+        bedrooms: [],
         minArea: 5000,
       },
       metrics: {
@@ -68,7 +69,7 @@ const ClientsPage = () => {
       name: "Saudi Logistics Company",
       email: "operations@saudilogistics.com",
       phone: "+966 50 987 6543",
-      type: "developer",
+      type: "seller",
       assignedTo: "user123",
       status: "active",
       stage: "qualifying",
@@ -101,6 +102,7 @@ const ClientsPage = () => {
         },
         location: ["KAEC Industrial Valley", "Riyadh Industrial City"],
         propertyType: ["factory", "warehouse"],
+        bedrooms: [],
         minArea: 10000,
         purpose: "investment"
       },

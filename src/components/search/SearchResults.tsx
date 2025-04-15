@@ -69,9 +69,8 @@ const SearchResults = ({ searchResults, onNewSearch, onPropertyClick }: SearchRe
                 </div>
                 
                 <div className="flex items-center text-sm text-gray-500 mt-2">
-                  <span className="mr-3">{property.bedrooms} {property.bedrooms === 1 ? 'bed' : 'beds'}</span>
-                  <span className="mr-3">{property.bathrooms} {property.bathrooms === 1 ? 'bath' : 'baths'}</span>
-                  <span>{property.area} sqft</span>
+                  <span className="mr-3">{property.type}</span>
+                  <span>{property.area} sqm</span>
                 </div>
                 
                 <div className="mt-3 flex flex-wrap gap-1">

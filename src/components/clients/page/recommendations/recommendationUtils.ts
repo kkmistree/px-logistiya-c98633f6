@@ -7,73 +7,76 @@ export const getRecommendedProperties = (client: Client): Property[] => {
   
   // This would typically come from a backend service that matches properties to requirements
   // For this mock, we'll create properties that align with client requirements
-  const { budget, location, propertyType, bedrooms } = client.requirements;
+  const { budget, location, propertyType } = client.requirements;
   
   const mockProperties: Property[] = [
     {
       id: "prop1",
-      title: `${bedrooms?.[0] || 2} Bedroom ${propertyType?.[0] || "Apartment"} in ${location?.[0] || "Dubai Marina"}`,
-      description: `Premium ${propertyType?.[0] || "apartment"} with stunning views and high-end finishes. Great ROI potential.`,
-      type: (propertyType?.[0] as "apartment" | "villa" | "townhouse" | "penthouse" | "land") || "apartment",
-      status: "ready",
+      title: `${propertyType?.[0] || "Warehouse"} in ${location?.[0] || "Riyadh Industrial City"}`,
+      description: `Premium ${propertyType?.[0] || "warehouse"} with excellent logistics connectivity and high-end specifications. Great ROI potential.`,
+      type: (propertyType?.[0] as "warehouse" | "factory" | "logistics" | "land" | "office" | "mixed-use") || "warehouse",
+      status: "available",
       price: budget?.min + ((budget?.max - budget?.min) * 0.7),
-      area: 1200,
-      bedrooms: bedrooms?.[0] || 2,
-      bathrooms: bedrooms?.[0] || 2,
+      area: 5000,
       location: {
-        area: location?.[0] || "Dubai Marina",
-        community: "Premium Tower"
+        area: location?.[0] || "Riyadh Industrial City",
+        community: "MODON Zone 1"
       },
-      features: ["Pool", "Gym", "Security", "Parking"],
+      features: ["Loading Bays", "Security", "High Ceiling", "Fire System"],
       images: ["/placeholder.svg"],
-      developer: "Emaar Properties",
+      developer: "MODON Industrial Development",
       roi: 8.2,
-      tags: ["High Yield", "Premium", "Furnished"],
-      furnishing: "Furnished",
+      tags: ["High Yield", "MODON Approved", "SEZ", "Vision 2030 Aligned"],
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      matchScore: 92
+      matchScore: 92,
+      zoning: "Industrial",
+      vision2030Alignment: ["Logistics Hub", "Manufacturing"],
+      seaportDistance: 120,
+      airportDistance: 45,
+      highwayDistance: 5
     },
     {
       id: "prop2",
-      title: `Luxury ${bedrooms?.[1] || 3} Bedroom ${propertyType?.[0] || "Apartment"} in ${location?.[1] || "Downtown Dubai"}`,
-      description: `Spacious ${propertyType?.[0] || "apartment"} with premium finishes. Ideal for investors seeking stable returns.`,
-      type: (propertyType?.[0] as "apartment" | "villa" | "townhouse" | "penthouse" | "land") || "apartment",
-      status: "ready",
+      title: `Large ${propertyType?.[0] || "Factory"} in ${location?.[1] || "Jeddah Industrial City"}`,
+      description: `Spacious ${propertyType?.[0] || "factory"} with premium specifications. Ideal for investors seeking stable returns.`,
+      type: (propertyType?.[0] as "warehouse" | "factory" | "logistics" | "land" | "office" | "mixed-use") || "factory",
+      status: "available",
       price: budget?.min + ((budget?.max - budget?.min) * 0.8),
-      area: 1500,
-      bedrooms: bedrooms?.[1] || 3,
-      bathrooms: bedrooms?.[1] || 3,
+      area: 8000,
       location: {
-        area: location?.[1] || "Downtown Dubai",
-        community: "Boulevard Central"
+        area: location?.[1] || "Jeddah Industrial City",
+        community: "Industrial Valley"
       },
-      features: ["Pool", "Gym", "Security", "Parking", "Balcony"],
+      features: ["High Power Capacity", "Water Supply", "Loading Docks", "Office Space"],
       images: ["/placeholder.svg"],
-      developer: "DAMAC Properties",
+      developer: "KAEC Industrial Development",
       roi: 7.8,
-      tags: ["High Yield", "Premium", "City View"],
+      tags: ["High Yield", "Export Ready", "Logistics Corridor"],
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      matchScore: 88
+      matchScore: 88,
+      zoning: "Heavy Industrial",
+      vision2030Alignment: ["Manufacturing", "Export Hub"],
+      seaportDistance: 20,
+      airportDistance: 35,
+      highwayDistance: 2
     },
     {
       id: "prop3",
-      title: `${bedrooms?.[0] || 2} Bedroom Off-Plan ${propertyType?.[0] || "Apartment"} in ${location?.[0] || "Dubai Marina"}`,
-      description: `Off-plan ${propertyType?.[0] || "apartment"} with attractive payment plan. High projected ROI.`,
-      type: (propertyType?.[0] as "apartment" | "villa" | "townhouse" | "penthouse" | "land") || "apartment",
-      status: "off-plan",
+      title: `${propertyType?.[0] || "Logistics"} Development in ${location?.[0] || "Riyadh Industrial City"}`,
+      description: `Under-development ${propertyType?.[0] || "logistics"} facility with attractive payment plan. High projected ROI.`,
+      type: (propertyType?.[0] as "warehouse" | "factory" | "logistics" | "land" | "office" | "mixed-use") || "logistics",
+      status: "under-development",
       price: budget?.min + ((budget?.max - budget?.min) * 0.6),
-      area: 1100,
-      bedrooms: bedrooms?.[0] || 2,
-      bathrooms: bedrooms?.[0] || 2,
+      area: 6500,
       location: {
-        area: location?.[0] || "Dubai Marina",
-        community: "Marina Vista"
+        area: location?.[0] || "Riyadh Industrial City",
+        community: "Logistics Hub"
       },
-      features: ["Pool", "Gym", "Security", "Smart Home"],
+      features: ["Modern Design", "Smart Systems", "Security", "Sustainable"],
       images: ["/placeholder.svg"],
-      developer: "Select Group",
+      developer: "Saudi Logistics Development",
       completionDate: "2025-06-30",
       roi: 9.5,
       paymentPlan: {
@@ -85,10 +88,15 @@ export const getRecommendedProperties = (client: Client): Property[] => {
           { percentage: 50, dueDate: "On Handover" }
         ]
       },
-      tags: ["Off-Plan", "High ROI", "Payment Plan"],
+      tags: ["Under Development", "High ROI", "Payment Plan", "MODON Approved"],
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      matchScore: 85
+      matchScore: 85,
+      zoning: "Logistics",
+      vision2030Alignment: ["Logistics Hub"],
+      seaportDistance: 110,
+      airportDistance: 40,
+      highwayDistance: 3
     }
   ];
   
