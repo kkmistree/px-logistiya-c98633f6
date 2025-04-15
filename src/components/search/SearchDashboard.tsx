@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from "@/hooks/use-toast";
@@ -13,7 +14,8 @@ import {
   LineChart
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import PropertyCategoryCard from './categories/PropertyCategoryCard';
 import MarketInsightCard from './insights/MarketInsightCard';
 import SearchSuggestionCard from './suggestions/SearchSuggestionCard';
@@ -99,119 +101,172 @@ const SearchDashboard = ({ onSearch, onCategoryClick }: SearchDashboardProps) =>
   };
 
   return (
-    <div className="container mx-auto max-w-[1400px] px-4 py-6">
-      <div className="mb-8">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="p-2 rounded-full bg-estate-primary/10">
-            <Lightbulb className="h-5 w-5 text-estate-primary" />
+    <div className="w-full">
+      <div className="bg-white rounded-lg border border-slate-200 shadow-sm mb-6 p-6">
+        <div className="flex items-center space-x-3 mb-4">
+          <div className="bg-estate-primary/10 p-2 rounded-full">
+            <Zap className="h-5 w-5 text-estate-primary" />
           </div>
           <div>
-            <h2 className="text-2xl font-semibold text-estate-primary">Smart Deal Discovery</h2>
-            <p className="text-sm text-slate-600">Uncover opportunities tailored to your investment strategy</p>
+            <h2 className="text-xl font-bold text-estate-primary">Smart Deal Discovery</h2>
+            <p className="text-sm text-slate-600">Find your next investment opportunity with AI-powered recommendations</p>
           </div>
         </div>
-      </div>
-
-      <Card className="p-6 border-slate-200">
+        
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="mb-8 grid w-full grid-cols-5 gap-4 bg-transparent p-0">
+          <TabsList className="bg-slate-100 p-1 mb-6 flex flex-wrap gap-2">
             <TabsTrigger 
               value="discover" 
-              className="flex items-center gap-2 data-[state=active]:bg-estate-primary data-[state=active]:text-white rounded-lg border border-slate-200 shadow-sm"
+              className="data-[state=active]:bg-estate-primary data-[state=active]:text-white"
             >
-              <Zap size={18} />
+              <Zap size={16} className="mr-2" />
               <span>Discovery</span>
             </TabsTrigger>
             <TabsTrigger 
               value="radar" 
-              className="flex items-center gap-2 data-[state=active]:bg-estate-primary data-[state=active]:text-white rounded-lg border border-slate-200 shadow-sm"
+              className="data-[state=active]:bg-estate-primary data-[state=active]:text-white"
             >
-              <LineChart size={18} />
+              <LineChart size={16} className="mr-2" />
               <span>Investment Radar</span>
             </TabsTrigger>
             <TabsTrigger 
               value="trends" 
-              className="flex items-center gap-2 data-[state=active]:bg-estate-primary data-[state=active]:text-white rounded-lg border border-slate-200 shadow-sm"
+              className="data-[state=active]:bg-estate-primary data-[state=active]:text-white"
             >
-              <TrendingUp size={18} />
+              <TrendingUp size={16} className="mr-2" />
               <span>Market Trends</span>
             </TabsTrigger>
             <TabsTrigger 
               value="recent" 
-              className="flex items-center gap-2 data-[state=active]:bg-estate-primary data-[state=active]:text-white rounded-lg border border-slate-200 shadow-sm"
+              className="data-[state=active]:bg-estate-primary data-[state=active]:text-white"
             >
-              <Clock size={18} />
+              <Clock size={16} className="mr-2" />
               <span>Recent</span>
             </TabsTrigger>
             <TabsTrigger 
               value="saved" 
-              className="flex items-center gap-2 data-[state=active]:bg-estate-primary data-[state=active]:text-white rounded-lg border border-slate-200 shadow-sm"
+              className="data-[state=active]:bg-estate-primary data-[state=active]:text-white"
             >
-              <BookmarkPlus size={18} />
+              <BookmarkPlus size={16} className="mr-2" />
               <span>Saved</span>
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="discover" className="mt-0 space-y-6">
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-              <div className="xl:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <PropertyCategoryCard 
-                  {...propertyTypes}
-                  onItemClick={onCategoryClick}
-                />
-                <PropertyCategoryCard 
-                  {...locationCategories}
-                  onItemClick={onCategoryClick}
-                />
+          <TabsContent value="discover" className="mt-0">
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+                <div className="xl:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <PropertyCategoryCard 
+                    {...propertyTypes}
+                    onItemClick={onCategoryClick}
+                  />
+                  <PropertyCategoryCard 
+                    {...locationCategories}
+                    onItemClick={onCategoryClick}
+                  />
+                </div>
+                <MarketInsightCard />
               </div>
-              <MarketInsightCard />
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="md:col-span-2">
-                <SearchSuggestionCard 
-                  suggestions={searchSuggestions}
-                  onSuggestionClick={handleSuggestionClick}
-                  onRefresh={handleRefreshSuggestions}
-                />
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="md:col-span-2">
+                  <SearchSuggestionCard 
+                    suggestions={searchSuggestions}
+                    onSuggestionClick={handleSuggestionClick}
+                    onRefresh={handleRefreshSuggestions}
+                  />
+                </div>
+                <InvestorSignals />
               </div>
-              <InvestorSignals />
             </div>
           </TabsContent>
           
           <TabsContent value="radar" className="mt-0">
-            <LiveInvestmentRadar />
+            <Card className="border-slate-200">
+              <CardHeader className="bg-slate-50 border-b border-slate-100">
+                <CardTitle className="text-lg font-semibold flex items-center">
+                  <LineChart size={18} className="mr-2 text-estate-primary" />
+                  Live Investment Radar
+                </CardTitle>
+                <CardDescription>Track investment opportunities in real-time across Saudi Arabia</CardDescription>
+              </CardHeader>
+              <CardContent className="p-6">
+                <LiveInvestmentRadar />
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="trends" className="mt-0">
             <div className="space-y-6">
-              <MarketTrends />
-              <MarketComparison />
+              <Card className="border-slate-200">
+                <CardHeader className="bg-slate-50 border-b border-slate-100">
+                  <CardTitle className="text-lg font-semibold flex items-center">
+                    <TrendingUp size={18} className="mr-2 text-estate-primary" />
+                    Market Trends
+                  </CardTitle>
+                  <CardDescription>Industrial real estate market performance and outlook</CardDescription>
+                </CardHeader>
+                <CardContent className="p-6">
+                  <MarketTrends />
+                </CardContent>
+              </Card>
+              
+              <Card className="border-slate-200">
+                <CardHeader className="bg-slate-50 border-b border-slate-100">
+                  <CardTitle className="text-lg font-semibold flex items-center">
+                    <BarChart3 size={18} className="mr-2 text-estate-primary" />
+                    Market Comparison
+                  </CardTitle>
+                  <CardDescription>Compare key metrics across industrial markets</CardDescription>
+                </CardHeader>
+                <CardContent className="p-6">
+                  <MarketComparison />
+                </CardContent>
+              </Card>
             </div>
           </TabsContent>
 
           <TabsContent value="recent" className="mt-0">
             <Card className="border-slate-200">
-              <RecentSearches />
+              <CardHeader className="bg-slate-50 border-b border-slate-100">
+                <CardTitle className="text-lg font-semibold flex items-center">
+                  <Clock size={18} className="mr-2 text-estate-primary" />
+                  Recent Searches
+                </CardTitle>
+                <CardDescription>Your search history and recently viewed properties</CardDescription>
+              </CardHeader>
+              <CardContent className="p-6">
+                <RecentSearches />
+              </CardContent>
             </Card>
           </TabsContent>
 
           <TabsContent value="saved" className="mt-0">
-            <Card className="p-12 text-center border-slate-200">
-              <div className="flex flex-col items-center justify-center max-w-md mx-auto">
-                <BookmarkPlus className="h-16 w-16 text-slate-300 mb-6" />
-                <h3 className="text-xl font-medium mb-3">No saved searches yet</h3>
-                <p className="text-slate-500 mb-8">
-                  Save your search criteria to get notified when new properties match your requirements
-                </p>
-                <p className="text-sm text-estate-primary">
-                  Try searching for properties and click "Save Search"
-                </p>
-              </div>
+            <Card className="border-slate-200">
+              <CardHeader className="bg-slate-50 border-b border-slate-100">
+                <CardTitle className="text-lg font-semibold flex items-center">
+                  <BookmarkPlus size={18} className="mr-2 text-estate-primary" />
+                  Saved Searches
+                </CardTitle>
+                <CardDescription>Your bookmarked searches and alerts</CardDescription>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="flex flex-col items-center justify-center py-12 text-center">
+                  <BookmarkPlus className="h-16 w-16 text-slate-300 mb-6" />
+                  <h3 className="text-xl font-medium mb-3">No saved searches yet</h3>
+                  <p className="text-slate-500 mb-8 max-w-md">
+                    Save your search criteria to get notified when new properties match your requirements
+                  </p>
+                  <Button variant="outline" className="gap-2">
+                    <Map size={16} />
+                    <span>Explore Properties</span>
+                  </Button>
+                </div>
+              </CardContent>
             </Card>
           </TabsContent>
         </Tabs>
-      </Card>
+      </div>
     </div>
   );
 };
