@@ -195,9 +195,9 @@ const TransactionAnalysis = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All sizes</SelectItem>
-              <SelectItem value="small">Small (< 5,000 sqm)</SelectItem>
+              <SelectItem value="small">Small (&lt; 5,000 sqm)</SelectItem>
               <SelectItem value="medium">Medium (5,000-10,000 sqm)</SelectItem>
-              <SelectItem value="large">Large (> 10,000 sqm)</SelectItem>
+              <SelectItem value="large">Large (&gt; 10,000 sqm)</SelectItem>
             </SelectContent>
           </Select>
         </div>
