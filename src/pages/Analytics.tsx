@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import AppShell from "@/components/layout/AppShell";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -11,12 +10,12 @@ import MarketShare from "@/components/analytics/MarketShare";
 import AreasComparison from "@/components/analytics/AreasComparison";
 import AreaAnalysis from "@/components/analytics/AreaAnalysis";
 import TransactionAnalysis from "@/components/analytics/TransactionAnalysis";
-import ReportGenerator from "@/components/analytics/ReportGenerator";
+import InvestmentAnalysis from "@/components/analytics/investment/InvestmentAnalysis";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 
 const Analytics = () => {
-  const [activeTab, setActiveTab] = useState("market");
+  const [activeTab, setActiveTab] = useState("investment");
   const [showReportGenerator, setShowReportGenerator] = useState(false);
 
   return (
@@ -41,6 +40,7 @@ const Analytics = () => {
         
         <Tabs defaultValue={activeTab} value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="mb-6 flex flex-wrap">
+            <TabsTrigger value="investment">Investment Analysis</TabsTrigger>
             <TabsTrigger value="market">Market Insights</TabsTrigger>
             <TabsTrigger value="projects">Project Analytics</TabsTrigger>
             <TabsTrigger value="marketPerformance">Market Performance</TabsTrigger>
@@ -50,6 +50,10 @@ const Analytics = () => {
             <TabsTrigger value="transactions">Transactions</TabsTrigger>
             <TabsTrigger value="reports">Reports</TabsTrigger>
           </TabsList>
+          
+          <TabsContent value="investment">
+            <InvestmentAnalysis />
+          </TabsContent>
           
           <TabsContent value="market">
             <MarketInsights />
