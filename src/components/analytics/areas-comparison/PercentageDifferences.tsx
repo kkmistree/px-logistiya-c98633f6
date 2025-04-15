@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ComparisonDifference from './ComparisonDifference';
 import { isHigherValue } from './differenceUtils';
@@ -46,7 +47,7 @@ const PercentageDifferences = ({
       <div className="mb-3">
         <ComparisonDifference 
           value={priceSqftDiff} 
-          isPositive={isHigherValue(location1Data.medianPricePerSqft, location2Data.medianPricePerSqft, 'price-sqft')}
+          isPositive={isHigherValue(location1Data.medianPricePerSqm, location2Data.medianPricePerSqm, 'price-sqft')}
         />
       </div>
       

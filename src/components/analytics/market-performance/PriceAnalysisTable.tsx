@@ -5,7 +5,7 @@ import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@
 interface PropertyTypeData {
   type: string;
   medianPrice: string;
-  pricePerSqft: string;
+  pricePerSqm: string;
 }
 
 interface PriceAnalysisTableProps {
@@ -22,7 +22,7 @@ const PriceAnalysisTable = ({ data }: PriceAnalysisTableProps) => {
             <TableRow>
               <TableHead>Property type</TableHead>
               <TableHead>Median price</TableHead>
-              <TableHead>Median price/sqft</TableHead>
+              <TableHead>Median price/sqm</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -30,7 +30,7 @@ const PriceAnalysisTable = ({ data }: PriceAnalysisTableProps) => {
               <TableRow key={index}>
                 <TableCell className="font-medium">{row.type}</TableCell>
                 <TableCell>{row.medianPrice}</TableCell>
-                <TableCell>{row.pricePerSqft}</TableCell>
+                <TableCell>{row.pricePerSqm}</TableCell>
               </TableRow>
             ))}
           </TableBody>

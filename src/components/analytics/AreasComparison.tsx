@@ -25,7 +25,7 @@ const AreasComparison = () => {
   // Calculate differences for the central badges
   const volumeDiff = calculateDifference(location1Data.totalVolume, location2Data.totalVolume, 'volume');
   const valueDiff = calculateDifference(location1Data.totalValue, location2Data.totalValue, 'value');
-  const priceSqftDiff = calculateDifference(location1Data.medianPricePerSqft, location2Data.medianPricePerSqft, 'price-sqft');
+  const priceSqftDiff = calculateDifference(location1Data.medianPricePerSqm, location2Data.medianPricePerSqm, 'price-sqft');
   const priceDiff = calculateDifference(location1Data.medianPrice, location2Data.medianPrice, 'price');
   const existingUnitsDiff = calculateDifference(location1Data.existingUnits, location2Data.existingUnits, 'units');
   const upcomingUnitsDiff = calculateDifference(location1Data.upcomingUnits, location2Data.upcomingUnits, 'units');

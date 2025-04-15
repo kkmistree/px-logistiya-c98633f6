@@ -4,11 +4,11 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 
 interface PriceRangeData {
   year: string;
-  below1M: number;
-  from1Mto2M: number;
-  from2Mto3M: number;
-  from3Mto7M: number;
-  above7M: number;
+  below50M: number;
+  from50Mto100M: number;
+  from100Mto200M: number;
+  from200Mto500M: number;
+  above500M: number;
 }
 
 interface PriceRangeDistributionChartProps {
@@ -24,23 +24,23 @@ const PriceRangeDistributionChart = ({ data }: PriceRangeDistributionChartProps)
           <div className="flex items-center justify-center mb-4 text-xs space-x-4">
             <div className="flex items-center">
               <div className="w-3 h-3 bg-cyan-300 mr-1"></div>
-              <span>Up to AED 1M</span>
+              <span>Up to SAR 50M</span>
             </div>
             <div className="flex items-center">
               <div className="w-3 h-3 bg-pink-400 mr-1"></div>
-              <span>AED 1M - AED 2M</span>
+              <span>SAR 50M - SAR 100M</span>
             </div>
             <div className="flex items-center">
               <div className="w-3 h-3 bg-green-400 mr-1"></div>
-              <span>AED 2M - AED 3.7M</span>
+              <span>SAR 100M - SAR 200M</span>
             </div>
             <div className="flex items-center">
               <div className="w-3 h-3 bg-yellow-400 mr-1"></div>
-              <span>AED 3.7M - AED 7M</span>
+              <span>SAR 200M - SAR 500M</span>
             </div>
             <div className="flex items-center">
               <div className="w-3 h-3 bg-indigo-400 mr-1"></div>
-              <span>Above AED 7M</span>
+              <span>Above SAR 500M</span>
             </div>
           </div>
           <div className="h-[400px]">
@@ -58,22 +58,22 @@ const PriceRangeDistributionChart = ({ data }: PriceRangeDistributionChartProps)
                 <Tooltip 
                   formatter={(value, name) => {
                     const labels = {
-                      below1M: "Up to AED 1M",
-                      from1Mto2M: "AED 1M - AED 2M",
-                      from2Mto3M: "AED 2M - AED 3.7M",
-                      from3Mto7M: "AED 3.7M - AED 7M",
-                      above7M: "Above AED 7M"
+                      below50M: "Up to SAR 50M",
+                      from50Mto100M: "SAR 50M - SAR 100M",
+                      from100Mto200M: "SAR 100M - SAR 200M",
+                      from200Mto500M: "SAR 200M - SAR 500M",
+                      above500M: "Above SAR 500M"
                     };
                     
                     const formattedValue = typeof value === 'number' ? `${value.toFixed(1)}%` : `${value}%`;
                     return [formattedValue, labels[name as keyof typeof labels]];
                   }}
                 />
-                <Bar dataKey="below1M" stackId="a" fill="#22d3ee" />
-                <Bar dataKey="from1Mto2M" stackId="a" fill="#ec4899" />
-                <Bar dataKey="from2Mto3M" stackId="a" fill="#4ade80" />
-                <Bar dataKey="from3Mto7M" stackId="a" fill="#facc15" />
-                <Bar dataKey="above7M" stackId="a" fill="#818cf8" />
+                <Bar dataKey="below50M" stackId="a" fill="#22d3ee" />
+                <Bar dataKey="from50Mto100M" stackId="a" fill="#ec4899" />
+                <Bar dataKey="from100Mto200M" stackId="a" fill="#4ade80" />
+                <Bar dataKey="from200Mto500M" stackId="a" fill="#facc15" />
+                <Bar dataKey="above500M" stackId="a" fill="#818cf8" />
               </BarChart>
             </ResponsiveContainer>
           </div>

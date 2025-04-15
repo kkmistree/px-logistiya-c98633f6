@@ -25,7 +25,7 @@ const MetricsGrid = ({ locationData, position }: MetricsGridProps) => {
       
       <ComparisonItem 
         title="Median price per sqft"
-        value={locationData.medianPricePerSqft}
+        value={locationData.medianPricePerSqm}
         changeValue={locationData.valueYoY}
       />
       
