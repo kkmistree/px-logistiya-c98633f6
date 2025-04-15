@@ -1,3 +1,4 @@
+
 import { Property } from "@/types/property";
 
 export const properties: Property[] = [
@@ -19,9 +20,9 @@ export const properties: Property[] = [
     },
     features: ["Loading Docks", "High Ceiling", "Security System", "Fire System", "Office Space"],
     images: [
-      "/lovable-uploads/warehouse1.jpg",
-      "/lovable-uploads/warehouse2.jpg",
-      "/lovable-uploads/warehouse3.jpg"
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
     ],
     developer: "MODON Development",
     roi: 7.8,
@@ -51,9 +52,9 @@ export const properties: Property[] = [
     },
     features: ["High Power Capacity", "Water Supply", "Loading Docks", "Office Space"],
     images: [
-      "/lovable-uploads/factory1.jpg",
-      "/lovable-uploads/factory2.jpg",
-      "/lovable-uploads/factory3.jpg"
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
     ],
     developer: "Saudi Industrial Co.",
     completionDate: "2025-06-30T00:00:00Z",

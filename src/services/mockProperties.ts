@@ -1,3 +1,4 @@
+
 import { Property } from "@/types/property";
 
 // Mock property data used for searching
@@ -15,7 +16,7 @@ export const mockProperties: Property[] = [
       community: "MODON Zone 1"
     },
     features: ["Loading Docks", "High Ceiling", "Security System", "Fire System"],
-    images: ["/lovable-uploads/warehouse1.jpg"],
+    images: ["/placeholder.svg"],
     roi: 8.5,
     views: 120,
     createdAt: new Date().toISOString(),
