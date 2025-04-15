@@ -1,40 +1,14 @@
 
 import { cn } from "@/lib/utils";
-import {
-  Home,
-  Search,
-  Users,
-  Building,
-  FileText,
-  BarChart2,
-  MessageSquare,
-  Settings,
-  HelpCircle,
-  ChevronRight,
-  BookOpen,
-} from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import CurrencySwitcher from "@/components/currency/CurrencySwitcher";
-import NavigationItems, { NavItem } from "./sidebar/NavigationItems";
+import NavigationItems, { navItems } from "./sidebar/NavigationItems";
 import UserMenu from "./sidebar/UserMenu";
 
 interface SidebarProps {
   open: boolean;
   setOpen: (open: boolean) => void;
 }
-
-const navItems: NavItem[] = [
-  { icon: Home, label: "Command Center", path: "/" },
-  { icon: Search, label: "Quick Search", path: "/search" },
-  { icon: Search, label: "MLS Search", path: "/mls" },
-  { icon: Users, label: "Clients & CRM", path: "/clients" },
-  { icon: Building, label: "Developer Hub", path: "/developers" },
-  { icon: FileText, label: "Deal Rooms", path: "/deals" },
-  { icon: BarChart2, label: "Analytics", path: "/analytics" },
-  { icon: MessageSquare, label: "Messages", path: "/messages" },
-  { icon: BookOpen, label: "Knowledge", path: "/knowledge" },
-  { icon: Settings, label: "Settings", path: "/settings" },
-  { icon: HelpCircle, label: "Help & Support", path: "/support" },
-];
 
 const Sidebar = ({ open, setOpen }: SidebarProps) => {
   return (
@@ -56,7 +30,7 @@ const Sidebar = ({ open, setOpen }: SidebarProps) => {
                 <div className="w-8 h-8 bg-white rounded-md flex items-center justify-center">
                   <span className="font-bold text-black">pX</span>
                 </div>
-                <span className="font-semibold text-xl">pX</span>
+                <span className="font-semibold text-xl">propX</span>
               </div>
               <button onClick={() => setOpen(false)} className="p-1 hover:bg-white/10 rounded-full">
                 <ChevronRight size={20} />
