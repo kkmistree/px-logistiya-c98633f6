@@ -1,14 +1,14 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AppShell from "@/components/layout/AppShell";
 import PropertySearchBar from "@/components/property/PropertySearchBar";
 import { useSearchParams } from 'react-router-dom';
 import { useToast } from "@/hooks/use-toast";
 import { searchProperties } from '@/services/propertyService';
 import SearchResults from '@/components/search/SearchResults';
-import QuickSearch from '@/components/search/QuickSearch';
 import { Property } from '@/types/property';
 import SearchDashboard from '@/components/search/SearchDashboard';
+import { Search as SearchIcon } from 'lucide-react';
 
 const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,11 +20,11 @@ const Search = () => {
   const { toast } = useToast();
 
   // Perform search when the page loads with a query parameter
-  useState(() => {
+  useEffect(() => {
     if (query) {
       performSearch(query);
     }
-  });
+  }, [query]);
 
   const performSearch = (searchQuery: string) => {
     if (!searchQuery.trim()) return;
@@ -49,8 +49,8 @@ const Search = () => {
       console.error("Search error:", error);
       setSearching(false);
       toast({
-        description: "An error occurred while searching. Please try again.",
         variant: "destructive",
+        description: "An error occurred while searching. Please try again.",
       });
     }
   };
@@ -84,37 +84,31 @@ const Search = () => {
 
   return (
     <AppShell>
-      <div className="space-y-6">
-        <div className="flex flex-col space-y-2">
-          <h1 className="text-3xl font-bold">Smart Deal Discovery</h1>
-          <p className="text-lg text-gray-600">
-            Discover new opportunities with our AI-powered property search.
-          </p>
+      <div className="container mx-auto max-w-7xl px-4 py-6 space-y-6">
+        <div className="flex items-center space-x-2 mb-2">
+          <div className="bg-estate-primary/10 p-2 rounded-full">
+            <SearchIcon size={20} className="text-estate-primary" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold">Property Search</h1>
+            <p className="text-sm text-slate-500">Find your next industrial investment opportunity</p>
+          </div>
         </div>
 
-        {!hasSearched ? (
-          <>
-            <PropertySearchBar 
-              onSearch={handleSearch} 
-              onSaveSearch={handleSaveSearch}
-              savedSearch={savedSearch}
-            />
-            <QuickSearch onSearch={handleSearch} fullScreen />
-            <SearchDashboard />
-          </>
+        <PropertySearchBar 
+          onSearch={handleSearch} 
+          onSaveSearch={handleSaveSearch}
+          savedSearch={savedSearch}
+        />
+
+        {hasSearched ? (
+          <SearchResults 
+            searchResults={searchResults} 
+            onNewSearch={handleNewSearch}
+            onPropertyClick={handlePropertyClick}
+          />
         ) : (
-          <>
-            <PropertySearchBar 
-              onSearch={handleSearch}
-              onSaveSearch={handleSaveSearch}
-              savedSearch={savedSearch}
-            />
-            <SearchResults 
-              searchResults={searchResults} 
-              onNewSearch={handleNewSearch}
-              onPropertyClick={handlePropertyClick}
-            />
-          </>
+          <SearchDashboard />
         )}
       </div>
     </AppShell>

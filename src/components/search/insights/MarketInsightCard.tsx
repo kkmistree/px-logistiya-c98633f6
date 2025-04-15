@@ -1,57 +1,100 @@
 
-import { TrendingUp, ArrowUpCircle, ChevronRight } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { TrendingUp, ArrowUp, BarChart3, PieChart, AlertCircle } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
 interface InsightItem {
   label: string;
   value: string;
-  trend: number;
+  change: {
+    value: string;
+    positive: boolean;
+  };
+  icon: React.ReactNode;
 }
 
 const MarketInsightCard = () => {
   const navigate = useNavigate();
+  
   const insights: InsightItem[] = [
-    { label: "Average ROI", value: "8.5%", trend: 12 },
-    { label: "Occupancy Rate", value: "94%", trend: 5 },
-    { label: "Market Growth", value: "15%", trend: 8 }
+    { 
+      label: "Avg. Industrial ROI", 
+      value: "8.7%", 
+      change: { value: "+0.6%", positive: true },
+      icon: <PieChart size={18} className="text-blue-500" />
+    },
+    { 
+      label: "YoY Price Growth", 
+      value: "12.5%", 
+      change: { value: "+2.3%", positive: true },
+      icon: <TrendingUp size={18} className="text-green-500" />
+    },
+    { 
+      label: "Transaction Volume", 
+      value: "↑ 15%", 
+      change: { value: "+5%", positive: true },
+      icon: <BarChart3 size={18} className="text-purple-500" />
+    }
   ];
 
   return (
-    <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="flex items-center text-lg">
-          <TrendingUp size={18} className="mr-2 text-green-500" />
-          Market Performance
+    <Card className="border-slate-200">
+      <CardHeader className="pb-3 bg-slate-50 border-b border-slate-100">
+        <CardTitle className="text-lg font-semibold flex items-center">
+          <TrendingUp size={18} className="mr-2 text-estate-primary" />
+          Market Pulse
         </CardTitle>
-        <CardDescription>Latest market trends and analytics</CardDescription>
+        <CardDescription>
+          Industrial sector performance indicators
+        </CardDescription>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-2">
-          {insights.map((insight) => (
-            <div key={insight.label} className="flex justify-between items-center p-2 bg-slate-50 rounded">
-              <div className="flex flex-col">
-                <span className="text-sm font-medium">{insight.label}</span>
-                <span className="text-lg font-semibold">{insight.value}</span>
+      
+      <CardContent className="p-4">
+        <div className="space-y-3">
+          {insights.map((insight, index) => (
+            <div 
+              key={index} 
+              className="flex justify-between items-center p-3 bg-slate-50 rounded-md border border-slate-100"
+            >
+              <div className="flex items-center">
+                <div className="mr-3 p-1.5 bg-white rounded-md border border-slate-100">
+                  {insight.icon}
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500">{insight.label}</p>
+                  <p className="text-base font-semibold">{insight.value}</p>
+                </div>
               </div>
-              <div className="flex items-center text-green-600">
-                <ArrowUpCircle size={14} className="mr-1" />
-                {insight.trend}%
+              <div className={`px-2 py-1 rounded-md text-xs font-medium ${
+                insight.change.positive ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'
+              }`}>
+                {insight.change.value}
               </div>
             </div>
           ))}
-          <Button 
-            variant="secondary" 
-            size="sm" 
-            className="w-full mt-2" 
-            onClick={() => navigate('/analytics')}
-          >
-            View Full Analytics
-            <ChevronRight size={14} className="ml-1" />
-          </Button>
         </div>
       </CardContent>
+      
+      <CardFooter className="pt-0 pb-4 px-4">
+        <div className="w-full">
+          <div className="flex items-center bg-amber-50 p-2 rounded-md border border-amber-100 mb-3">
+            <AlertCircle size={14} className="text-amber-500 mr-2 flex-shrink-0" />
+            <p className="text-xs text-amber-700">
+              Riyadh Industrial City shows highest growth rate in Q2 2025
+            </p>
+          </div>
+          
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="w-full text-estate-primary hover:bg-estate-primary/5 border-estate-primary/20"
+            onClick={() => navigate('/analytics')}
+          >
+            View Full Market Analysis
+          </Button>
+        </div>
+      </CardFooter>
     </Card>
   );
 };
