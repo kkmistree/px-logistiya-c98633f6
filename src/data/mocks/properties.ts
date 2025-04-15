@@ -19,9 +19,9 @@ export const properties: Property[] = [
     },
     features: ["Loading Docks", "High Ceiling", "Security System", "Fire System", "Office Space"],
     images: [
-      "/placeholder.svg", 
-      "/placeholder.svg",
-      "/placeholder.svg"
+      "/lovable-uploads/warehouse1.jpg",
+      "/lovable-uploads/warehouse2.jpg",
+      "/lovable-uploads/warehouse3.jpg"
     ],
     developer: "MODON Development",
     roi: 7.8,
@@ -51,9 +51,9 @@ export const properties: Property[] = [
     },
     features: ["High Power Capacity", "Water Supply", "Loading Docks", "Office Space"],
     images: [
-      "/placeholder.svg", 
-      "/placeholder.svg",
-      "/placeholder.svg"
+      "/lovable-uploads/factory1.jpg",
+      "/lovable-uploads/factory2.jpg",
+      "/lovable-uploads/factory3.jpg"
     ],
     developer: "Saudi Industrial Co.",
     completionDate: "2025-06-30T00:00:00Z",

@@ -1,4 +1,3 @@
-
 import { Property } from "@/types/property";
 
 // Mock property data used for searching
@@ -16,7 +15,7 @@ export const mockProperties: Property[] = [
       community: "MODON Zone 1"
     },
     features: ["Loading Docks", "High Ceiling", "Security System", "Fire System"],
-    images: ["/placeholder.svg"],
+    images: ["/lovable-uploads/warehouse1.jpg"],
     roi: 8.5,
     views: 120,
     createdAt: new Date().toISOString(),
@@ -38,7 +37,7 @@ export const mockProperties: Property[] = [
       community: "Industrial Valley"
     },
     features: ["Power Substation", "Water Supply", "Loading Docks", "Office Space"],
-    images: ["/placeholder.svg"],
+    images: ["/lovable-uploads/factory1.jpg"],
     roi: 7.2,
     views: 95,
     createdAt: new Date().toISOString(),
@@ -60,7 +59,7 @@ export const mockProperties: Property[] = [
       community: "Logistics Hub"
     },
     features: ["Loading Bays", "Truck Access", "Security", "Parking"],
-    images: ["/placeholder.svg"],
+    images: ["/lovable-uploads/logistics1.jpg"],
     roi: 9.5,
     views: 75,
     createdAt: new Date().toISOString(),
@@ -239,7 +238,6 @@ export const mockProperties: Property[] = [
     airportDistance: 30,
     highwayDistance: 5
   },
-  // Adding two more industrial properties
   {
     id: "prop11",
     title: "Investment Opportunity in KAEC Industrial Valley",
