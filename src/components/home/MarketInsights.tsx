@@ -1,4 +1,3 @@
-
 import { ArrowUpRight, TrendingUp, TrendingDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -11,55 +10,39 @@ const MarketInsights = () => {
   
   const insights = [
     {
-      title: "Dubai Marina 1BR prices up 8% MoM",
-      description: "Consider exit strategy for investments in this area.",
-      trend: "up",
+      title: "Industrial Growth",
+      description: "Dammam Industrial City sees 15% QoQ increase in warehouse demand",
       category: "Price Trends",
       action: () => {
         toast({
-          title: "Price trends analysis",
-          description: "Opening detailed analysis for Dubai Marina 1BR"
+          title: "Market Analysis",
+          description: "Opening detailed analysis for Dammam Industrial City"
         });
-        navigate("/analytics?location=Dubai+Marina&type=1BR");
+        navigate("/analytics?location=Dammam&type=warehouse");
       }
     },
     {
-      title: "Sobha Hartland Phase 3 launches in 30 days",
-      description: "Notify investors interested in premium developments.",
-      trend: "info",
-      category: "Launch Alerts",
+      title: "New Development",
+      description: "MODON announces Phase 4 expansion in Sudair Industrial City",
+      category: "Development",
       action: () => {
         toast({
-          title: "Launch alert",
-          description: "Setting reminder for Sobha Hartland Phase 3 launch"
+          title: "Development Alert",
+          description: "Setting reminder for Sudair Industrial City Phase 4"
         });
       }
     },
     {
-      title: "Rental yields declining in JVC for studios",
-      description: "Current average yield: 6.2%, down from 7.1% last quarter.",
-      trend: "down",
-      category: "Rental Market",
-      action: () => {
-        toast({
-          title: "Rental market analysis",
-          description: "Opening detailed rental yield report for JVC studios"
-        });
-        navigate("/analytics?metric=rental_yield&location=JVC&type=Studio");
-      }
-    },
-    {
-      title: "Palm Jumeirah showing steady appreciation",
-      description: "12.5% year-on-year increase in property values.",
-      trend: "up",
+      title: "Yield Analysis",
+      description: "Industrial yields rising in Jeddah Industrial City",
       category: "Investment",
-      action: () => {
-        toast({
-          title: "Investment analysis",
-          description: "Opening detailed appreciation report for Palm Jumeirah"
-        });
-        navigate("/analytics?location=Palm+Jumeirah&metric=appreciation");
-      }
+      subtext: "Current average yield: 8.5%, up from 7.2% last quarter"
+    },
+    {
+      title: "Market Trend",
+      description: "Riyadh industrial corridor showing steady appreciation",
+      category: "Market Analysis",
+      subtext: "18.5% year-on-year increase in property values"
     },
   ];
 
@@ -70,7 +53,7 @@ const MarketInsights = () => {
   return (
     <div className="bg-white rounded-lg shadow-sm p-4">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold text-estate-primary">AI Market Insights</h2>
+        <h2 className="text-lg font-semibold text-estate-primary">Industrial Market Insights</h2>
         <Button 
           variant="ghost" 
           size="sm" 
@@ -92,15 +75,18 @@ const MarketInsights = () => {
               <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded-full">
                 {insight.category}
               </span>
-              {insight.trend === "up" && (
+              {insight.title.includes("Growth") && (
                 <TrendingUp size={18} className="text-estate-success" />
               )}
-              {insight.trend === "down" && (
-                <TrendingDown size={18} className="text-estate-danger" />
+              {insight.title.includes("Yield") && (
+                <TrendingUp size={18} className="text-estate-success" />
               )}
             </div>
             <h3 className="text-sm font-semibold mt-2 text-estate-primary">{insight.title}</h3>
             <p className="text-xs text-slate-600 mt-1">{insight.description}</p>
+            {insight.subtext && (
+              <p className="text-xs text-estate-secondary mt-1">{insight.subtext}</p>
+            )}
           </Card>
         ))}
       </div>

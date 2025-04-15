@@ -12,27 +12,27 @@ const NewsRegulationUpdates = () => {
   const updates = [
     {
       id: "n1",
-      title: "DLD announces new service fees for property registration",
-      date: "Apr 1, 2025",
-      source: "Dubai Land Department",
+      title: "SIDF announces new financing program for industrial projects",
+      date: "Apr 15, 2025",
+      source: "Saudi Industrial Development Fund",
       url: "#",
       type: "regulation"
     },
     {
       id: "n2",
-      title: "UAE Central Bank updates mortgage lending requirements",
-      date: "Mar 28, 2025",
-      source: "UAE Central Bank",
+      title: "Updated zoning regulations for Riyadh's industrial cities",
+      date: "Apr 12, 2025",
+      source: "MODON",
       url: "#",
       type: "regulation"
     },
     {
       id: "n3",
-      title: "JVC introduces new zoning rules for mixed-use developments",
-      date: "Mar 25, 2025",
-      source: "RERA",
+      title: "New environmental standards for industrial facilities",
+      date: "Apr 10, 2025",
+      source: "Saudi Environment Ministry",
       url: "#",
-      type: "community"
+      type: "regulation"
     }
   ];
 
@@ -60,7 +60,7 @@ const NewsRegulationUpdates = () => {
   return (
     <div className="bg-white rounded-lg shadow-sm p-4">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold text-estate-primary">News & Regulation Updates</h2>
+        <h2 className="text-lg font-semibold text-estate-primary">Industrial Regulations & Updates</h2>
         <Button 
           variant="ghost" 
           size="sm" 
@@ -110,7 +110,7 @@ const NewsRegulationUpdates = () => {
         className="w-full mt-3 text-estate-primary"
         onClick={() => navigate("/knowledge-base")}
       >
-        View Knowledge Base
+        View Industrial Knowledge Base
       </Button>
     </div>
   );

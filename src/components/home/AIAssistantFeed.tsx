@@ -1,5 +1,4 @@
-
-import { ArrowUpRight, Brain, AlertTriangle, MessageSquare, Rocket } from "lucide-react";
+import { ArrowUpRight, Brain, AlertTriangle, MessageSquare, Factory } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
@@ -12,29 +11,29 @@ const AIAssistantFeed = () => {
   const insights = [
     {
       id: "ai1",
-      message: "You haven't contacted Mohammed Al Farsi in 7 days.",
-      action: "Schedule Follow-up",
-      type: "client",
-      priority: "medium"
+      message: "New industrial land allocation in Dammam Industrial City - 3 plots match your investor criteria",
+      action: "View Matches",
+      type: "opportunity",
+      priority: "high"
     },
     {
       id: "ai2",
-      message: "Palm Jumeirah prices jumped 9% — suggest exit strategy?",
-      action: "Create Strategy",
+      message: "MODON announces new regulations for industrial facilities in Riyadh",
+      action: "Review Changes",
       type: "market",
       priority: "high"
     },
     {
       id: "ai3",
-      message: "This mandate matches 2 new listings — send shortlist?",
-      action: "View Matches",
+      message: "2 warehouses in Jeddah Industrial City match recent search criteria",
+      action: "View Properties",
       type: "mandate",
-      priority: "high"
+      priority: "medium"
     },
     {
       id: "ai4",
-      message: "3 clients looking for Dubai Hills — new listing available",
-      action: "Send Alerts",
+      message: "Industrial land prices in Sudair City up 12% - consider portfolio review",
+      action: "Analyze Market",
       type: "opportunity",
       priority: "medium"
     }
@@ -72,12 +71,11 @@ const AIAssistantFeed = () => {
     }
   };
   
-  // Helper to get icon based on insight type
   const getInsightIcon = (type: string) => {
     switch(type) {
       case "client": return <MessageSquare size={16} className="text-blue-500" />;
       case "market": return <AlertTriangle size={16} className="text-amber-500" />;
-      case "mandate": return <Rocket size={16} className="text-purple-500" />;
+      case "mandate": return <Factory size={16} className="text-purple-500" />;
       case "opportunity": return <Brain size={16} className="text-green-500" />;
       default: return <Brain size={16} className="text-slate-500" />;
     }
@@ -86,7 +84,7 @@ const AIAssistantFeed = () => {
   return (
     <div className="bg-white rounded-lg shadow-sm p-4">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold text-estate-primary">AI Assistant Feed</h2>
+        <h2 className="text-lg font-semibold text-estate-primary">AI Market Intelligence</h2>
         <Button 
           variant="ghost" 
           size="sm" 
