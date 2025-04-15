@@ -317,6 +317,7 @@ export const users: User[] = [
   },
 ];
 
+// Update the client requirements to match our updated Client interface
 const clientRequirements = {
   budget: {
     min: 10000000,
@@ -389,13 +390,17 @@ export const clients: Client[] = [
     assignedTo: "u2",
     status: "active",
     requirements: {
-      ...clientRequirements,
       propertyType: ["factory", "land"],
       location: ["KAEC Industrial Valley", "Jubail Industrial City"],
       minArea: 10000,
       features: ["High Power Capacity", "Water Supply", "Road Access"],
       timeline: "12 months",
       paymentPreference: "payment-plan" as const,
+      budget: {
+        min: 15000000,
+        max: 30000000,
+      },
+      purpose: "investment" as const
     },
     documents: [
       {

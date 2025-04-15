@@ -227,9 +227,9 @@ const ProjectDetail = ({ property, onClose }: ProjectDetailProps) => {
                     <thead className="bg-slate-50">
                       <tr>
                         <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Type</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Bedrooms</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Area (sqft)</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Price (AED)</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Unit</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Area (sqm)</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Price (SAR)</th>
                         <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
                         <th className="px-4 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">Action</th>
                       </tr>
@@ -237,10 +237,10 @@ const ProjectDetail = ({ property, onClose }: ProjectDetailProps) => {
                     <tbody className="bg-white divide-y divide-slate-200">
                       {Array(5).fill(null).map((_, idx) => (
                         <tr key={idx} className="hover:bg-slate-50">
-                          <td className="px-4 py-3 text-sm text-slate-700">Villa {idx + 1}</td>
-                          <td className="px-4 py-3 text-sm text-slate-700">{property.bedrooms}</td>
+                          <td className="px-4 py-3 text-sm text-slate-700">Unit {idx + 1}</td>
+                          <td className="px-4 py-3 text-sm text-slate-700">{property.type}</td>
                           <td className="px-4 py-3 text-sm text-slate-700">{property.area}</td>
-                          <td className="px-4 py-3 text-sm text-slate-700 font-medium">{formatCurrency(property.price, "AED")}</td>
+                          <td className="px-4 py-3 text-sm text-slate-700 font-medium">{formatCurrency(property.price, "SAR")}</td>
                           <td className="px-4 py-3 text-sm">
                             <Badge className="bg-green-100 text-green-800 border-none">Available</Badge>
                           </td>

@@ -16,7 +16,7 @@ export interface Client {
     };
     location: string[];
     propertyType: string[];
-    bedrooms: number[];
+    bedrooms?: number[]; // Make this optional for industrial properties
     minArea?: number;
     features?: string[];
     timeline?: string;
@@ -70,7 +70,7 @@ export interface Mandate {
     };
     location: string[];
     propertyType: string[];
-    bedrooms: number[];
+    bedrooms?: number[]; // Make this optional for industrial properties
     minArea?: number;
     features?: string[];
     timeline?: string;
