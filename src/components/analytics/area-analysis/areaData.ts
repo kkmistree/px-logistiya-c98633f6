@@ -1,5 +1,5 @@
 
-// Area data for analysis
+// Area data for Saudi industrial cities analysis
 export const areaData = [
   {
     id: "riyadh-industrial",

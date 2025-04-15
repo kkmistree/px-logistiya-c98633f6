@@ -1,159 +1,87 @@
+
 import { Deal } from "@/types/deal";
 
 export const deals: Deal[] = [
   {
     id: "d1",
-    propertyId: "p1",
-    buyerId: "c1",
-    sellerId: undefined, // Developer direct
-    buyerAgentId: "u1",
-    sellerAgentId: undefined,
-    status: "negotiation",
-    price: 15000000, // Negotiated down from listing price
-    depositAmount: 750000,
-    depositPaid: true,
-    depositDate: "2023-11-05T00:00:00Z",
-    commissionRate: 2,
-    commissionAmount: 300000,
-    commissionSplit: {
-      buyerAgent: 100,
-      sellerAgent: 0,
+    property: "Warehouse Complex - Riyadh Industrial City",
+    client: "ACME Industrials LLC",
+    price: "SAR 23,500,000",
+    status: "pending-approval",
+    statusText: "Pending Approval",
+    progress: 50,
+    date: "2025-03-20",
+    lastUpdated: "2025-03-20",
+    matchScore: 91,
+    transactionType: "Industrial Asset",
+    documents: {
+      total: 4,
+      uploaded: 2,
+      pending: 2
     },
-    documents: [
-      {
-        id: "doc1",
-        type: "reservation",
-        name: "Reservation Form",
-        url: "/placeholder.svg",
-        status: "signed",
-        uploadedAt: "2023-11-05T10:30:00Z",
-        uploadedBy: "u1",
-      },
-      {
-        id: "doc2",
-        type: "loi",
-        name: "Letter of Intent",
-        url: "/placeholder.svg",
-        status: "signed",
-        uploadedAt: "2023-11-06T14:15:00Z",
-        uploadedBy: "u1",
-      },
-      {
-        id: "doc3",
-        type: "spa",
-        name: "Sale & Purchase Agreement",
-        url: "/placeholder.svg",
-        status: "pending",
-        uploadedAt: "2023-11-10T09:45:00Z",
-        uploadedBy: "u1",
-      },
-    ],
-    timeline: [
-      {
-        stage: "Initial Interest",
-        date: "2023-10-12T15:00:00Z",
-        completedBy: "u1",
-        notes: "Client very interested after viewing property",
-      },
-      {
-        stage: "Offer Submitted",
-        date: "2023-10-30T11:30:00Z",
-        completedBy: "u1",
-        notes: "Offer of 15M SAR submitted to developer",
-      },
-      {
-        stage: "Offer Accepted",
-        date: "2023-11-02T16:45:00Z",
-        completedBy: "u1",
-        notes: "Developer accepted the offer",
-      },
-      {
-        stage: "Reservation Fee Paid",
-        date: "2023-11-05T10:00:00Z",
-        completedBy: "u1",
-        notes: "Client paid 5% reservation fee",
-      },
-    ],
-    notes: "Client is very particular about handover date. Need to ensure developer confirms exact timeline.",
-    createdAt: "2023-10-30T11:30:00Z",
-    updatedAt: "2023-11-10T09:45:00Z",
+    dealInfo: {
+      deposit: "SAR 2,350,000",
+      commission: "SAR 470,000",
+      brokersAccepted: true,
+      closing: "2025-05-20"
+    }
   },
   {
-    id: "d2",
-    propertyId: "p4",
-    buyerId: "c2",
-    sellerId: undefined, // Current owner not modeled in this sample
-    buyerAgentId: "u2",
-    sellerAgentId: undefined,
-    status: "pending",
-    price: 16000000, // Negotiated down from listing price
-    depositAmount: 800000,
-    depositPaid: true,
-    depositDate: "2023-11-08T00:00:00Z",
-    commissionRate: 2,
-    commissionAmount: 320000,
-    commissionSplit: {
-      buyerAgent: 100,
-      sellerAgent: 0,
+    id: "d2", 
+    property: "Manufacturing Facility - Jubail Industrial City",
+    client: "Saudi Manufacturing Corp",
+    price: "SAR 31,800,000",
+    status: "documents",
+    statusText: "Documents Pending",
+    progress: 17,
+    date: "2025-04-01",
+    lastUpdated: "2025-04-01", 
+    matchScore: 78,
+    transactionType: "Industrial Asset",
+    documents: {
+      total: 6,
+      uploaded: 1,
+      pending: 5
     },
-    documents: [
-      {
-        id: "doc4",
-        type: "loi",
-        name: "Letter of Intent",
-        url: "/placeholder.svg",
-        status: "signed",
-        uploadedAt: "2023-11-07T13:20:00Z",
-        uploadedBy: "u2",
-      },
-      {
-        id: "doc5",
-        type: "payment",
-        name: "Deposit Receipt",
-        url: "/placeholder.svg",
-        status: "signed",
-        uploadedAt: "2023-11-08T11:05:00Z",
-        uploadedBy: "u2",
-      },
-    ],
-    timeline: [
-      {
-        stage: "Initial Interest",
-        date: "2023-11-01T10:00:00Z",
-        completedBy: "u2",
-        notes: "Client interested after seeing property details",
-      },
-      {
-        stage: "Property Viewing",
-        date: "2023-11-03T14:30:00Z",
-        completedBy: "u2",
-        notes: "Client viewed the property and liked it",
-      },
-      {
-        stage: "Offer Submitted",
-        date: "2023-11-05T09:15:00Z",
-        completedBy: "u2",
-        notes: "Offer of 16M SAR submitted to seller",
-      },
-      {
-        stage: "Offer Accepted",
-        date: "2023-11-06T16:30:00Z",
-        completedBy: "u2",
-        notes: "Seller accepted the offer",
-      },
-      {
-        stage: "Deposit Paid",
-        date: "2023-11-08T10:45:00Z",
-        completedBy: "u2",
-        notes: "Client paid 5% deposit",
-      },
-    ],
-    notes: "Client wants to complete quickly as they are entering Saudi market by end of month.",
-    createdAt: "2023-11-05T09:15:00Z",
-    updatedAt: "2023-11-08T11:05:00Z",
+    dealInfo: {
+      commission: "SAR 636,000",
+      brokersAccepted: true
+    }
   },
+  {
+    id: "d3",
+    property: "Logistics Hub - Dammam Industrial City",
+    client: "Gulf Logistics Ltd",
+    price: "SAR 19,100,000",
+    status: "completed",
+    statusText: "Completed",
+    progress: 100,
+    date: "2025-03-15",
+    lastUpdated: "2025-03-15",
+    matchScore: 76,
+    transactionType: "Industrial Asset",
+    documents: {
+      total: 8,
+      uploaded: 8,
+      pending: 0
+    },
+    dealInfo: {
+      deposit: "SAR 1,910,000",
+      commission: "SAR 382,000",
+      brokersAccepted: true,
+      closing: "2025-03-15"
+    }
+  }
 ];
 
-export const getDeal = (id: string) => {
+export const getDeal = (id: string): Deal | undefined => {
   return deals.find(d => d.id === id);
+};
+
+export const getDealsByAgent = (agentId: string): Deal[] => {
+  return deals.filter(d => d.agent === agentId);
+};
+
+export const getDealsByClient = (clientId: string): Deal[] => {
+  return deals.filter(d => d.client === clientId);
 };
