@@ -3,12 +3,12 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-// Mock data for developers
+// Mock data for KSA industrial developers
 const developers = [
   {
     id: "d1",
-    name: "Saudi Economic Development Co.",
-    logo: "https://placehold.co/100x60?text=SEDC",
+    name: "Saudi Industrial Development Company",
+    logo: "https://placehold.co/100x60?text=SIDC",
     projectCount: 28,
     tier: "Platinum",
     location: "Riyadh",
@@ -31,23 +31,23 @@ const developers = [
   },
   {
     id: "d4",
-    name: "Jubail Industrial City",
-    logo: "https://placehold.co/100x60?text=Jubail",
+    name: "Royal Commission for Jubail",
+    logo: "https://placehold.co/100x60?text=RCJ",
     projectCount: 12,
     tier: "Gold",
     location: "Eastern Province",
   },
   {
     id: "d5",
-    name: "Dammam Industrial Development",
-    logo: "https://placehold.co/100x60?text=DID",
+    name: "Dammam Industrial City",
+    logo: "https://placehold.co/100x60?text=DIC",
     projectCount: 16,
     tier: "Gold",
     location: "Dammam",
   },
   {
     id: "d6",
-    name: "Sudair City Development",
+    name: "Sudair City for Industry and Business",
     logo: "https://placehold.co/100x60?text=Sudair",
     projectCount: 8,
     tier: "Silver",
@@ -74,7 +74,7 @@ const DeveloperDirectory = () => {
                 <div className="flex items-center mt-1 space-x-2">
                   <span className="text-sm text-slate-500">{developer.location}</span>
                   <span className="text-sm text-slate-500">•</span>
-                  <span className="text-sm text-slate-500">{developer.projectCount} Projects</span>
+                  <span className="text-sm text-slate-500">{developer.projectCount} Industrial Projects</span>
                 </div>
               </div>
             </div>
@@ -87,7 +87,7 @@ const DeveloperDirectory = () => {
                   ? "bg-amber-500" 
                   : "bg-slate-400"
               }>
-                {developer.tier} Developer
+                {developer.tier} Industrial Developer
               </Badge>
               <button className="text-sm text-blue-600 hover:underline">
                 View Profile

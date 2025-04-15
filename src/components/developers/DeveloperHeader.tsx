@@ -7,7 +7,7 @@ const DeveloperHeader = () => {
   return (
     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
       <div>
-        <h1 className="text-2xl font-bold text-estate-primary">Developer Hub</h1>
+        <h1 className="text-2xl font-bold text-estate-primary">KSA Industrial Developer Hub</h1>
         <p className="text-slate-500">Browse and manage industrial developers, projects, and investment opportunities across KSA</p>
       </div>
       
@@ -21,7 +21,7 @@ const DeveloperHeader = () => {
           <span>Export</span>
         </Button>
         <Button>
-          Register Project
+          Register Industrial Project
         </Button>
       </div>
     </div>

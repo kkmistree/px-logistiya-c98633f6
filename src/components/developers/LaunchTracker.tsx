@@ -5,11 +5,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CalendarDays, Bell } from "lucide-react";
 
-// Mock data for launches
+// Mock data for KSA industrial launches
 const launches = [
   {
     id: "l1",
-    projectName: "Riyadh Industrial City - Phase 3",
+    projectName: "Riyadh Industrial City - Advanced Manufacturing Zone",
     developer: "MODON",
     image: "https://placehold.co/600x400?text=Riyadh+Industrial",
     location: "Northern Riyadh",
@@ -18,12 +18,12 @@ const launches = [
     type: "Industrial Park",
     startingPrice: "SAR 8.5M",
     paymentPlan: "40/60",
-    highlights: ["Logistics Support", "Customs Clearance", "Industrial Utilities"]
+    highlights: ["Petrochemical Support", "Customs Clearance", "Advanced Industrial Utilities"]
   },
   {
     id: "l2",
-    projectName: "Jeddah Logistics Hub",
-    developer: "Saudi Economic Development Co.",
+    projectName: "Jeddah Industrial Logistics Hub",
+    developer: "Saudi Industrial Development Company",
     image: "https://placehold.co/600x400?text=Jeddah+Logistics",
     location: "South Jeddah",
     launchDate: "2025-07-01",
@@ -41,7 +41,7 @@ const launches = [
     location: "NEOM Region",
     launchDate: "2025-08-10",
     registrationOpen: false,
-    type: "Mixed-Use Industrial",
+    type: "Advanced Manufacturing",
     startingPrice: "SAR 12.7M",
     paymentPlan: "50/50",
     highlights: ["Renewable Energy", "Smart Factory", "AI Integration"]
@@ -84,7 +84,7 @@ const LaunchTracker = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold">Upcoming Project Launches</h2>
+        <h2 className="text-xl font-semibold">Upcoming KSA Industrial Project Launches</h2>
         <Button variant="outline" size="sm">
           <CalendarDays size={16} className="mr-2" />
           Calendar View
