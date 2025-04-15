@@ -39,7 +39,7 @@ const Analytics = () => {
           </div>
         )}
         
-        <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <Tabs defaultValue={activeTab} value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="mb-6 flex flex-wrap">
             <TabsTrigger value="market">Market Insights</TabsTrigger>
             <TabsTrigger value="projects">Project Analytics</TabsTrigger>

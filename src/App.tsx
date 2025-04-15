@@ -18,6 +18,7 @@ import Knowledge from "@/pages/Knowledge";
 import Settings from "@/pages/Settings";
 import Support from "@/pages/Support";
 import ListingPerformance from "@/pages/ListingPerformance";
+import Search from "@/pages/Search";
 
 function App() {
   return (
@@ -38,6 +39,10 @@ function App() {
         {
           path: "/market",
           element: <Market />
+        },
+        {
+          path: "/search",
+          element: <Search />
         },
         {
           path: "/clients",
