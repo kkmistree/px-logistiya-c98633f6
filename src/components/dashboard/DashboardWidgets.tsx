@@ -8,7 +8,6 @@ import ActiveDeals from "@/components/home/ActiveDeals";
 import UpcomingViewings from "@/components/home/UpcomingViewings";
 import DeveloperWatchlist from "@/components/home/DeveloperWatchlist";
 import MarketInsights from "@/components/home/MarketInsights";
-import BrokerLeaderboard from "@/components/home/BrokerLeaderboard";
 import AIAssistantFeed from "@/components/home/AIAssistantFeed";
 import NewsRegulationUpdates from "@/components/home/NewsRegulationUpdates";
 import { Property } from "@/types/property";
@@ -21,8 +20,8 @@ interface DashboardWidgetsProps {
 
 const DashboardWidgets = ({ onAddListing, onAddClient, onViewProperty }: DashboardWidgetsProps) => {
   return (
-    <>
-      {/* Level 2: Main Widgets Grid - First Row */}
+    <div className="space-y-6">
+      {/* Primary Metrics Row */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
         <div className="md:col-span-1">
           <MandatesSummary />
@@ -35,11 +34,8 @@ const DashboardWidgets = ({ onAddListing, onAddClient, onViewProperty }: Dashboa
         </div>
       </div>
       
-      {/* Level 2: Main Widgets Grid - Second Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-        <div className="md:col-span-1">
-          <CommissionTracker />
-        </div>
+      {/* Active Deals & Viewings Row */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         <div className="md:col-span-1">
           <ActiveDeals />
         </div>
@@ -48,20 +44,17 @@ const DashboardWidgets = ({ onAddListing, onAddClient, onViewProperty }: Dashboa
         </div>
       </div>
       
-      {/* Level 2: Main Widgets Grid - Third Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-        <div className="md:col-span-1">
-          <DeveloperWatchlist onViewProperty={onViewProperty} />
-        </div>
+      {/* Market Intelligence Row */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         <div className="md:col-span-1">
           <MarketInsights />
         </div>
         <div className="md:col-span-1">
-          <BrokerLeaderboard />
+          <DeveloperWatchlist onViewProperty={onViewProperty} />
         </div>
       </div>
       
-      {/* Level 3: Personalized Feed */}
+      {/* AI & News Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         <div className="md:col-span-1">
           <AIAssistantFeed />
@@ -70,7 +63,7 @@ const DashboardWidgets = ({ onAddListing, onAddClient, onViewProperty }: Dashboa
           <NewsRegulationUpdates />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
