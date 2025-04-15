@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -80,7 +79,6 @@ const ListingDialog = ({ open, onOpenChange }: ListingDialogProps) => {
   });
 
   const handleAddListing = (values: PropertyFormValues) => {
-    // In a real app, this would call an API to save the listing
     console.log("Form values:", values);
     console.log("Images:", images);
     
@@ -176,9 +174,9 @@ const ListingDialog = ({ open, onOpenChange }: ListingDialogProps) => {
                   name="location.community"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>City/Area</FormLabel>
+                      <FormLabel>Area</FormLabel>
                       <FormControl>
-                        <Input placeholder="Enter city or area" {...field} />
+                        <Input placeholder="Enter area name" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

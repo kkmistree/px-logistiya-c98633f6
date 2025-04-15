@@ -26,7 +26,7 @@ const PropertySearchBar = ({ onSearch, onSaveSearch, savedSearch }: PropertySear
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={18} />
         <Input 
           type="search" 
-          placeholder={isMobile ? "Enter search criteria..." : "Try 'Two bedroom in Dubai Marina under 2M with sea view'"}
+          placeholder={isMobile ? "Enter search criteria..." : "Try 'Warehouse in Riyadh Industrial City with loading docks'"}
           className="pl-10 w-full"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
