@@ -19,6 +19,7 @@ import Settings from "@/pages/Settings";
 import Support from "@/pages/Support";
 import ListingPerformance from "@/pages/ListingPerformance";
 import Search from "@/pages/Search";
+import CityAnalytics from "@/pages/CityAnalytics";
 
 function App() {
   return (
@@ -31,6 +32,10 @@ function App() {
         {
           path: "/analytics",
           element: <Analytics />
+        },
+        {
+          path: "/analytics/:cityName",
+          element: <CityAnalytics />
         },
         {
           path: "/ListingPerformance",
