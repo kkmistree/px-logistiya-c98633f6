@@ -1,5 +1,5 @@
 
-import React from 'react';
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,6 @@ const SearchDashboard = () => {
   const handleOpenMls = () => {
     navigate('/mls');
     toast({
-      title: "Navigating to MLS",
       description: "Opening the Industrial Assets page"
     });
   };

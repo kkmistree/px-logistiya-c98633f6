@@ -3,7 +3,7 @@ import { useState } from 'react';
 import AppShell from "@/components/layout/AppShell";
 import PropertySearchBar from "@/components/property/PropertySearchBar";
 import { useSearchParams } from 'react-router-dom';
-import { toast } from 'sonner';
+import { useToast } from "@/hooks/use-toast";
 import { searchProperties } from '@/services/propertyService';
 import SearchResults from '@/components/search/SearchResults';
 import QuickSearch from '@/components/search/QuickSearch';
@@ -17,6 +17,7 @@ const Search = () => {
   const [searching, setSearching] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [savedSearch, setSavedSearch] = useState(false);
+  const { toast } = useToast();
 
   // Perform search when the page loads with a query parameter
   useState(() => {
@@ -41,15 +42,13 @@ const Search = () => {
         setHasSearched(true);
         
         toast({
-          title: `Found ${results.length} matching properties`,
-          description: `Search results for: ${searchQuery}`,
+          description: `Found ${results.length} matching properties`
         });
       }, 1000);
     } catch (error) {
       console.error("Search error:", error);
       setSearching(false);
       toast({
-        title: "Search error",
         description: "An error occurred while searching. Please try again.",
         variant: "destructive",
       });
@@ -65,7 +64,6 @@ const Search = () => {
   const handleSaveSearch = () => {
     setSavedSearch(!savedSearch);
     toast({
-      title: savedSearch ? "Search removed" : "Search saved",
       description: savedSearch 
         ? "This search has been removed from your saved searches" 
         : "This search has been added to your saved searches"
@@ -80,11 +78,8 @@ const Search = () => {
 
   const handlePropertyClick = (propertyId: string) => {
     toast({
-      title: "Property selected",
       description: `Viewing details for property ID: ${propertyId}`,
     });
-    // In a real app, this would navigate to the property detail page
-    // navigate(`/property/${propertyId}`);
   };
 
   return (
